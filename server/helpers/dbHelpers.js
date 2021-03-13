@@ -1,29 +1,50 @@
 module.exports = (db) => {
   const getUsers = () => {
-      const query = {
-          text: 'SELECT * FROM users',
-      };
+    const query = {
+      text: "SELECT * FROM users",
+    };
 
-      return db
-          .query(query)
-          .then((result) => result.rows)
-          .catch((err) => err);
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
   const getShops = () => {
     const query = {
-      text: 'SELECT * FROM shops',
+      text: "SELECT * FROM shops",
     };
-  
+
     return db
-        .query(query)
-        .then((result) => result.rows)
-        .catch((err) => err);
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
 
-  const getShopsById = () => {
+  const getCategories = () => {
+    const query = {
+      text: "SELECT * FROM categories",
+    };
 
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
   };
+
+  const getShopsByCategories = (category) => {
+    const query = {
+      text: `SELECT * FROM shops JOIN categories ON categories.id = category_id WHERE categories.name = $1`,
+      values: [`${category}`],
+    };
+
+    return db
+      .query(query)
+      .then((result) => result.rows[0])
+      .catch((err) => err);
+  };
+
+  const getShopsById = () => {};
 
   // const getUserByEmail = email => {
 
@@ -64,10 +85,12 @@ module.exports = (db) => {
   // }
 
   return {
-      getUsers,
-      getShops,
-      //getUserByEmail,
-      //addUser,
-      //getUsersPosts
+    getUsers,
+    getShops,
+    getCategories,
+    getShopsByCategories,
+    //getUserByEmail,
+    //addUser,
+    //getUsersPosts
   };
 };
