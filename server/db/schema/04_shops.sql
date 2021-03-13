@@ -15,5 +15,6 @@ CREATE TABLE "shops" (
   "user_id" int REFERENCES users(id),
   "delivery" boolean,
   "pickup" boolean,
-  "shipping" boolean
+  "shipping" boolean,
+  "category_id" integer REFERENCES categories(id)
 );
