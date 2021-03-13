@@ -1,11 +1,11 @@
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
-  "user_name" varchar NOT NULL,
-  "first_name" varchar NOT NULL,
-  "last_name" varchar NOT NULL,
-  "email" varchar UNIQUE NOT NULL,
-  "password" varchar NOT NULL,
-  "password_confirmation" varchar NOT NULL,
-  "created_at" timestamp
+  "user_name" VARCHAR(255) NOT NULL,
+  "first_name" VARCHAR(255) NOT NULL,
+  "last_name" VARCHAR(255) NOT NULL,
+  "email" VARCHAR(255) UNIQUE NOT NULL,
+  "password" VARCHAR(255) NOT NULL,
+  "password_confirmation" VARCHAR(255) NOT NULL,
+  "created_at" TIMESTAMP NOT NULL DEFAULT NOW()
 );
