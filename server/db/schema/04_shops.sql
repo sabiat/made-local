@@ -16,5 +16,5 @@ CREATE TABLE "shops" (
   "delivery" BOOLEAN,
   "pickup" BOOLEAN,
   "shipping" BOOLEAN,
-  "category_id" INTEGEREGER REFERENCES categories(id)
+  "category_id" INTEGER REFERENCES categories(id)
 );
