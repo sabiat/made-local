@@ -14,10 +14,12 @@ import UserProfile from './components/UserProfile'
 import ShopProfile from './components/ShopProfile'
 import Nav from './components/Nav'
 
+
+
 function App() {
   return (
     <Router>
-    <div>
+    <div class = "App">
       <Nav />
       {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
