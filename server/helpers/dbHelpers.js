@@ -96,6 +96,14 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const registerUser = (values) => {
+    db.query(`INSERT INTO users (user_name, first_name, last_name, email, password, password_confirmation)
+    VALUES ($1, $2, $3, $4, $5, $6)
+    RETURNING *`,
+    values)
+      .then((res) => {console.log(res)})
+  }
+
   const postMessage = (id) => {
     // const query = {
     //   text: `SELECT shops.*
@@ -155,7 +163,8 @@ module.exports = (db) => {
     getUserById,
     getUserFavourites,
     getShopById,
-    getMessagesByShopId
+    getMessagesByShopId,
+    registerUser
     //getUserByEmail,
     //addUser,
     //getUsersPosts

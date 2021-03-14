@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getPostsByUsers } = require("../helpers/dataHelpers");
+const dbHelpers = require("../helpers/dbHelpers");
 
 module.exports = ({
   getUsers,
@@ -9,6 +10,7 @@ module.exports = ({
   getUsersPosts,
   getUserById,
   getUserFavourites,
+  registerUser
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -56,24 +58,12 @@ module.exports = ({
   });
 
   router.post("/", (req, res) => {
-    const { first_name, last_name, email, password } = req.body;
+    const { username, firstName, lastName, email, password, confirmPassword } = req.body;
 
-    getUserByEmail(email)
-      .then((user) => {
-        if (user) {
-          res.json({
-            msg: "Sorry, a user account with this email already exists",
-          });
-        } else {
-          return addUser(first_name, last_name, email, password);
-        }
-      })
-      .then((newUser) => res.json(newUser))
-      .catch((err) =>
-        res.json({
-          error: err.message,
-        })
-      );
+    const values = [username, firstName, lastName, email, password, confirmPassword]
+    console.log("inside post", req.body)
+
+    registerUser(values);
   });
 
   return router;

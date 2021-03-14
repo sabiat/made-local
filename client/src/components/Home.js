@@ -30,7 +30,8 @@ export default function Home() {
       <SearchBar />
       <Grid container direction="row" justify="center" alignItems="center">
         <ShopBadge 
-        shopName={state[0].name}
+        // shopName={state[0].name}
+        shopName={'test'}
         />
       </Grid>
     </div>
