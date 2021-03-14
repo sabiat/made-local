@@ -83,6 +83,32 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getMessagesByShopId = (id) => {
+    const query = {
+      text: `SELECT *
+    FROM shop_messages
+    WHERE shop_id = $1;`,
+      values: [`${id}`],
+    };
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
+  const postMessage = (id) => {
+    // const query = {
+    //   text: `SELECT shops.*
+    // FROM shops
+    // WHERE id = $1;`,
+    //   values: [`${id}`],
+    // };
+    // return db
+    //   .query(query)
+    //   .then((result) => result.rows)
+    //   .catch((err) => err);
+  };
+  
   // const getUserByEmail = email => {
 
   //     const query = {
@@ -129,6 +155,7 @@ module.exports = (db) => {
     getUserById,
     getUserFavourites,
     getShopById,
+    getMessagesByShopId
     //getUserByEmail,
     //addUser,
     //getUsersPosts
