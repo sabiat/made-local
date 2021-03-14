@@ -7,14 +7,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Home() {
-  const [state, setState] = useState("");
+  const [state, setState] = useState();
 
   const fetchShopData = () => {
     axios
       .get("/api/shops")
       .then((res) => {
         const shop = res.data;
-        setState({ shop });
+        //console.log("shop:", shop)
+        setState(shop);
+        //console.log("state:", state)
       })
       .catch((err) => console.log(err));
   };
@@ -27,14 +29,9 @@ export default function Home() {
     <div>
       <SearchBar />
       <Grid container direction="row" justify="center" alignItems="center">
-        <ShopBadge />
-        <ShopBadge />
-        <ShopBadge />
-        <ShopBadge />
-        <ShopBadge />
-        <ShopBadge />
-        <ShopBadge />
-        <ShopBadge />
+        <ShopBadge 
+        shopName={state[0].name}
+        />
       </Grid>
     </div>
   );

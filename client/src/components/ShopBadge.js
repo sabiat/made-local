@@ -1,4 +1,4 @@
-export default function ShopBadge() {
+export default function ShopBadge(props) {
   return (
     <div
       style={{
@@ -10,8 +10,7 @@ export default function ShopBadge() {
         console.log("Working");
       }}
     >
-      <h1>Shop Name</h1>
-      <p>@username</p>
+      <h2>{props.shopName}</h2>
       <img
         width="25px"
         src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
