@@ -3,7 +3,26 @@ import Grid from "@material-ui/core/Grid";
 import ShopBadge from "./ShopBadge";
 import SearchBar from "./SearchBar";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 export default function Home() {
+  const [state, setState] = useState("");
+
+  const fetchShopData = () => {
+    axios
+      .get("/api/shops")
+      .then((res) => {
+        const shop = res.data;
+        setState({ shop });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchShopData();
+  }, []);
+
   return (
     <div>
       <SearchBar />
