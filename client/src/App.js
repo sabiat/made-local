@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import UserProfile from "./components/UserProfile";
 import ShopProfile from "./components/ShopProfile";
 import Nav from "./components/Nav";
+import Card from "./components/Card";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
