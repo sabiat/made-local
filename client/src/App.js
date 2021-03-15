@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import UserProfile from "./components/UserProfile";
 import ShopProfile from "./components/ShopProfile";
+import ShopRegister from "./components/ShopRegister"
 import Nav from "./components/Nav";
 import Card from "./components/Card";
 
@@ -59,6 +60,9 @@ function App() {
             </Route>
             <Route path="/users/:user_id">
               <UserProfile />
+            </Route>
+            <Route path="/shops/new">
+              <ShopRegister />
             </Route>
             <Route path="/shops/:shop_id">
               <ShopProfile />
