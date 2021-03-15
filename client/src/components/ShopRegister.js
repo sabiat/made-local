@@ -41,8 +41,8 @@ export default function RegistrationForm(props) {
   const sendDetailsToServer = () => {
     if (state.name.length && state.description.length && state.streetAddress.length && state.postalCode.length && state.city.length && state.phoneNumber.length && state.social.length && state.photo.length) {
 
-      provider.search({ query: 134 Florida Drive, Beaconsfield, Quebec, H9W1M3 })
-      .then( (result) => {
+      axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${state.postalCode}.json?worldview=cn&access_token=${process.env.REACT_APP_MAPBOX}`)
+      .then((result) => {
         console.log("result", result);
         axios({
           method: 'post',
@@ -53,8 +53,8 @@ export default function RegistrationForm(props) {
             streetAddress: state.streetAddress,
             postalCode: state.postalCode,
             city: state.city,
-            latitude: state.latitude,
-            longitude: state.longitude,
+            longitude: result.data.features[0].center[0],
+            latitude: result.data.features[0].center[1],
             phoneNumber: state.phoneNumber,
             social: state.social,
             photo: state.photo,
