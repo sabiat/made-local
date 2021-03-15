@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
 
+import { OpenStreetMapProvider } from 'leaflet-geosearch';
+// setup
+const provider = new OpenStreetMapProvider();
+
 export default function RegistrationForm(props) {
 
   const [state, setState] = useState({
@@ -36,46 +40,49 @@ export default function RegistrationForm(props) {
 
   const sendDetailsToServer = () => {
     if (state.name.length && state.description.length && state.streetAddress.length && state.postalCode.length && state.city.length && state.phoneNumber.length && state.social.length && state.photo.length) {
-      //function to convert address into lat/lng
-      axios({
-        method: 'post',
-        url: '/api/shops',
-        data: {
-          name: state.name,
-          description: state.description,
-          streetAddress: state.streetAddress,
-          postalCode: state.postalCode,
-          city: state.city,
-          latitude: state.latitude,
-          longitude: state.longitude,
-          phoneNumber: state.phoneNumber,
-          social: state.social,
-          photo: state.photo,
-          delivery: state.delivery,
-          pickup: state.pickup,
-          shipping: state.shipping,
-          category: state.category
-        }
-      }).then(function (response) {
-        if (response.status === 200) {
-          setState(prevState => ({
-            ...prevState,
-            'successMessage': 'Registration successful. Redirecting to home page..'
-          }))
-          // redirectToHome();
-          //props.showError(null)
-        } else {
-          console.log("error")
-          //props.showError("Some error ocurred");
-        }
-      })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
-      props.showError('Please enter valid username and password')
-    }
 
+      provider.search({ query: 134 Florida Drive, Beaconsfield, Quebec, H9W1M3 })
+      .then( (result) => {
+        console.log("result", result);
+        axios({
+          method: 'post',
+          url: '/api/shops',
+          data: {
+            name: state.name,
+            description: state.description,
+            streetAddress: state.streetAddress,
+            postalCode: state.postalCode,
+            city: state.city,
+            latitude: state.latitude,
+            longitude: state.longitude,
+            phoneNumber: state.phoneNumber,
+            social: state.social,
+            photo: state.photo,
+            delivery: state.delivery,
+            pickup: state.pickup,
+            shipping: state.shipping,
+            category: state.category
+          }
+        }).then(function (response) {
+          if (response.status === 200) {
+            setState(prevState => ({
+              ...prevState,
+              'successMessage': 'Registration successful. Redirecting to home page..'
+            }))
+            // redirectToHome();
+            //props.showError(null)
+          } else {
+            console.log("error")
+            //props.showError("Some error ocurred");
+          }
+        })
+          .catch(function (error) {
+            console.log(error);
+          })
+      }
+      )
+
+    } 
   }
 
   const handleSubmitClick = (e) => {
