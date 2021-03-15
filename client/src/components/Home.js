@@ -9,29 +9,23 @@ import axios from "axios";
 export default function Home() {
   const [state, setState] = useState();
 
-  const fetchShopData = () => {
+  useEffect(() => {
     axios
       .get("/api/shops")
       .then((res) => {
-        const shop = res.data;
-        //console.log("shop:", shop)
-        setState(shop);
-        //console.log("state:", state)
+        setState(res.data);
       })
       .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    fetchShopData();
   }, []);
 
+  console.log("this is the state: ", state);
   return (
     <div>
       <SearchBar />
       <Grid container direction="row" justify="center" alignItems="center">
-        <ShopBadge 
-        // shopName={state[0].name}
-        shopName={'test'}
+        <ShopBadge
+          shopName={state}
+          // shopName={state.name}
         />
       </Grid>
     </div>
