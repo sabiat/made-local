@@ -5,8 +5,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import RegisterForm from './RegisterForm';
-import RegistrationFormTest from './RegisterFormTest'
+import RegistrationForm from './RegisterForm'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,7 +40,7 @@ export default function Register() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <RegistrationFormTest />
+        <RegistrationForm />
       </div>
     </Container>
   );
