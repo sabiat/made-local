@@ -9,6 +9,7 @@ export default function ShopAbout() {
   <div borderRadius='300px'><img
         width="50px"
         src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
+        alt=""
       /></div>
     </Box>
   </div>

@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-import { OpenStreetMapProvider } from 'leaflet-geosearch';
-// setup
-const provider = new OpenStreetMapProvider();
-
 export default function RegistrationForm(props) {
 
   const [state, setState] = useState({

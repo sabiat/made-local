@@ -5,7 +5,7 @@ export default function Root() {
   return (
     <div>
       <div>
-        <img src="https://images.pexels.com/photos/6097827/pexels-photo-6097827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+        <img src="https://images.pexels.com/photos/6097827/pexels-photo-6097827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="home" />
       </div>
       <h2>Root</h2>
       <Button

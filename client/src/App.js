@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import Root from "./components/Root";
@@ -9,7 +9,6 @@ import UserProfile from "./components/UserProfile";
 import ShopProfile from "./components/ShopProfile";
 import ShopRegister from "./components/ShopRegister"
 import Nav from "./components/Nav";
-import Card from "./components/Card";
 
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";

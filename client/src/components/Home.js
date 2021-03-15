@@ -34,7 +34,9 @@ export default function Home() {
           item.distance = Math.round(haversine(a,b) / 1000)
           return item;
         })
-        setShop(shopList);
+        const filteredList = shopList.filter((shop) => { return shop.distance < 20
+        })
+        setShop(filteredList);
       })
       .catch((err) => console.log(err));
     })
@@ -45,6 +47,7 @@ export default function Home() {
       <SearchBar />
       {shop.map((shop) => (
         <Card
+          key={shop.id}
           {...shop}
           
         />
