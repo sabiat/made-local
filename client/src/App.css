@@ -37,3 +37,9 @@
     transform: rotate(360deg);
   }
 }
+
+.map-container {
+  width: 40%;
+  height: 400px;
+  margin: auto
+}
