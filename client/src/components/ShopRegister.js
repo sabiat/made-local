@@ -66,10 +66,8 @@ export default function RegistrationForm(props) {
               'successMessage': 'Registration successful. Redirecting to home page..'
             }))
             // redirectToHome();
-            //props.showError(null)
           } else {
             console.log("error")
-            //props.showError("Some error ocurred");
           }
         })
           .catch(function (error) {
@@ -106,18 +104,18 @@ export default function RegistrationForm(props) {
           />
         </div>
         <div>
-        <select name = "category"
+        <select name="category"
         id="category"
         value={state.category}
         onChange={handleChange}
         >
-            <option value = "Food" selected>Food & Catering</option>
-            <option value = "Jewellery & Accessories">Jewellery & Accessories</option>
-            <option value = "Clothing">Clothing</option>
-            <option value = "Events & Planning">Events & Planning</option>
-            <option value = "Home & Living">Home & Living</option>
-            <option value = "Health & Wellness">Health & Wellness</option>
-         </select>
+            <option value="Food">Food & Catering</option>
+            <option value="Jewellery & Accessories">Jewellery & Accessories</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Events & Planning">Events & Planning</option>
+            <option value="Home & Living">Home & Living</option>
+            <option value="Health & Wellness">Health & Wellness</option>
+        </select>
         </div>
         <div>
           <input type="name"
@@ -168,7 +166,7 @@ export default function RegistrationForm(props) {
           />
         </div>
         <div>
-          <label for="delivery">Delivery</label>
+          <label htmlFor="delivery">Delivery</label>
           <input type="checkbox"
             id="delivery"
             checked={state.delivery}
@@ -176,7 +174,7 @@ export default function RegistrationForm(props) {
           />
         </div>
         <div>
-          <label for="pickup">Pickup</label>
+          <label htmlFor="pickup">Pickup</label>
           <input type="checkbox"
             id="pickup"
             checked={state.pickup}
@@ -184,7 +182,7 @@ export default function RegistrationForm(props) {
           />
         </div>
         <div>
-          <label for="shipping">Shipping</label>
+          <label htmlFor="shipping">Shipping</label>
           <input type="checkbox"
             id="shipping"
             checked={state.shipping}
