@@ -58,15 +58,20 @@ export default function Home() {
       ) : (
         <>
           <SearchBar category={category} setCategory={handleChange} />
-          {shop
-            .filter((shop) => {
-              return (
-                category === "" || shop["category_id"] === parseInt(category)
-              );
-            })
-            .map((shop) => (
-              <Card key={shop.id} {...shop} />
-            ))}
+          <Grid container spacing={1}>
+            {shop
+              .filter((shop) => {
+                return (
+                  category === "" || shop["category_id"] === parseInt(category)
+                );
+              })
+
+              .map((shop) => (
+                <Grid item style={{ padding: 30 }} xs={4} spacing={3}>
+                  <Card key={shop.id} {...shop} />
+                </Grid>
+              ))}
+          </Grid>
         </>
       )}
     </div>
