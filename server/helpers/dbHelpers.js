@@ -113,7 +113,7 @@ module.exports = (db) => {
       .query(query)
       .then((result) => {
         params[params.length - 1] = result.rows[0].id;
-        return db.query(`INSERT INTO shops (name, description, street_address, postal_code, city, latitude, longitude, phone_number, social, photo, user_id, delivery, pickup, shipping, category_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`, params)
+        db.query(`INSERT INTO shops (name, description, street_address, postal_code, city, latitude, longitude, phone_number, social, photo, user_id, delivery, pickup, shipping, category_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`, params)
         })
       .catch((err) => err)
   }

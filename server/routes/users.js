@@ -63,7 +63,8 @@ module.exports = ({
     const values = [username, firstName, lastName, email, password, confirmPassword]
     // console.log("inside post", req.body)
 
-    registerUser(values);
+    registerUser(values)
+    .then((res) => {res.send('added')})
   });
 
   return router;
