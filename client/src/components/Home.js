@@ -5,6 +5,7 @@ import Card from "./Card";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import haversine from "haversine-distance";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function Home() {
   const [shop, setShop] = useState([]);
@@ -12,6 +13,7 @@ export default function Home() {
     lat: 0,
     lng: 0,
   });
+  const [loading, setLoading] = useState(true);
 
   const [category, setCategory] = useState("");
 
@@ -32,41 +34,41 @@ export default function Home() {
   };
 
   useEffect(() => {
-    getLocation().then((coords) => {
-      axios
-        .get("/api/shops")
-        .then((res) => {
-          const shopList = res.data.map((item) => {
-            const a = { latitude: coords.lat, longitude: coords.lng };
-            const b = { latitude: item.latitude, longitude: item.longitude };
-            item.distance = (haversine(a, b) / 1000).toFixed(1);
-            return item;
-          });
-          const filteredList = shopList.filter((shop) => {
-            return shop.distance < 20;
-          });
-          setShop(filteredList);
-        })
-        .catch((err) => console.log(err));
-    });
+    Promise.all([getLocation(), axios.get("/api/shops")]).then(
+      ([coords, shopsResp]) => {
+        const shopList = shopsResp.data.map((item) => {
+          const a = { latitude: coords.lat, longitude: coords.lng };
+          const b = { latitude: item.latitude, longitude: item.longitude };
+          item.distance = (haversine(a, b) / 1000).toFixed(1);
+          return item;
+        });
+        const filteredList = shopList.filter((shop) => {
+          return shop.distance < 20;
+        });
+        setShop(filteredList);
+        setLoading(false);
+      }
+    );
   }, []);
 
   return (
     <div>
-      <SearchBar category={category} setCategory={handleChange} />
-      {shop
-        .filter((shop) => {
-          return category === "" || shop["category_id"] === parseInt(category);
-        })
-        .map((shop) => (
-          <Card key={shop.id} {...shop} />
-        ))}
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-      ></Grid>
+      {loading ? (
+        <CircularProgress color="secondary" />
+      ) : (
+        <>
+          <SearchBar category={category} setCategory={handleChange} />
+          {shop
+            .filter((shop) => {
+              return (
+                category === "" || shop["category_id"] === parseInt(category)
+              );
+            })
+            .map((shop) => (
+              <Card key={shop.id} {...shop} />
+            ))}
+        </>
+      )}
     </div>
   );
 }
