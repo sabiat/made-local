@@ -6,8 +6,6 @@ export default function ShopMap(props) {
   const coords = [props.lat, props.lon]
 
   return (
-    <div>
-        {/* <h2>{props.name}</h2> */}
         <MapContainer
           className='map-container'
           center={coords}
@@ -19,6 +17,5 @@ export default function ShopMap(props) {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
         </MapContainer>
-    </div>
   )
 }

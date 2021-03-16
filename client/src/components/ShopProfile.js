@@ -41,24 +41,25 @@ console.log("state:", state.shop[0]);
           delivery={state.shop[0].delivery}
           pickup={state.shop[0].pickup}
           shipping={state.shop[0].shipping}
-          />}
-      <Grid direction="column">
-        <Grid item xs={8}>
-        <ShopPhotos />
-        </Grid>
-        
-        <Grid item xs={12}>
-        {isLoading ? 
-        <div className="App">Loading...</div> : 
-        <ShopMap
-          name={state.shop[0].name}
-          lat={state.shop[0].latitude}
-          lon={state.shop[0].longitude} 
         />}
+      <Grid container alignItems="center">
+        <Grid item xs={8}>
+          <ShopPhotos />
         </Grid>
+
+        {isLoading ?
+          <div className="App">Loading...</div> :
+          <Grid item xs={4}>
+            <ShopMap
+              name={state.shop[0].name}
+              lat={state.shop[0].latitude}
+              lon={state.shop[0].longitude}
+            />
+          </Grid>
+        }
       </Grid>
-        <Grid item xs={4}>
+      <Grid item xs={12}>
         <ShopMessageBoard />
-        </Grid>
+      </Grid>
     </div>
 )}

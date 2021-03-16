@@ -9,37 +9,22 @@ import UserProfile from "./components/UserProfile";
 import ShopProfile from "./components/ShopProfile";
 import ShopRegister from "./components/ShopRegister"
 import Nav from "./components/Nav";
+import Button from "@material-ui/core/Button";
 
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#588b8b",
-    },
-    secondary: {
-      main: "#f28482",
-      contrastText: "#ffcc00",
-    },
-    background: {
-      default: "F7EDE12"
-    },
-    contrastThreshold: 3,
-    tonalOffset: 0.2,
-  },
-});
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from './styles/theme'
 
 function App() {
   return (
     <Router>
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <div className="App">
           <Nav />
           {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/" exact>
-              <Root />
+              <Root/>
             </Route>
             <Route path="/home">
               <Home />
@@ -61,7 +46,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-      </MuiThemeProvider>
+      </ThemeProvider>
     </Router>
   );
 }

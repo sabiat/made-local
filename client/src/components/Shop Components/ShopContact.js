@@ -2,7 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles({
   root: {
@@ -26,24 +27,27 @@ export default function ShopContact(props) {
 
   return (
     <Grid container alignItems="center">
-        <Grid item xs={1}>
-        <img
-          width="50px"
-          src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
-          alt=""
-          //borderRadius="30px"
-        /> 
-        </Grid>
-      <Grid item xs={4} justify="left">
+      <Grid item xs={5} justify="left">
+      <Typography variant="body1">
         <h1>{props.name}</h1>
-        <h3>{props.description}</h3>
+      </Typography> 
       </Grid>
       <Grid item xs={3}>
+      <Typography variant="body2" color="textSecondary">
+        {props.description}
+        </Typography> 
       </Grid>
       <Grid item xs={4}>
       <Grid container spacing={3} alignItems="center" direction="column">
+        <Grid item>
+        <Avatar
+          width="100px"
+          src={props.photo}
+          alt=""
+        /> 
+        </Grid>
       <Grid item>
-        <Typography className={classes.pos} color="textSecondary">
+        <Typography variant="body1" color="textSecondary">
           Contact
         </Typography>
         <Typography variant="body2">

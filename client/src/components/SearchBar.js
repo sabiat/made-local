@@ -4,6 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
+//import theme from './styles/theme';
 
 import { useState } from "react";
 
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
+
 export default function SearchBar(props) {
   const classes = useStyles();
 

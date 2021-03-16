@@ -1,12 +1,13 @@
 import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 const imgLink =
   "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
 export default function ShopMessageBoard() {
   return (
-    <div style={{ padding: 14 }} className="App">
-      <h1>Community Message Board</h1>
+    <div>
+      <Typography>Community Message Board
       <Paper style={{ padding: "40px 20px" }}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
@@ -38,6 +39,7 @@ export default function ShopMessageBoard() {
           </Grid>
         </Grid>
       </Paper>
+      </Typography>
     </div>
   );
 }
