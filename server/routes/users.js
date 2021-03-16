@@ -61,7 +61,7 @@ module.exports = ({
     const { username, firstName, lastName, email, password, confirmPassword } = req.body;
 
     const values = [username, firstName, lastName, email, password, confirmPassword]
-    console.log("inside post", req.body)
+    // console.log("inside post", req.body)
 
     registerUser(values);
   });
