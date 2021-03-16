@@ -10,28 +10,21 @@ import ShopProfile from "./components/ShopProfile";
 import ShopRegister from "./components/ShopRegister"
 import Nav from "./components/Nav";
 
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      // light: will be calculated from palette.primary.main,
       main: "#588b8b",
-      // dark: will be calculated from palette.primary.main,
-      // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
       main: "#f28482",
-      // dark: will be calculated from palette.secondary.main,
       contrastText: "#ffcc00",
     },
-    // Used by `getContrastText()` to maximize the contrast between
-    // the background and the text.
+    background: {
+      default: "F7EDE12"
+    },
     contrastThreshold: 3,
-    // Used by the functions below to shift a color's luminance by approximately
-    // two indexes within its tonal palette.
-    // E.g., shift from Red 500 to Red 300 or Red 700.
     tonalOffset: 0.2,
   },
 });
@@ -39,7 +32,7 @@ const theme = createMuiTheme({
 function App() {
   return (
     <Router>
-      <ThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
         <div className="App">
           <Nav />
           {/* A <Switch> looks through its children <Route>s and
@@ -68,7 +61,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-      </ThemeProvider>
+      </MuiThemeProvider>
     </Router>
   );
 }

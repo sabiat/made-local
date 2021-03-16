@@ -1,4 +1,3 @@
-import ShopAbout from './Shop Components/ShopAbout';
 import ShopContact from './Shop Components/ShopContact';
 import ShopMap from './Shop Components/ShopMap';
 import ShopPhotos from './Shop Components/ShopPhotos';
@@ -6,7 +5,8 @@ import ShopMessageBoard from './Shop Components/ShopMessageBoard';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-// https://material-ui.com/components/grid-list/
+import Grid from '@material-ui/core/Grid';
+
 
 export default function ShopProfile() {
   const [isLoading, setLoading] = useState(true);
@@ -27,14 +27,38 @@ export default function ShopProfile() {
     fetchshopDetails();
   }, []);
 
-
+console.log("state:", state.shop[0]);
   return (
-  <div>
-    <ShopAbout /> 
-    <ShopContact />
-    {isLoading ? <div className="App">Loading...</div> : <ShopMap name={state.shop[0].name} lat={state.shop[0].latitude} lon={state.shop[0].longitude}/> }
-    <ShopPhotos />
-    <ShopMessageBoard />
-    <h2>Shop profile</h2>
-  </div>
+    <div>
+      {isLoading ? 
+        <div className="App">Loading...</div> :
+        <ShopContact 
+          name={state.shop[0].name}
+          description={state.shop[0].description}
+          photo={state.shop[0].photo}
+          phoneNumber={state.shop[0].phone_number}
+          social={state.shop[0].social}
+          delivery={state.shop[0].delivery}
+          pickup={state.shop[0].pickup}
+          shipping={state.shop[0].shipping}
+          />}
+      <Grid direction="column">
+        <Grid item xs={8}>
+        <ShopPhotos />
+        </Grid>
+        
+        <Grid item xs={12}>
+        {isLoading ? 
+        <div className="App">Loading...</div> : 
+        <ShopMap
+          name={state.shop[0].name}
+          lat={state.shop[0].latitude}
+          lon={state.shop[0].longitude} 
+        />}
+        </Grid>
+      </Grid>
+        <Grid item xs={4}>
+        <ShopMessageBoard />
+        </Grid>
+    </div>
 )}
