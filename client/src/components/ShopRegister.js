@@ -113,6 +113,7 @@ export default function RegistrationForm(props) {
         >
             <option value="Food & Catering">Food & Catering</option>
             <option value="Jewellery & Accessories">Jewellery & Accessories</option>
+            <option value="Tattoo Artists">Tattoo Artists</option>
             <option value="Clothing">Clothing</option>
             <option value="Events & Planning">Events & Planning</option>
             <option value="Home & Living">Home & Living</option>
