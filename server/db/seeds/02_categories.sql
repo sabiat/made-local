@@ -3,7 +3,7 @@ INSERT INTO categories(name)
   ('Food & Catering'),
   ('Jewellery & Accessories'),
   ('Tattoo Artists'),
-  ('clothing'),
+  ('Clothing'),
   ('Events & Planning'),
   ('Home & Living'),
   ('Health & Wellness');

@@ -13,6 +13,12 @@ export default function Home() {
     lng: 0,
   });
 
+  const [category, setCategory] = useState("");
+
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
+
   const getLocation = () => {
     return new Promise((res, rej) => {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -47,10 +53,14 @@ export default function Home() {
 
   return (
     <div>
-      <SearchBar />
-      {shop.map((shop) => (
-        <Card key={shop.id} {...shop} />
-      ))}
+      <SearchBar category={category} setCategory={handleChange} />
+      {shop
+        .filter((shop) => {
+          return category === "" || shop["category_id"] === parseInt(category);
+        })
+        .map((shop) => (
+          <Card key={shop.id} {...shop} />
+        ))}
       <Grid
         container
         direction="row"
