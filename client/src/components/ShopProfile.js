@@ -47,7 +47,7 @@ console.log("state:", state.shop[0]);
         <ShopPhotos />
         </Grid>
         
-        <Grid item xs={4}>
+        <Grid item xs={12}>
         {isLoading ? 
         <div className="App">Loading...</div> : 
         <ShopMap
@@ -56,9 +56,9 @@ console.log("state:", state.shop[0]);
           lon={state.shop[0].longitude} 
         />}
         </Grid>
+      </Grid>
         <Grid item xs={4}>
         <ShopMessageBoard />
         </Grid>
-      </Grid>
     </div>
 )}
