@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 export default function RegistrationForm(props) {
-
+  let history = useHistory();
   const [state, setState] = useState({
     name: "",
     description: "",
@@ -39,7 +40,7 @@ export default function RegistrationForm(props) {
 
       axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${state.postalCode}.json?worldview=cn&access_token=${process.env.REACT_APP_MAPBOX}`)
       .then((result) => {
-        console.log("result", result);
+        console.log('success')
         axios({
           method: 'post',
           url: '/api/shops',
@@ -65,18 +66,19 @@ export default function RegistrationForm(props) {
               ...prevState,
               'successMessage': 'Registration successful. Redirecting to home page..'
             }))
-            // redirectToHome();
+            history.push("/home")
           } else {
             console.log("error")
           }
         })
           .catch(function (error) {
-            console.log(error);
+            console.log('error', error);
           })
       }
       )
-
-    } 
+    } else {
+      console.log('Fields are empty!')
+    }
   }
 
   const handleSubmitClick = (e) => {
@@ -109,7 +111,7 @@ export default function RegistrationForm(props) {
         value={state.category}
         onChange={handleChange}
         >
-            <option value="Food">Food & Catering</option>
+            <option value="Food & Catering">Food & Catering</option>
             <option value="Jewellery & Accessories">Jewellery & Accessories</option>
             <option value="Clothing">Clothing</option>
             <option value="Events & Planning">Events & Planning</option>
