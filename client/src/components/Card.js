@@ -7,7 +7,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
@@ -30,8 +29,10 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
-  avatar: {
-    backgroundColor: red[500],
+  header: {
+    // fontWeight: "bold",
+    // fontSize: 5,
+    backgroundColor: theme.palette.secondary.main,
   },
 }));
 
@@ -40,7 +41,11 @@ export default function ShopCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader title={props.name} subheader={`${props.distance} km away`}  />
+      <CardHeader
+        className={classes.header}
+        title={props.name}
+        subheader={`${props.distance} km away`}
+      />
 
       <CardMedia
         className={classes.media}
@@ -53,24 +58,35 @@ export default function ShopCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        {props.pickup && (
-          <IconButton>
-            <CheckCircleOutlineRoundedIcon /> pick-up
+        <div>
+          <IconButton aria-label="add to favorites">
+            <FavoriteIcon />
           </IconButton>
-        )}{" "}
-        {props.delivery && (
-          <IconButton>
-            <CheckCircleOutlineRoundedIcon /> delivery
-          </IconButton>
-        )}{" "}
-        {props.shipping && (
-          <IconButton>
-            <CheckCircleOutlineRoundedIcon /> shipping
-          </IconButton>
-        )}
+          {props.pickup && (
+            <IconButton>
+              <CheckCircleOutlineRoundedIcon />
+              <Typography variant="body2" color="textSecondary" component="p">
+                pick-up
+              </Typography>
+            </IconButton>
+          )}{" "}
+          {props.delivery && (
+            <IconButton>
+              <CheckCircleOutlineRoundedIcon />
+              <Typography variant="body2" color="textSecondary" component="p">
+                delivery
+              </Typography>
+            </IconButton>
+          )}{" "}
+          {props.shipping && (
+            <IconButton>
+              <CheckCircleOutlineRoundedIcon />
+              <Typography variant="body2" color="textSecondary" component="p">
+                shipping
+              </Typography>
+            </IconButton>
+          )}
+        </div>
       </CardActions>
     </Card>
   );
