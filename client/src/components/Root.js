@@ -2,6 +2,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Root() {
+  const history = useHistory();
   const classes = useStyles();
 
   return (
@@ -33,7 +35,7 @@ export default function Root() {
         variant="contained"
         color="secondary"
         onClick={() => {
-          console.log("CLICKED");
+          history.push("/login");
         }}
       >
         Login
@@ -42,7 +44,7 @@ export default function Root() {
         variant="contained"
         color="secondary"
         onClick={() => {
-          console.log("CLICKED");
+          history.push("/register");
         }}
       >
         Register
