@@ -14,10 +14,12 @@ export default function Nav(props) {
         {props.user ? (
           <>
             <MenuItem>
-              <Link to="/users/:user_id">{props.user}</Link>
+              <Link to="/users/:user_id">{props.user.email}</Link>
             </MenuItem>
             <MenuItem>
-              <Link to="/">Logout</Link>
+              <Link to="/" onClick={props.handleLogout}>
+                Logout
+              </Link>
             </MenuItem>
           </>
         ) : (

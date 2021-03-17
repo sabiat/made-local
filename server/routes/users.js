@@ -57,7 +57,7 @@ module.exports = ({
       );
   });
 
-  router.post("/", (req, res) => {
+  router.post("/register", (req, res) => {
     const {
       username,
       firstName,
@@ -76,36 +76,43 @@ module.exports = ({
       confirmPassword,
     ];
 
-    registerUser(values).then((res) => {
-      res.cookie("email", response.email);
-      res.json(res.rows[0]);
+    registerUser(values).then((response) => {
+      res.cookie("id", response.id);
+      res.json(response);
     });
   });
 
   router.post("/login", (req, res) => {
-    getUserByEmail(req.body.email).then((response) => {
-      if (
-        req.body.email === response.email &&
-        req.body.password === response.password
-      ) {
-        res.cookie("email", response.email);
-        res.json(response);
-      } else {
-        res.json({ err: "Incorrect login" });
-      }
-    });
+    getUserByEmail(req.body.email)
+      .then((response) => {
+        if (
+          req.body.email === response.email &&
+          req.body.password === response.password
+        ) {
+          res.cookie("id", response.id);
+          res.json(response);
+        } else {
+          console.log("here");
+          res.json({ err: "Incorrect login" });
+        }
+      })
+      .catch((err) => res.json(err));
   });
 
   router.post("/authenticate", (req, res) => {
-    const email = req.cookies.email;
+    const id = req.cookies.id;
 
-    if (email) {
-      getUserByEmail(email).then((response) => {
+    if (id) {
+      getUserById(id).then((response) => {
         res.json(response);
       });
     } else {
       res.json(null);
     }
+  });
+  router.post("/logout", (req, res) => {
+    res.clearCookie("id");
+    res.json({ msg: "Cookie erased" });
   });
 
   return router;

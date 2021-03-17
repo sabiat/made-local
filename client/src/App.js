@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
 import Root from "./components/Root";
@@ -20,19 +25,44 @@ function App() {
 
   const handleLogin = (userInfo) => {
     axios.post("/api/users/login", { ...userInfo }).then((res) => {
-      setUser(res.data.email);
+      if (res.data.err) {
+        alert("error");
+      }
+      const loggedInUser = {
+        id: res.data.id,
+        user_name: res.data.user_name,
+        email: res.data.email,
+      };
+      setUser(loggedInUser);
+    });
+  };
+
+  const handleLogout = (userInfo) => {
+    axios.post("/api/users/logout").then((res) => {
+      setUser(null);
     });
   };
 
   useEffect(() => {
-    axios.post("/api/users/authenticate").then((res) => setUser(res.data));
+    axios.post("/api/users/authenticate").then((res) => {
+      if (res.data) {
+        const loggedInUser = {
+          id: res.data.id,
+          user_name: res.data.user_name,
+          email: res.data.email,
+        };
+        setUser(loggedInUser);
+      } else {
+        setUser(null);
+      }
+    });
   }, []);
 
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <div className="App">
-          <Nav user={user} />
+          <Nav user={user} handleLogout={handleLogout} />
           {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
           <Switch>
@@ -46,7 +76,7 @@ function App() {
               <Login handleLogin={handleLogin} />
             </Route>
             <Route path="/register">
-              <Register />
+              <Register setAppUser={setUser} />
             </Route>
             <Route path="/users/:user_id">
               <UserProfile />

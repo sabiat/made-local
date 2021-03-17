@@ -21,6 +21,8 @@ export default function Login(props) {
     password: "",
   });
 
+  const history = useHistory();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInfo((prev) => ({
@@ -32,6 +34,7 @@ export default function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     props.handleLogin(userInfo);
+    history.push("/home");
   };
 
   return (
