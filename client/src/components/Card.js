@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -8,8 +8,10 @@ import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
 export default function ShopCard(props) {
   const classes = useStyles();
 
+  const [favourite, setFavourite] = useState(props.isFavourited);
+
+  const addToFavourites = () => {
+    setFavourite(true);
+  };
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -58,7 +66,17 @@ export default function ShopCard(props) {
       <CardActions disableSpacing>
         <div>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            {favourite ? (
+              <FavoriteIcon
+                color="secondary"
+                onClick={() => setFavourite(false)}
+              />
+            ) : (
+              <FavoriteBorderOutlinedIcon
+                color="primary"
+                onClick={() => addToFavourites()}
+              />
+            )}
           </IconButton>
           {props.pickup && (
             <IconButton>

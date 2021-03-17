@@ -1,11 +1,10 @@
 // custom hook to pass shopList to App.js -> UserProfile.js and Home.js
-// export default everything... 
+// export default everything...
 import { useEffect, useState } from "react";
 import axios from "axios";
 import haversine from "haversine-distance";
 
 export default function useApplicationData() {
-
   const [loading, setLoading] = useState(true);
   const [shops, setShops] = useState([]);
   const [shop, setShop] = useState([]);
@@ -25,7 +24,7 @@ export default function useApplicationData() {
       });
     });
   };
-  
+
   useEffect(() => {
     Promise.all([getLocation(), axios.get("/api/shops")]).then(
       ([coords, shopsResp]) => {
@@ -36,7 +35,7 @@ export default function useApplicationData() {
           return item;
         });
         const filteredList = shopList.filter((shop) => {
-          return shop.distance < 20;
+          return shop.distance < 500;
         });
         setShop(filteredList);
         setLoading(false);
@@ -45,5 +44,14 @@ export default function useApplicationData() {
     );
   }, []);
 
-  return { loading, setLoading, shop, setShop, shops, setShops, userLocation, setUserLocation }
+  return {
+    loading,
+    setLoading,
+    shop,
+    setShop,
+    shops,
+    setShops,
+    userLocation,
+    setUserLocation,
+  };
 }
