@@ -70,6 +70,18 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const addFavouriteShop = (user_id, shop_id) => {
+    const query = {
+      text: `INSERT INTO favourites (user_id, shop_id) 
+      VALUES ($1, $2) RETURNING *`,
+      values: [user_id, shop_id],
+    };
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   const getShopById = (id) => {
     const query = {
       text: `SELECT shops.*
@@ -99,8 +111,8 @@ module.exports = (db) => {
   const registerUser = (values) => {
     return db
       .query(
-        `INSERT INTO users (user_name, first_name, last_name, email, password, password_confirmation)
-    VALUES ($1, $2, $3, $4, $5, $6)
+        `INSERT INTO users (user_name, first_name, last_name, email, photo, password, password_confirmation)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *`,
         values
       )
@@ -205,6 +217,7 @@ module.exports = (db) => {
     registerUser,
     registerShop,
     getUserByEmail,
+    addFavouriteShop,
     //addUser,
     //getUsersPosts
   };

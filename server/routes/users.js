@@ -11,6 +11,7 @@ module.exports = ({
   getUserById,
   getUserFavourites,
   registerUser,
+  addFavouriteShop,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -44,6 +45,12 @@ module.exports = ({
       );
   });
 
+  router.post("/:id/favourites", (req, res) => {
+    addFavouriteShop()
+      .then((favourites) => res.json(favourites))
+      .catch((err) => res.json({ error: err.message }));
+  });
+
   router.get("/posts", (req, res) => {
     getUsersPosts()
       .then((usersPosts) => {
@@ -63,6 +70,7 @@ module.exports = ({
       firstName,
       lastName,
       email,
+      photo,
       password,
       confirmPassword,
     } = req.body;
@@ -72,6 +80,7 @@ module.exports = ({
       firstName,
       lastName,
       email,
+      photo,
       password,
       confirmPassword,
     ];
