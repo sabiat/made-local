@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Chat() {
   const classes = useStyles();
 
-  const { allChats, sendChatAction, user } = React.useContext(CTX);
+  const { allChats, sendChatAction, user, socket } = React.useContext(CTX);
 
   const topics = Object.keys(allChats);
 
@@ -99,11 +99,14 @@ export default function Chat() {
             variant="outlined"
             className={classes.button}
             onClick={() => {
-              sendChatAction({
-                from: user,
-                msg: textValue,
-                topic: activeTopic,
-              });
+              sendChatAction(
+                {
+                  from: user,
+                  msg: textValue,
+                  topic: activeTopic,
+                },
+                socket
+              );
               changeTextValue("");
             }}
           >
