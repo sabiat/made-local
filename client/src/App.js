@@ -10,7 +10,7 @@ import ShopProfile from "./components/ShopProfile";
 import ShopRegister from "./components/ShopRegister";
 import Nav from "./components/Nav";
 import Button from "@material-ui/core/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./styles/theme";
@@ -20,9 +20,13 @@ function App() {
 
   const handleLogin = (userInfo) => {
     axios.post("/api/users/login", { ...userInfo }).then((res) => {
-      setUser(res.data);
+      setUser(res.data.email);
     });
   };
+
+  useEffect(() => {
+    axios.post("/api/users/authenticate").then((res) => setUser(res.data));
+  }, []);
 
   return (
     <Router>

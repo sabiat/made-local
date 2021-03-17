@@ -148,7 +148,7 @@ module.exports = (db) => {
     return db
       .query(query)
       .then((result) => {
-        result.rows[0];
+        return result.rows[0];
       })
       .catch((err) => err);
   };

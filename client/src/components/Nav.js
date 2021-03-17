@@ -14,7 +14,7 @@ export default function Nav(props) {
         {props.user ? (
           <>
             <MenuItem>
-              <Link to="/users/:user_id">{props.user.email}</Link>
+              <Link to="/users/:user_id">{props.user}</Link>
             </MenuItem>
             <MenuItem>
               <Link to="/">Logout</Link>

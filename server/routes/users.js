@@ -1,7 +1,4 @@
 const express = require("express");
-const app = express();
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
 const router = express.Router();
 const { getPostsByUsers } = require("../helpers/dataHelpers");
 const dbHelpers = require("../helpers/dbHelpers");
@@ -80,13 +77,35 @@ module.exports = ({
     ];
 
     registerUser(values).then((res) => {
+      res.cookie("email", response.email);
       res.json(res.rows[0]);
     });
   });
 
   router.post("/login", (req, res) => {
-    // console.log("here", req.body);
-    res.json(req.body);
+    getUserByEmail(req.body.email).then((response) => {
+      if (
+        req.body.email === response.email &&
+        req.body.password === response.password
+      ) {
+        res.cookie("email", response.email);
+        res.json(response);
+      } else {
+        res.json({ err: "Incorrect login" });
+      }
+    });
+  });
+
+  router.post("/authenticate", (req, res) => {
+    const email = req.cookies.email;
+
+    if (email) {
+      getUserByEmail(email).then((response) => {
+        res.json(response);
+      });
+    } else {
+      res.json(null);
+    }
   });
 
   return router;
