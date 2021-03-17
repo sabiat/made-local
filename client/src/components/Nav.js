@@ -9,26 +9,38 @@ export default function Nav(props) {
     <AppBar>
       <ToolBar>
         <MenuItem>
-          <Link to="/home">madelocal</Link>
+          <Link to="/home" style={{ textDecoration: "none" }}>
+            made | local
+          </Link>
         </MenuItem>
         {props.user ? (
           <>
             <MenuItem>
-              <Link to="/users/:user_id">{props.user.email}</Link>
+              <Link to="/users/:user_id" style={{ textDecoration: "none" }}>
+                {props.user["user_name"]}
+              </Link>
             </MenuItem>
             <MenuItem>
-              <Link to="/" onClick={props.handleLogout}>
+              <Link
+                to="/"
+                onClick={props.handleLogout}
+                style={{ textDecoration: "none" }}
+              >
                 Logout
               </Link>
             </MenuItem>
           </>
         ) : (
           <MenuItem>
-            <Link to="/login">Login</Link>
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              Login
+            </Link>
           </MenuItem>
         )}
         <MenuItem>
-          <Link to="/register">Register</Link>
+          <Link to="/register" style={{ textDecoration: "none" }}>
+            Register
+          </Link>
         </MenuItem>
         <MailOutlineIcon></MailOutlineIcon>
       </ToolBar>
