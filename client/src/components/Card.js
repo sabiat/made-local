@@ -30,8 +30,6 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   header: {
-    // fontWeight: "bold",
-    // fontSize: 5,
     backgroundColor: theme.palette.secondary.main,
   },
 }));
