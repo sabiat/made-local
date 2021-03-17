@@ -44,16 +44,16 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const getUserById = (id) => {
-    const query = {
-      text: `SELECT user_name FROM users WHERE id = $1`,
-      values: [`${id}`],
-    };
-    return db
-      .query(query)
-      .then((result) => result.rows[0])
-      .catch((err) => err);
-  };
+  // const getUserById = (id) => {
+  //   const query = {
+  //     text: `SELECT user_name FROM users WHERE id = $1`,
+  //     values: [`${id}`],
+  //   };
+  //   return db
+  //     .query(query)
+  //     .then((result) => result.rows[0])
+  //     .catch((err) => err);
+  // };
 
   const getUserFavourites = (id) => {
     const query = {
@@ -97,26 +97,34 @@ module.exports = (db) => {
   };
 
   const registerUser = (values) => {
-    db.query(`INSERT INTO users (user_name, first_name, last_name, email, password, password_confirmation)
+    return db
+      .query(
+        `INSERT INTO users (user_name, first_name, last_name, email, password, password_confirmation)
     VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *`,
-    values)
-      .then((res) => {console.log(res)})
-      .catch((err) => err)
-  }
+        values
+      )
+      .then((res) => res.rows[0])
+      .catch((err) => err);
+  };
 
   const registerShop = (params) => {
     let category = params[params.length - 1];
     const query = {
-      text: `SELECT categories.id FROM categories WHERE categories.name = $1`, values: [`${category}`]};
-      return db
+      text: `SELECT categories.id FROM categories WHERE categories.name = $1`,
+      values: [`${category}`],
+    };
+    return db
       .query(query)
       .then((result) => {
         params[params.length - 1] = result.rows[0].id;
-        db.query(`INSERT INTO shops (name, description, street_address, postal_code, city, latitude, longitude, phone_number, social, photo, user_id, delivery, pickup, shipping, category_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`, params)
-        })
-      .catch((err) => err)
-  }
+        db.query(
+          `INSERT INTO shops (name, description, street_address, postal_code, city, latitude, longitude, phone_number, social, photo, user_id, delivery, pickup, shipping, category_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`,
+          params
+        );
+      })
+      .catch((err) => err);
+  };
 
   const postMessage = (id) => {
     // const query = {
@@ -130,19 +138,35 @@ module.exports = (db) => {
     //   .then((result) => result.rows)
     //   .catch((err) => err);
   };
-  
-  // const getUserByEmail = email => {
 
-  //     const query = {
-  //         text: `SELECT * FROM users WHERE email = $1` ,
-  //         values: [email]
-  //     }
+  const getUserByEmail = (email) => {
+    const query = {
+      text: `SELECT * FROM users WHERE email = $1`,
+      values: [email],
+    };
 
-  //     return db
-  //         .query(query)
-  //         .then(result => result.rows[0])
-  //         .catch((err) => err);
-  // }
+    return db
+      .query(query)
+      .then((result) => {
+        return result.rows[0];
+      })
+      .catch((err) => {
+        return err.message;
+      });
+  };
+
+  const getUserById = (id) => {
+    const query = {
+      text: `SELECT * FROM users WHERE id = $1`,
+      values: [id],
+    };
+    return db
+      .query(query)
+      .then((result) => {
+        return result.rows[0];
+      })
+      .catch((err) => err);
+  };
 
   // const addUser = (firstName, lastName, email, password) => {
   //     const query = {
@@ -179,8 +203,8 @@ module.exports = (db) => {
     getShopById,
     getMessagesByShopId,
     registerUser,
-    registerShop
-    //getUserByEmail,
+    registerShop,
+    getUserByEmail,
     //addUser,
     //getUsersPosts
   };

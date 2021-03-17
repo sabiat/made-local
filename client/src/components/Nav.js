@@ -4,21 +4,43 @@ import ToolBar from "@material-ui/core/ToolBar";
 import { MenuItem } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 
-export default function Nav() {
+export default function Nav(props) {
   return (
     <AppBar>
       <ToolBar>
         <MenuItem>
-          <Link to="/home">madelocal</Link>
+          <Link to="/home" style={{ textDecoration: "none" }}>
+            made | local
+          </Link>
         </MenuItem>
+        {props.user ? (
+          <>
+            <MenuItem>
+              <Link to="/users/:user_id" style={{ textDecoration: "none" }}>
+                {props.user["user_name"]}
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link
+                to="/"
+                onClick={props.handleLogout}
+                style={{ textDecoration: "none" }}
+              >
+                Logout
+              </Link>
+            </MenuItem>
+          </>
+        ) : (
+          <MenuItem>
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              Login
+            </Link>
+          </MenuItem>
+        )}
         <MenuItem>
-          <Link to="/users/:user_id">username</Link>
-        </MenuItem>
-        <MenuItem>
-          <Link to="/login">Login</Link>
-        </MenuItem>
-        <MenuItem>
-          <Link to="/register">Register</Link>
+          <Link to="/register" style={{ textDecoration: "none" }}>
+            Register
+          </Link>
         </MenuItem>
         <MailOutlineIcon></MailOutlineIcon>
       </ToolBar>

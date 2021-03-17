@@ -10,7 +10,7 @@ module.exports = ({
   getUsersPosts,
   getUserById,
   getUserFavourites,
-  registerUser
+  registerUser,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -57,14 +57,62 @@ module.exports = ({
       );
   });
 
-  router.post("/", (req, res) => {
-    const { username, firstName, lastName, email, password, confirmPassword } = req.body;
+  router.post("/register", (req, res) => {
+    const {
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    } = req.body;
 
-    const values = [username, firstName, lastName, email, password, confirmPassword]
-    // console.log("inside post", req.body)
+    const values = [
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    ];
 
-    registerUser(values)
-    .then((res) => {res.send('added')})
+    registerUser(values).then((response) => {
+      res.cookie("id", response.id);
+      res.json(response);
+    });
+  });
+
+  router.post("/login", (req, res) => {
+    getUserByEmail(req.body.email)
+      .then((response) => {
+        if (
+          req.body.email === response.email &&
+          req.body.password === response.password
+        ) {
+          res.cookie("id", response.id);
+          res.json(response);
+        } else {
+          console.log("here");
+          res.json({ err: "Incorrect login" });
+        }
+      })
+      .catch((err) => res.json(err));
+  });
+
+  router.post("/authenticate", (req, res) => {
+    const id = req.cookies.id;
+
+    if (id) {
+      getUserById(id).then((response) => {
+        res.json(response);
+      });
+    } else {
+      res.json(null);
+    }
+  });
+  router.post("/logout", (req, res) => {
+    res.clearCookie("id");
+    res.json({ msg: "Cookie erased" });
   });
 
   return router;
