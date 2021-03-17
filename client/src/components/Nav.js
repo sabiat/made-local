@@ -4,7 +4,7 @@ import ToolBar from "@material-ui/core/ToolBar";
 import { MenuItem } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 
-export default function Nav() {
+export default function Nav(props) {
   return (
     <AppBar>
       <ToolBar>
@@ -14,9 +14,15 @@ export default function Nav() {
         <MenuItem>
           <Link to="/users/:user_id">username</Link>
         </MenuItem>
-        <MenuItem>
-          <Link to="/login">Login</Link>
-        </MenuItem>
+        {props.user ? (
+          <MenuItem>
+            <Link to="/">Logout</Link>
+          </MenuItem>
+        ) : (
+          <MenuItem>
+            <Link to="/login">Login</Link>
+          </MenuItem>
+        )}
         <MenuItem>
           <Link to="/register">Register</Link>
         </MenuItem>
