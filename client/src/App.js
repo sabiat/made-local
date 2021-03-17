@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import axios from "axios";
 import Home from "./components/Home";
 import Root from "./components/Root";
 import Login from "./components/Login";
@@ -16,7 +16,13 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./styles/theme";
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
+
+  const handleLogin = (userInfo) => {
+    axios.post("/api/users/login", { ...userInfo }).then((res) => {
+      setUser(res.data);
+    });
+  };
 
   return (
     <Router>
@@ -33,7 +39,7 @@ function App() {
               <Home />
             </Route>
             <Route path="/login">
-              <Login />
+              <Login handleLogin={handleLogin} />
             </Route>
             <Route path="/register">
               <Register />

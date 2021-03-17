@@ -11,13 +11,15 @@ export default function Nav(props) {
         <MenuItem>
           <Link to="/home">madelocal</Link>
         </MenuItem>
-        <MenuItem>
-          <Link to="/users/:user_id">username</Link>
-        </MenuItem>
         {props.user ? (
-          <MenuItem>
-            <Link to="/">Logout</Link>
-          </MenuItem>
+          <>
+            <MenuItem>
+              <Link to="/users/:user_id">{props.user.email}</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/">Logout</Link>
+            </MenuItem>
+          </>
         ) : (
           <MenuItem>
             <Link to="/login">Login</Link>

@@ -1,4 +1,7 @@
 const express = require("express");
+const app = express();
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 const router = express.Router();
 const { getPostsByUsers } = require("../helpers/dataHelpers");
 const dbHelpers = require("../helpers/dbHelpers");
@@ -10,7 +13,7 @@ module.exports = ({
   getUsersPosts,
   getUserById,
   getUserFavourites,
-  registerUser
+  registerUser,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -58,13 +61,32 @@ module.exports = ({
   });
 
   router.post("/", (req, res) => {
-    const { username, firstName, lastName, email, password, confirmPassword } = req.body;
+    const {
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    } = req.body;
 
-    const values = [username, firstName, lastName, email, password, confirmPassword]
-    // console.log("inside post", req.body)
+    const values = [
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+    ];
 
-    registerUser(values)
-    .then((res) => {res.send('added')})
+    registerUser(values).then((res) => {
+      res.json(res.rows[0]);
+    });
+  });
+
+  router.post("/login", (req, res) => {
+    // console.log("here", req.body);
+    res.json(req.body);
   });
 
   return router;

@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -12,8 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
-  const history = useHistory();
+export default function Login(props) {
   const classes = useStyles();
 
   const [userInfo, setUserInfo] = useState({
@@ -28,15 +28,12 @@ export default function Login() {
       [name]: value,
     }));
   };
-  const sendUserInfo = () => {
-    if (userInfo.length && userInfo.password.length) {
-    }
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
-    history.push("/home");
+    props.handleLogin(userInfo);
   };
+
   return (
     <Container className={classes.container} maxWidth="xs">
       <form>
