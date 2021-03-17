@@ -1,18 +1,41 @@
-// import Button from "./components/Button";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router-dom";
+
+const useStyles = makeStyles((theme) => ({
+  image: {
+    backgroundImage: `url(
+      "https://images.pexels.com/photos/6097827/pexels-photo-6097827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+    )`,
+    height: "350px",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+}));
 
 export default function Root() {
+  const history = useHistory();
+  const classes = useStyles();
+
   return (
     <div>
-      <div>
-        <img src="https://images.pexels.com/photos/6097827/pexels-photo-6097827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="home" />
-      </div>
-      <h2>Root</h2>
+      <Box className={classes.image}>
+        <Typography variant="h2">
+          <Box>MADE LOCAL</Box>
+        </Typography>
+      </Box>
       <Button
         variant="contained"
         color="secondary"
         onClick={() => {
-          console.log("CLICKED");
+          history.push("/login");
         }}
       >
         Login
@@ -21,7 +44,7 @@ export default function Root() {
         variant="contained"
         color="secondary"
         onClick={() => {
-          console.log("CLICKED");
+          history.push("/register");
         }}
       >
         Register
