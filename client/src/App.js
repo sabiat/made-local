@@ -9,7 +9,6 @@ import UserProfile from "./components/UserProfile";
 import ShopProfile from "./components/ShopProfile";
 import ShopRegister from "./components/ShopRegister";
 import Nav from "./components/Nav";
-import Button from "@material-ui/core/Button";
 import Chat from "./components/Chat";
 
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -32,15 +31,15 @@ function App() {
               <Root />
             </Route>
             <Route path="/home">
-              <Home 
-              loading={loading}
-              setLoading={setLoading}
-              shop={shop}
-              setShop={setShop}
-              shops={shops}
-              setShops={setShops}
-              userLocation={userLocation}
-              setUserLocation={setUserLocation} />
+              <Home
+                loading={loading}
+                setLoading={setLoading}
+                shop={shop}
+                setShop={setShop}
+                shops={shops}
+                setShops={setShops}
+                userLocation={userLocation}
+                setUserLocation={setUserLocation} />
             </Route>
             <Route path="/login">
               <Login />
@@ -50,8 +49,8 @@ function App() {
             </Route>
             <Route path="/users/:user_id">
               <UserProfile
-              shops={shops}
-              setShops={setShops} />
+                shops={shops}
+                setShops={setShops} />
             </Route>
             <Route path="/shops/new">
               <ShopRegister />
