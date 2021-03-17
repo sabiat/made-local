@@ -8,6 +8,7 @@ export default function RegistrationForm(props) {
     firstName: "",
     lastName: "",
     email: "",
+    photo: "",
     password: "",
     confirmPassword: "",
   });
@@ -28,6 +29,7 @@ export default function RegistrationForm(props) {
       state.firstName.length &&
       state.lastName.length &&
       state.email.length &&
+      state.photo.length &&
       state.password.length &&
       state.confirmPassword.length
     ) {
@@ -39,6 +41,7 @@ export default function RegistrationForm(props) {
           firstName: state.firstName,
           lastName: state.lastName,
           email: state.email,
+          photo: state.photo,
           password: state.password,
           confirmPassword: state.confirmPassword,
         },
@@ -107,6 +110,15 @@ export default function RegistrationForm(props) {
             aria-describedby="emailHelp"
             placeholder="Enter email"
             value={state.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <input
+            type="photo"
+            id="photo"
+            placeholder="Picture"
+            value={state.photo}
             onChange={handleChange}
           />
         </div>
