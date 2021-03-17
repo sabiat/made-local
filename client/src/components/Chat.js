@@ -42,15 +42,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Chat() {
   const classes = useStyles();
 
-  const [allChats] = React.useContext(CTX);
-
-  console.log(allChats);
+  const { allChats, sendChatAction, user } = React.useContext(CTX);
 
   const topics = Object.keys(allChats);
 
   const [activeTopic, changeActiveTopic] = useState(topics[0]);
   const [textValue, changeTextValue] = useState("");
 
+  console.log("in chat:", allChats);
   return (
     <div>
       <Paper className={classes.root}>
@@ -96,7 +95,20 @@ export default function Chat() {
             value={textValue}
             onChange={(e) => changeTextValue(e.target.value)}
           />
-          <Button variant="outlined">Send</Button>
+          <Button
+            variant="outlined"
+            className={classes.button}
+            onClick={() => {
+              sendChatAction({
+                from: user,
+                msg: textValue,
+                topic: activeTopic,
+              });
+              changeTextValue("");
+            }}
+          >
+            Send
+          </Button>
         </div>
       </Paper>
     </div>
