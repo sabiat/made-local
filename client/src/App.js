@@ -7,14 +7,19 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import UserProfile from "./components/UserProfile";
 import ShopProfile from "./components/ShopProfile";
-import ShopRegister from "./components/ShopRegister"
+import ShopRegister from "./components/ShopRegister";
 import Nav from "./components/Nav";
 import Button from "@material-ui/core/Button";
+import Chat from "./components/Chat";
 
 import { ThemeProvider } from "@material-ui/core/styles";
-import theme from './styles/theme'
+import theme from "./styles/theme";
+import Store from "./components/Store";
+
+import useApplicationData from "./hooks/useApplicationData"
 
 function App() {
+  const { loading, setLoading, shop, setShop, shops, setShops, userLocation, setUserLocation } = useApplicationData();
   return (
     <Router>
       <ThemeProvider theme={theme}>
@@ -24,10 +29,18 @@ function App() {
           renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/" exact>
-              <Root/>
+              <Root />
             </Route>
             <Route path="/home">
-              <Home />
+              <Home 
+              loading={loading}
+              setLoading={setLoading}
+              shop={shop}
+              setShop={setShop}
+              shops={shops}
+              setShops={setShops}
+              userLocation={userLocation}
+              setUserLocation={setUserLocation} />
             </Route>
             <Route path="/login">
               <Login />
@@ -36,13 +49,20 @@ function App() {
               <Register />
             </Route>
             <Route path="/users/:user_id">
-              <UserProfile />
+              <UserProfile
+              shops={shops}
+              setShops={setShops} />
             </Route>
             <Route path="/shops/new">
               <ShopRegister />
             </Route>
             <Route path="/shops/:shop_id">
               <ShopProfile />
+            </Route>
+            <Route path="/chat">
+              <Store>
+                <Chat />
+              </Store>
             </Route>
           </Switch>
         </div>
