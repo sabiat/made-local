@@ -17,8 +17,11 @@ import Nav from "./components/Nav";
 import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 
-import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./styles/theme";
+import Chat from "./components/Chat";
+
+import { ThemeProvider } from "@material-ui/core/styles";
+import Store from "./components/Store";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -86,6 +89,11 @@ function App() {
             </Route>
             <Route path="/shops/:shop_id">
               <ShopProfile />
+            </Route>
+            <Route path="/chat">
+              <Store>
+                <Chat />
+              </Store>
             </Route>
           </Switch>
         </div>

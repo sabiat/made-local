@@ -1,7 +1,13 @@
+const { normalizePort, onError, onListening } = require("./bin/helpers");
 const db = require("./db");
 const dbHelpers = require("./helpers/dbHelpers")(db);
-
+var debug = require("debug")("server:server");
+var http = require("http");
 var express = require("express");
+var app = express();
+
+var port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
@@ -11,7 +17,20 @@ var usersRouter = require("./routes/users");
 const shopsRouter = require("./routes/shops");
 const categoriesRouter = require("./routes/categories");
 
-var app = express();
+const server = http.createServer(app);
+const io = require("socket.io")(server);
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+io.on("connection", function (socket) {
+  console.log("a user connected");
+  socket.on("chat message", function (msg) {
+    console.log("message: " + JSON.stringify(msg));
+    io.emit("chat message", msg);
+  });
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -24,4 +43,6 @@ app.use("/api/users", usersRouter(dbHelpers));
 app.use("/api/shops", shopsRouter(dbHelpers));
 app.use("/api/categories", categoriesRouter(dbHelpers));
 
-module.exports = app;
+server.listen(port);
+server.on("error", onError);
+server.on("listening", () => onListening(server, debug, port));
