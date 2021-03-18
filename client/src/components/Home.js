@@ -12,15 +12,19 @@ export default function Home(props) {
     setCategory(event.target.value);
   };
 
-  const [favouritedShops, setFavouritedShops] = useState();
+  const [favouritedShops, setFavouritedShops] = useState(null);
 
   useEffect(() => {
     axios.get(`/api/users/favourites`).then((res) => {
-      const usersFavs = [];
-      for (const shop of res.data) {
-        usersFavs.push(shop.shop_id);
+      if (res.data.length > 1) {
+        const usersFavs = [];
+        for (const shop of res.data) {
+          usersFavs.push(shop.shop_id);
+        }
+        setFavouritedShops(usersFavs);
+      } else {
+        setFavouritedShops(null);
       }
-      setFavouritedShops(usersFavs);
     });
   }, []);
 
