@@ -1,45 +1,60 @@
-import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
+import Review from "./Review";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Typography, Grid, TextField } from "@material-ui/core";
 
-const imgLink =
-  "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
+export default function ShopMessageBoard(props) {
+  const [messages, setMessages] = useState([]);
 
-export default function ShopMessageBoard() {
+  const fetchShopReviews = () => {
+    const endpoint = window.location.pathname.split("/");
+    const id = endpoint[endpoint.length - 1];
+
+    axios.get(`/api/shops/${id}/messages`).then((res) => {
+      setMessages(res.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchShopReviews();
+  }, []);
+
+  const updateMessageBoard = (event) => {
+    const endpoint = window.location.pathname.split("/");
+    const shop_id = endpoint[endpoint.length - 1];
+
+    const message_text = event.target.value;
+    const user_id = props.user.id;
+
+    if (event.key === "Enter") {
+      axios
+        .post(`/api/shops/${shop_id}/messages`, {
+          shop_id,
+          user_id,
+          message_text,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    console.log(event.target.value);
+  };
+
   return (
-    <div>
-      <Typography>Community Message Board
-      <Paper style={{ padding: "40px 20px" }}>
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <Avatar alt="Remy Sharp" src={imgLink} />
-          </Grid>
-          <Grid justifyContent="left" item xs zeroMinWidth>
-            <h4 style={{ margin: 0, textAlign: "left" }}>Dude Bro</h4>
-            <p style={{ textAlign: "left" }}>
-              This is a great shop!{" "}
-            </p>
-            <p style={{ textAlign: "left", color: "gray" }}>
-              posted 1 minute ago
-            </p>
-          </Grid>
-        </Grid>
-        <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-        <Grid container wrap="nowrap" spacing={2}>
-          <Grid item>
-            <Avatar alt="Remy Sharp" src={imgLink} />
-          </Grid>
-          <Grid justifyContent="left" item xs zeroMinWidth>
-            <h4 style={{ margin: 0, textAlign: "left" }}>Bro Dude</h4>
-            <p style={{ textAlign: "left" }}>
-              Highly recommend the cupcakes.{" "}
-            </p>
-            <p style={{ textAlign: "left", color: "gray" }}>
-              posted 3 minutes ago
-            </p>
-          </Grid>
-        </Grid>
-      </Paper>
-      </Typography>
-    </div>
+    <Grid>
+      <Typography variant="h6">Community Message Board</Typography>
+      {messages.map((message) => (
+        <Review key={message.id} {...message}></Review>
+      ))}
+
+      <form>
+        <TextField
+          onKeyDown={(event) => updateMessageBoard(event)}
+          id="outlined-basic"
+          label="Outlined"
+          variant="outlined"
+        ></TextField>
+      </form>
+    </Grid>
   );
 }

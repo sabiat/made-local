@@ -97,14 +97,27 @@ module.exports = (db) => {
 
   const getMessagesByShopId = (id) => {
     const query = {
-      text: `SELECT *
+      text: `SELECT shop_messages.*, users.user_name AS user_name, users.photo AS photo
     FROM shop_messages
+    JOIN users ON shop_messages.user_id = users.id
     WHERE shop_id = $1;`,
       values: [`${id}`],
     };
     return db
       .query(query)
       .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
+  const addShopMessages = (values) => {
+    return db
+      .query(
+        `INSERT INTO shop_messages (shop_id, user_id, message_text)
+        VALUES ($1, $2, $3)
+        RETURNING *`,
+        values
+      )
+      .then((res) => res.rows[0])
       .catch((err) => err);
   };
 
@@ -218,6 +231,7 @@ module.exports = (db) => {
     registerShop,
     getUserByEmail,
     addFavouriteShop,
+    addShopMessages,
     //addUser,
     //getUsersPosts
   };

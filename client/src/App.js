@@ -104,7 +104,7 @@ function App() {
               <ShopRegister />
             </Route>
             <Route path="/shops/:shop_id">
-              <ShopProfile />
+              <ShopProfile shops={shops} user={user} />
             </Route>
             <Route path="/chat">
               <Store>
