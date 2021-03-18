@@ -46,8 +46,13 @@ module.exports = ({
   });
 
   router.post("/:id/favourites", (req, res) => {
-    addFavouriteShop()
-      .then((favourites) => res.json(favourites))
+    console.log(req.body);
+    addFavouriteShop(req.body.user_id, req.body.shop_id)
+      .then((favourites) => {
+        getUserFavourites(req.body.user_id).then((favourites) => {
+          res.json(favourites);
+        });
+      })
       .catch((err) => res.json({ error: err.message }));
   });
 

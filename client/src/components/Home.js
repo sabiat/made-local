@@ -15,10 +15,11 @@ export default function Home(props) {
   const [favouritedShops, setFavouritedShops] = useState();
 
   useEffect(() => {
-    axios.get(`/api/users/1/favourites`).then((res) => {
+    console.log("home mounted");
+    axios.get(`/api/users/2/favourites`).then((res) => {
       const usersFavs = [];
       for (const shop of res.data) {
-        usersFavs.push(shop.id);
+        usersFavs.push(shop.shop_id);
       }
       setFavouritedShops(usersFavs);
     });
@@ -39,18 +40,17 @@ export default function Home(props) {
                 );
               })
               .map((shop) => {
-                if (favouritedShops.includes(shop.id)) {
+                if (favouritedShops && favouritedShops.includes(shop.id)) {
                   shop.isFavourited = true;
                 } else {
                   shop.isFavourited = false;
                 }
-                console.log(shop);
                 return shop;
               })
 
               .map((shop) => (
                 <Grid item style={{ padding: 30 }} xs={4} spacing={3}>
-                  <Card key={shop.id} {...shop} />
+                  <Card key={shop.id} {...shop} user={props.user} />
                 </Grid>
               ))}
           </Grid>

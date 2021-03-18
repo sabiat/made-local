@@ -39,10 +39,22 @@ const useStyles = makeStyles((theme) => ({
 export default function ShopCard(props) {
   const classes = useStyles();
 
-  const [favourite, setFavourite] = useState(props.isFavourited);
+  const [favourite, setFavourite] = useState();
+  useEffect(() => {
+    setFavourite(props.isFavourited);
+  }, [props.isFavourited]);
 
   const addToFavourites = () => {
-    setFavourite(true);
+    axios({
+      method: "post",
+      url: `/api/users/${props.user.id}/favourites`,
+      data: {
+        user_id: props.user.id,
+        shop_id: props.id,
+      },
+    }).then((res) => {
+      setFavourite(true);
+    });
   };
 
   return (
@@ -74,7 +86,9 @@ export default function ShopCard(props) {
             ) : (
               <FavoriteBorderOutlinedIcon
                 color="primary"
-                onClick={() => addToFavourites()}
+                onClick={() => {
+                  addToFavourites();
+                }}
               />
             )}
           </IconButton>
