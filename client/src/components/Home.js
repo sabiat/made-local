@@ -16,7 +16,7 @@ export default function Home(props) {
 
   useEffect(() => {
     axios.get(`/api/users/favourites`).then((res) => {
-      if (res.data.length > 1) {
+      if (res.data.name !== "error") {
         const usersFavs = [];
         for (const shop of res.data) {
           usersFavs.push(shop.shop_id);
