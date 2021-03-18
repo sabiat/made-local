@@ -85,7 +85,7 @@ export default function ShopCard(props) {
       />
       <CardActionArea>
         <CardMedia
-          onClick={() => history.push(`shops/${props.id}`)}
+          onClick={() => history.push(`/shops/${props.id}`)}
           className={classes.media}
           image={props.photo}
           title={props.name}

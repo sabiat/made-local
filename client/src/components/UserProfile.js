@@ -44,10 +44,11 @@ export default function UserProfile(props) {
   filterUserFavouriteShops();
 
   const favouriteList = favShops.map((shop) => {
+    shop.isFavourited = true;
     // <Card />
     return (
       <Grid item style={{ padding: 30 }} xs={4}>
-        <Card key={shop.id} {...shop} />
+        <Card key={shop.id} {...shop} user={props.user} />
       </Grid>
     );
   });
