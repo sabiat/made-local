@@ -29,6 +29,7 @@ io.on("connection", function (socket) {
   socket.on("chat message", function (msg) {
     console.log("message: " + JSON.stringify(msg));
     io.emit("chat message", msg);
+    // db query here
   });
 });
 
