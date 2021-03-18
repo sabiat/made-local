@@ -98,7 +98,7 @@ function App() {
               <Register setAppUser={setUser} />
             </Route>
             <Route path="/users/:user_id">
-              <UserProfile shops={shops} setShops={setShops} />
+              <UserProfile shops={shops} setShops={setShops} user={user} />
             </Route>
             <Route path="/shops/new">
               <ShopRegister />

@@ -16,7 +16,10 @@ export default function Nav(props) {
         {props.user ? (
           <>
             <MenuItem>
-              <Link to="/users/:user_id" style={{ textDecoration: "none" }}>
+              <Link
+                to={`/users/${props.user.id}`}
+                style={{ textDecoration: "none" }}
+              >
                 {props.user["user_name"]}
               </Link>
             </MenuItem>

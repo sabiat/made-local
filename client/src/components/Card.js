@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -12,6 +13,7 @@ import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutline
 
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import axios from "axios";
+import { CardActionArea } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,12 +36,16 @@ const useStyles = makeStyles((theme) => ({
   header: {
     backgroundColor: theme.palette.secondary.main,
   },
+  icon: {
+    color: theme.palette.warning.main,
+  },
 }));
 
 export default function ShopCard(props) {
   const classes = useStyles();
-
   const [favourite, setFavourite] = useState();
+  const history = useHistory();
+
   useEffect(() => {
     setFavourite(props.isFavourited);
   }, [props.isFavourited]);
@@ -57,6 +63,19 @@ export default function ShopCard(props) {
     });
   };
 
+  const removeFromFavourites = () => {
+    axios({
+      method: "delete",
+      url: `/api/users/${props.user.id}/favourites`,
+      data: {
+        user_id: props.user.id,
+        shop_id: props.id,
+      },
+    }).then((res) => {
+      setFavourite(false);
+    });
+  };
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -64,12 +83,14 @@ export default function ShopCard(props) {
         title={props.name}
         subheader={`${props.distance} km away`}
       />
-
-      <CardMedia
-        className={classes.media}
-        image={props.photo}
-        title={props.name}
-      />
+      <CardActionArea>
+        <CardMedia
+          onClick={() => history.push(`/shops/${props.id}`)}
+          className={classes.media}
+          image={props.photo}
+          title={props.name}
+        />
+      </CardActionArea>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.description}
@@ -81,11 +102,11 @@ export default function ShopCard(props) {
             {favourite ? (
               <FavoriteIcon
                 color="secondary"
-                onClick={() => setFavourite(false)}
+                onClick={() => removeFromFavourites()}
               />
             ) : (
               <FavoriteBorderOutlinedIcon
-                color="primary"
+                color="secondary"
                 onClick={() => {
                   addToFavourites();
                 }}
@@ -94,7 +115,7 @@ export default function ShopCard(props) {
           </IconButton>
           {props.pickup && (
             <IconButton>
-              <CheckCircleOutlineRoundedIcon />
+              <CheckCircleOutlineRoundedIcon color="primary" />
               <Typography variant="body2" color="textSecondary" component="p">
                 pick-up
               </Typography>
@@ -102,7 +123,7 @@ export default function ShopCard(props) {
           )}{" "}
           {props.delivery && (
             <IconButton>
-              <CheckCircleOutlineRoundedIcon />
+              <CheckCircleOutlineRoundedIcon color="primary" />
               <Typography variant="body2" color="textSecondary" component="p">
                 delivery
               </Typography>
@@ -110,7 +131,7 @@ export default function ShopCard(props) {
           )}{" "}
           {props.shipping && (
             <IconButton>
-              <CheckCircleOutlineRoundedIcon />
+              <CheckCircleOutlineRoundedIcon color="primary" />
               <Typography variant="body2" color="textSecondary" component="p">
                 shipping
               </Typography>
