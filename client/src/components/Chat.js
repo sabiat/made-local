@@ -8,7 +8,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import theme from "../styles/theme";
 import { useState } from "react";
 import useChat from "../hooks/useChat"
 
@@ -43,6 +42,8 @@ export default function Chat(props) {
   const classes = useStyles();
 
   const { currentConversation, conversationList, sendChatMessage, receiveChatMessage, setActiveConversation } = useChat();
+  // console.log("current convo", currentConversation);
+  // console.log("convo list", conversationList);
 
   const [textValue, changeTextValue] = useState("");
 
@@ -57,20 +58,23 @@ export default function Chat(props) {
         </Typography>
         <div className={classes.flex}>
           <div className={classes.topicsWindow}>
-            {/* <List>
-              {topics.map((topic) => (
+            <List>
+              {conversationList.map((convo) => (
                 <ListItem
-                  // onClick={(e) => changeActiveTopic(e.target.innerText)}
-                  key={topic}
+                onClick={() => {
+                  setActiveConversation(convo.shopId)}}
+                  // console.log("TARGET", e.target.innerText);
+                  // console.log("CONVO", convo)
+                  key={convo.shopId}
                   button
                 >
-                  <ListItemText primary={topic} />
+                  <ListItemText primary={convo.shopName} />
                 </ListItem>
               ))}
-            </List> */}
+            </List>
           </div>
           <div className={classes.chatWindow}>
-            {/* {allChats[activeTopic].map((chat, i) => (
+            {currentConversation["messages"].map((chat, i) => (
               <div className={classes.flex} key={i}>
                 <Chip
                   label={chat.from}
@@ -79,7 +83,7 @@ export default function Chat(props) {
                 />
                 <Typography variant="body1">{chat.msg}</Typography>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
 

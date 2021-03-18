@@ -33,11 +33,12 @@ const currentConversationData = {
 };
 
 export default function useChat() {
-
+  
   const [currentConversation, setCurrentConversation] = useState(currentConversationData);
   const [socket, setSocket] = useState(null);
   const [conversationList, setConversationList] = useState(conversationListData);
-
+  
+  console.log("top", currentConversation)
   // each of the functions gets passed user obj as parameter
 
   // db - used inside a useEffect
@@ -47,29 +48,45 @@ export default function useChat() {
 
   // click on conversation from conversationList and give it to chatLog
   const setActiveConversation = (shopId) => {
+    // setCurrentConversation(currentConversationData)
     // fetch from conversationList array
-    // find which object has the conversationId of the shopId
+    // loop through data.messages, find the object where conversationId = shopId
     // set state of currentConversation
   };
 
   const sendChatMessage = (user, value) => {
-    console.log("user, value", user, value);
+    //sends message to back-end
     socket.emit("chat message", {user, value}); // convId
   };
 
   const receiveChatMessage = (value) => {
+    const newMessage = {
+      from: value.user.user_name,
+      msg: value.value
+    }
     // append to array of messages of the current conversation
     // push to currentConversation.messages
+    // "stale as hell" -vasily
+    const updatedMessages = [...currentConversation.messages, newMessage]
+    setCurrentConversation(prev => ({...prev, messages: [...prev.messages, newMessage]}));
+
+    // const updatedConversation = currentConversation.messages.push(newMessage)
+    // setCurrentConversation(updatedConversation);
+    // console.log("UPDATED CONVERSATION", updatedConversation)
+
+    // setCurrentConversation(currentConversation["messages"] => [...currentConversation.messages, newMessage])
+
   };
 
   useEffect(() => {
     setSocket(io());
+    console.log("initializing")
   }, []);
 
   useEffect(() => {
     if (socket) {
       socket.on("chat message", function (msg) {
-        receiveChatMessage({ from: "User", msg: "Hi, do you offer gluten free options?" });
+        receiveChatMessage(msg);
       });
     }
   }, [socket]);
@@ -77,6 +94,3 @@ export default function useChat() {
   return { currentConversation, conversationList, sendChatMessage, receiveChatMessage, setActiveConversation };
 
 };
-
-// SHAPE: show names of shoplist on the side, and hard-coded messages
-// 
