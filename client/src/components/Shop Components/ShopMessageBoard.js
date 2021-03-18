@@ -51,7 +51,7 @@ export default function ShopMessageBoard(props) {
         <TextField
           onKeyDown={(event) => updateMessageBoard(event)}
           id="outlined-basic"
-          label="Outlined"
+          label="Add Review"
           variant="outlined"
         ></TextField>
       </form>
