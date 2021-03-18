@@ -15,8 +15,7 @@ export default function Home(props) {
   const [favouritedShops, setFavouritedShops] = useState();
 
   useEffect(() => {
-    console.log("home mounted");
-    axios.get(`/api/users/2/favourites`).then((res) => {
+    axios.get(`/api/users/favourites`).then((res) => {
       const usersFavs = [];
       for (const shop of res.data) {
         usersFavs.push(shop.shop_id);
@@ -49,7 +48,13 @@ export default function Home(props) {
               })
 
               .map((shop) => (
-                <Grid item style={{ padding: 30 }} xs={4} spacing={3}>
+                <Grid
+                  key={shop.id}
+                  item
+                  style={{ padding: 30 }}
+                  xs={4}
+                  spacing={3}
+                >
                   <Card key={shop.id} {...shop} user={props.user} />
                 </Grid>
               ))}

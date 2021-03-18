@@ -23,6 +23,16 @@ module.exports = ({
         })
       );
   });
+  // route to get user favourites with id from cookie
+  router.get("/favourites", (req, res) => {
+    getUserFavourites(req.cookies.id)
+      .then((users) => res.json(users))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
 
   router.get("/:id", (req, res) => {
     getUserById(req.params.id)
@@ -33,9 +43,8 @@ module.exports = ({
         })
       );
   });
-
+  // route to get user favourites with id from endpoint
   router.get("/:id/favourites", (req, res) => {
-    console.log(req.params.id);
     getUserFavourites(req.params.id)
       .then((users) => res.json(users))
       .catch((err) =>
@@ -46,7 +55,6 @@ module.exports = ({
   });
 
   router.post("/:id/favourites", (req, res) => {
-    console.log(req.body);
     addFavouriteShop(req.body.user_id, req.body.shop_id)
       .then((favourites) => {
         getUserFavourites(req.body.user_id).then((favourites) => {
