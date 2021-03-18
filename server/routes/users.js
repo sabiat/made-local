@@ -12,6 +12,7 @@ module.exports = ({
   getUserFavourites,
   registerUser,
   addFavouriteShop,
+  removeFavouriteShop,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -61,6 +62,12 @@ module.exports = ({
           res.json(favourites);
         });
       })
+      .catch((err) => res.json({ error: err.message }));
+  });
+
+  router.delete("/:id/favourites", (req, res) => {
+    removeFavouriteShop(req.body.user_id, req.body.shop_id)
+      .then((favourites) => res.json(favourites))
       .catch((err) => res.json({ error: err.message }));
   });
 

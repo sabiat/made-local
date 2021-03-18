@@ -82,6 +82,16 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const removeFavouriteShop = (user_id, shop_id) => {
+    return db
+      .query(`DELETE FROM favourites WHERE shop_id = $1 AND user_id = $2`, [
+        shop_id,
+        user_id,
+      ])
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   const getShopById = (id) => {
     const query = {
       text: `SELECT shops.*
@@ -232,6 +242,7 @@ module.exports = (db) => {
     getUserByEmail,
     addFavouriteShop,
     addShopMessages,
+    removeFavouriteShop,
     //addUser,
     //getUsersPosts
   };
