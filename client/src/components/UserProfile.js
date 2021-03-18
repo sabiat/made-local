@@ -18,7 +18,7 @@ export default function UserProfile(props) {
     const endpoint = window.location.pathname.split("/");
     const id = endpoint[endpoint.length - 1];
     // hardcoded for now ~ was ${id}
-    axios.get(`/api/users/1/favourites`).then((res) => {
+    axios.get(`/api/users/${id}/favourites`).then((res) => {
       setState((prev) => res.data);
       setLoading(false);
     });
@@ -32,7 +32,7 @@ export default function UserProfile(props) {
 
   const filterUserFavouriteShops = () => {
     const favouriteShopIds = state.map((shop) => {
-      return shop.id;
+      return shop.shop_id;
     });
     favShops = props.shops.filter((shop) => {
       if (favouriteShopIds.includes(shop.id)) {

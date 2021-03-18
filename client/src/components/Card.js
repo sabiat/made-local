@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
   header: {
     backgroundColor: theme.palette.secondary.main,
   },
+  icon: {
+    color: theme.palette.warning.main,
+  },
 }));
 
 export default function ShopCard(props) {
