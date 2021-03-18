@@ -1,12 +1,9 @@
 import Review from "./Review";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Typography, Grid } from "@material-ui/core";
+import { Typography, Grid, TextField } from "@material-ui/core";
 
-const imgLink =
-  "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
-
-export default function ShopMessageBoard() {
+export default function ShopMessageBoard(props) {
   const [messages, setMessages] = useState([]);
 
   const fetchShopReviews = () => {
@@ -22,9 +19,25 @@ export default function ShopMessageBoard() {
     fetchShopReviews();
   }, []);
 
-  const handleSubmit = (message) => {
-    axios.post("");
-    setMessages((messages) => messages.concat([message]));
+  const updateMessageBoard = (event) => {
+    const endpoint = window.location.pathname.split("/");
+    const shop_id = endpoint[endpoint.length - 1];
+
+    const message_text = event.target.value;
+    const user_id = props.user.id;
+
+    if (event.key === "Enter") {
+      axios
+        .post(`/api/shops/${shop_id}/messages`, {
+          shop_id,
+          user_id,
+          message_text,
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    console.log(event.target.value);
   };
 
   return (
@@ -33,7 +46,15 @@ export default function ShopMessageBoard() {
       {messages.map((message) => (
         <Review key={message.id} {...message}></Review>
       ))}
-      {/* <form onSubmit={}> input="message"</form> */}
+
+      <form>
+        <TextField
+          onKeyDown={(event) => updateMessageBoard(event)}
+          id="outlined-basic"
+          label="Outlined"
+          variant="outlined"
+        ></TextField>
+      </form>
     </Grid>
   );
 }

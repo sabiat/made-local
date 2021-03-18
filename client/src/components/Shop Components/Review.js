@@ -15,10 +15,10 @@ export default function Review(props) {
         <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-            <Avatar alt="Remy Sharp" src={imgLink} />
+            <Avatar alt={props.user_name} src={props.photo} />
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth>
-            <h4 style={{ margin: 0, textAlign: "left" }}>{props.user_id}</h4>
+            <h4 style={{ margin: 0, textAlign: "left" }}>{props.user_name}</h4>
             <p style={{ textAlign: "left" }}>{props.message_text}</p>
             <p style={{ textAlign: "left", color: "gray" }}>
               {trimDate(props.created_at)}

@@ -1,9 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
 import Root from "./components/Root";
@@ -21,10 +17,19 @@ import Chat from "./components/Chat";
 import { ThemeProvider } from "@material-ui/core/styles";
 import Store from "./components/Store";
 
-import useApplicationData from "./hooks/useApplicationData"
+import useApplicationData from "./hooks/useApplicationData";
 
 function App() {
-  const { loading, setLoading, shop, setShop, shops, setShops, userLocation, setUserLocation } = useApplicationData();
+  const {
+    loading,
+    setLoading,
+    shop,
+    setShop,
+    shops,
+    setShops,
+    userLocation,
+    setUserLocation,
+  } = useApplicationData();
   const [user, setUser] = useState(null);
 
   const handleLogin = (userInfo) => {
@@ -82,7 +87,8 @@ function App() {
                 shops={shops}
                 setShops={setShops}
                 userLocation={userLocation}
-                setUserLocation={setUserLocation} />
+                setUserLocation={setUserLocation}
+              />
             </Route>
             <Route path="/login">
               <Login handleLogin={handleLogin} />
@@ -91,15 +97,13 @@ function App() {
               <Register setAppUser={setUser} />
             </Route>
             <Route path="/users/:user_id">
-              <UserProfile
-                shops={shops}
-                setShops={setShops} />
+              <UserProfile shops={shops} setShops={setShops} />
             </Route>
             <Route path="/shops/new">
               <ShopRegister />
             </Route>
             <Route path="/shops/:shop_id">
-              <ShopProfile />
+              <ShopProfile shops={shops} user={user} />
             </Route>
             <Route path="/chat">
               <Store>

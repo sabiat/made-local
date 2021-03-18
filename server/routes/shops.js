@@ -7,6 +7,7 @@ module.exports = ({
   getShopById,
   getMessagesByShopId,
   registerShop,
+  addShopMessages,
 }) => {
   router.get("/", (req, res) => {
     getShops()
@@ -38,7 +39,13 @@ module.exports = ({
       );
   });
 
-  router.post("/:id/messages", (req, res) => {});
+  router.post("/:id/messages", (req, res) => {
+    const { shop_id, user_id, message_text } = req.body;
+    const values = [shop_id, user_id, message_text];
+    addShopMessages(values).then(() =>
+      getMessagesByShopId(shop_id).then((messages) => res.json(messages))
+    );
+  });
 
   router.post("/", (req, res) => {
     const {
