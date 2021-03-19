@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import axios from 'axios';
 
-const conversationListData = [
-  {
+const conversationListData = {
+  1: {
   shopName: "The Original Cupcakes",
   shopId: 1, // userId of shop owner
   messages: [
@@ -12,7 +12,7 @@ const conversationListData = [
     { from: "User", msg: "Awesome, I'll take 2 dozen chocolate cupcakes." },
   ],
 },
-{
+2: {
   shopName: "Shop the Constant Closet",
   shopId: 2, // userId of shop owner
   messages: [
@@ -21,7 +21,7 @@ const conversationListData = [
     { from: "User", msg: "Awesome, I'll take 2 dozen chocolate cupcakes." },
   ],
 }
-]
+}
 
 const currentConversationData = {
   shopName: "The Original Cupcakes",
@@ -35,78 +35,101 @@ const currentConversationData = {
 
 export default function useChat() {
   
-  const [currentConversation, setCurrentConversation] = useState(currentConversationData);
+  const [activeConversation, setActiveConversation] = useState(5);
   const [socket, setSocket] = useState(null);
   const [conversationList, setConversationList] = useState();
-  // const [conversationListCopy, setConversationListCopy] = useState();
+  const [shopData, setShopData] = useState();
   
-  function transformMe(someArray) {
+  function transformResData(resData) {
     let result = {}
-    for (const thing of someArray) {
-      //console.log(thing)
-      if (!result[thing.id]) {
-        result[thing.id] = {
-          id: thing.id,
-          shopId: thing.shopId,
-          shopname: thing.shopname,
+    for (const element of resData) {
+
+      if (!result[element.shop_id]) {
+        result[element.shop_id] = {
+          id: element.id,
+          shopId: element.shop_id,
+          shopname: element.shopname,
           messages: [
             {
-              from: thing.from,
-              msg: thing.message
+              from: element.from,
+              msg: element.message
             }
           ]
         }
       } else {
-        result[thing.id].messages.push(
+        result[element.shop_id].messages.push(
           {
-            from: thing.from,
-            msg: thing.message
+            from: element.from,
+            msg: element.message
           }
         )
       }
     }
     return result;
 };
-  // each of the functions gets passed user obj as parameter
+ 
+const transformShopData = function(data) {
+  //console.log("DATA", data)
+  const arr = [];
+  for (let convoNum in data) {
+    arr.push([data[convoNum].shopId, data[convoNum].shopname])
+  }
+return arr;
+};
 
-  // db - used inside a useEffect
-  const fetchAllConversations = () => {
-    // use axios get to fetch from backend
-    axios.get("/api/users/chats")
-    .then(res => {
-      // console.log(res.data);
-      setConversationList(transformMe(res.data));
-    });
-  };
-  
-  console.log("convolist", conversationList);
 
-  const setActiveConversation = (shopId) => {
-    // setCurrentConversation(currentConversationData)
-    // fetch from conversationList array
-    // loop through data.messages, find the object where conversationId = shopId
-    // set state of currentConversation
+// db - used inside a useEffect
+const fetchAllConversations = () => {
+  // use axios get to fetch from backend
+  return axios.get("/api/users/chats")
+  .then(res => {
+    setConversationList(transformResData(res.data));
+  });
+};
+
+//console.log("convolist", conversationList);
+//console.log(transformShopData(conversationList));
+//  console.log("shopData", shopData);
+
+  const selectActiveConversation = (shopId) => {
+    setActiveConversation(shopId);
   };
 
   const sendChatMessage = (user, value) => {
+    console.log("ACTIVECONVO", activeConversation);
     //sends message to back-end
-    socket.emit("chat message", {user, value}); // convId
+    // const newMessages = [...activeConversation.messages];
+    socket.emit("chat message", {user, value, shopId: activeConversation});
+    // newMessages.push({from: user.user_name, msg: value});
+    // setActiveConversation({...activeConversation, messages: newMessages}); 
   };
 
   const receiveChatMessage = (value) => {
+   console.log('VALUE', value)
     const newMessage = {
       from: value.user.user_name,
       msg: value.value
     }
     // append to array of messages of the current conversation
-    // "stale as hell" -vasily
-    const updatedMessages = [...currentConversation.messages, newMessage]
-    setCurrentConversation(prev => ({...prev, messages: [...prev.messages, newMessage]}));
+    //const updatedMessages = [...activeConversation.messages, newMessage]
+    const shopIdOfCurrentConvo = {};
+    // debugger;
+    shopIdOfCurrentConvo[value.shopId] = conversationList[value.shopId];
+    shopIdOfCurrentConvo[value.shopId].messages.push(newMessage);
+    const newConversationList = {...conversationList, ...shopIdOfCurrentConvo};
+    setConversationList(prev => ({...prev, ...newConversationList}));
+    // setActiveConversation(prev => ({...prev, messages: [...prev.messages, newMessage]}));
+    // console.log("ACTIVECONVO", activeConversation);
+    // console.log("CONVOLIST", conversationList);
+    console.log("shopidconvo", shopIdOfCurrentConvo)
+    console.log("convolist", conversationList);
   };
 
   useEffect(() => {
-    setSocket(io());
-    fetchAllConversations();
+    fetchAllConversations()
+    .then(() => {
+      setSocket(io());
+    })
   }, []);
 
   useEffect(() => {
@@ -117,6 +140,6 @@ export default function useChat() {
     }
   }, [socket]);
 
-  return { currentConversation, conversationList, sendChatMessage, receiveChatMessage, setActiveConversation };
+  return { activeConversation, conversationList, sendChatMessage, receiveChatMessage, selectActiveConversation, setActiveConversation, transformShopData };
 
 };

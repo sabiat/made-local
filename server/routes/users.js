@@ -13,6 +13,7 @@ module.exports = ({
   registerUser,
   addFavouriteShop,
   removeFavouriteShop,
+  getConversationsByUserId,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -32,10 +33,22 @@ module.exports = ({
         res.json({
           error: err.message,
         })
+        );
+      });
+      
+  router.get("/chats", (req, res) => {
+    getConversationsByUserId(req.cookies.id)
+      .then((resp) => {
+        res.json(resp)
+      })
+      .catch((err) =>
+      res.json({
+        error: err.message,
+      })
       );
-  });
+  })
 
-  router.get("/:id", (req, res) => {
+      router.get("/:id", (req, res) => {
     getUserById(req.params.id)
       .then((users) => res.json(users))
       .catch((err) =>
@@ -83,6 +96,7 @@ module.exports = ({
         })
       );
   });
+
 
   router.post("/register", (req, res) => {
     const {

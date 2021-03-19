@@ -119,6 +119,28 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getConversationsByUserId = (user_id) => {
+    const query = {
+      text: `SELECT (conversations.*),
+      chat_messages.message_text AS message,
+      shops.name AS shopName,
+      users.user_name AS from
+      
+      FROM conversations
+
+      JOIN chat_messages ON conversations.id = chat_messages.conversation_id
+      JOIN users ON users.id = chat_messages.user_id
+      JOIN shops ON shops.id = conversations.shop_id
+      WHERE conversations.user_id = $1
+      `,
+      values: [`${user_id}`]
+    };
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   const addShopMessages = (values) => {
     return db
       .query(
@@ -243,6 +265,7 @@ module.exports = (db) => {
     addFavouriteShop,
     addShopMessages,
     removeFavouriteShop,
+    getConversationsByUserId
     //addUser,
     //getUsersPosts
   };

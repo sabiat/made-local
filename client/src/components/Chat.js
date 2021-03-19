@@ -41,12 +41,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Chat(props) {
   const classes = useStyles();
 
-  const { currentConversation, conversationList, sendChatMessage, receiveChatMessage, setActiveConversation } = useChat();
-  // console.log("current convo", currentConversation);
-  // console.log("convo list", conversationList);
+  const { currentConversation, conversationList, sendChatMessage, receiveChatMessage, selectActiveConversation, activeConversation, setActiveConversation, transformShopData } = useChat();
 
   const [textValue, changeTextValue] = useState("");
 
+  const convoData = transformShopData(conversationList);
+  console.log("CONVODATA", convoData);
+  
   return (
     <div>
       <Paper className={classes.root}>
@@ -59,22 +60,22 @@ export default function Chat(props) {
         <div className={classes.flex}>
           <div className={classes.topicsWindow}>
             <List>
-              {/* {conversationList.map((convo) => (
+              {convoData.map((convo) => (
                 <ListItem
-                onClick={() => {
-                  setActiveConversation(convo.shopId)}}
+                onClick={() => {selectActiveConversation(convo[0])}}
                   // console.log("TARGET", e.target.innerText);
-                  // console.log("CONVO", convo)
-                  key={convo.shopId}
+                  key={convo[0]}
                   button
                 >
-                  <ListItemText primary={convo.shopName} />
+                  <ListItemText primary={convo[1]} />
                 </ListItem>
-              ))} */}
+              ))}
             </List>
           </div>
           <div className={classes.chatWindow}>
-            {currentConversation["messages"].map((chat, i) => (
+            {conversationList &&
+            conversationList[activeConversation] &&
+            conversationList[activeConversation].messages.map((chat, i) => (
               <div className={classes.flex} key={i}>
                 <Chip
                   label={chat.from}
