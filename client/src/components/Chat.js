@@ -59,7 +59,7 @@ export default function Chat(props) {
         <div className={classes.flex}>
           <div className={classes.topicsWindow}>
             <List>
-              {conversationList.map((convo) => (
+              {/* {conversationList.map((convo) => (
                 <ListItem
                 onClick={() => {
                   setActiveConversation(convo.shopId)}}
@@ -70,7 +70,7 @@ export default function Chat(props) {
                 >
                   <ListItemText primary={convo.shopName} />
                 </ListItem>
-              ))}
+              ))} */}
             </List>
           </div>
           <div className={classes.chatWindow}>

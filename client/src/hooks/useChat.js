@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
+import axios from 'axios';
 
 const conversationListData = [
   {
@@ -36,17 +37,50 @@ export default function useChat() {
   
   const [currentConversation, setCurrentConversation] = useState(currentConversationData);
   const [socket, setSocket] = useState(null);
-  const [conversationList, setConversationList] = useState(conversationListData);
+  const [conversationList, setConversationList] = useState();
+  // const [conversationListCopy, setConversationListCopy] = useState();
   
-  console.log("top", currentConversation)
+  function transformMe(someArray) {
+    let result = {}
+    for (const thing of someArray) {
+      //console.log(thing)
+      if (!result[thing.id]) {
+        result[thing.id] = {
+          id: thing.id,
+          shopId: thing.shopId,
+          shopname: thing.shopname,
+          messages: [
+            {
+              from: thing.from,
+              msg: thing.message
+            }
+          ]
+        }
+      } else {
+        result[thing.id].messages.push(
+          {
+            from: thing.from,
+            msg: thing.message
+          }
+        )
+      }
+    }
+    return result;
+};
   // each of the functions gets passed user obj as parameter
 
   // db - used inside a useEffect
-  const fetchAllConversations = (user) => {
+  const fetchAllConversations = () => {
     // use axios get to fetch from backend
+    axios.get("/api/users/chats")
+    .then(res => {
+      // console.log(res.data);
+      setConversationList(transformMe(res.data));
+    });
   };
+  
+  console.log("convolist", conversationList);
 
-  // click on conversation from conversationList and give it to chatLog
   const setActiveConversation = (shopId) => {
     // setCurrentConversation(currentConversationData)
     // fetch from conversationList array
@@ -65,22 +99,14 @@ export default function useChat() {
       msg: value.value
     }
     // append to array of messages of the current conversation
-    // push to currentConversation.messages
     // "stale as hell" -vasily
     const updatedMessages = [...currentConversation.messages, newMessage]
     setCurrentConversation(prev => ({...prev, messages: [...prev.messages, newMessage]}));
-
-    // const updatedConversation = currentConversation.messages.push(newMessage)
-    // setCurrentConversation(updatedConversation);
-    // console.log("UPDATED CONVERSATION", updatedConversation)
-
-    // setCurrentConversation(currentConversation["messages"] => [...currentConversation.messages, newMessage])
-
   };
 
   useEffect(() => {
     setSocket(io());
-    console.log("initializing")
+    fetchAllConversations();
   }, []);
 
   useEffect(() => {
