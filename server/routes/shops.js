@@ -8,6 +8,7 @@ module.exports = ({
   getMessagesByShopId,
   registerShop,
   addShopMessages,
+  getPhotosByShopId,
 }) => {
   router.get("/", (req, res) => {
     getShops()
@@ -32,6 +33,16 @@ module.exports = ({
   router.get("/:id/messages", (req, res) => {
     getMessagesByShopId(req.params.id)
       .then((shops) => res.json(shops))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+
+  router.get("/:id/photos", (req, res) => {
+    getPhotosByShopId(req.params.id)
+      .then((photos) => res.json(photos))
       .catch((err) =>
         res.json({
           error: err.message,
