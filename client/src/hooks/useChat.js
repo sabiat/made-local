@@ -135,7 +135,8 @@ const fetchAllConversations = () => {
   useEffect(() => {
     if (socket) {
       socket.on("chat message", function (msg) {
-        receiveChatMessage(msg);
+        receiveChatMessage(msg
+          );
       });
     }
   }, [socket]);
