@@ -4,7 +4,6 @@ import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,25 +59,4 @@ export default function Review(props) {
       </div>
     </Card>
   );
-}
-
-{
-  /* <Typography variant="body2">
-  <Paper style={{ padding: "40px 20px" }}>
-    <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-    <Grid container wrap="nowrap" spacing={2}>
-      <Grid item>
-        <Avatar alt={props.user_name} src={props.photo} />
-      </Grid>
-      <Grid justifyContent="left" item xs zeroMinWidth>
-        <h4 style={{ margin: 0, textAlign: "left" }}>{props.user_name}</h4>
-        <p style={{ textAlign: "left" }}>{props.message_text}</p>
-        <p style={{ textAlign: "left", color: "gray" }}>
-          {trimDate(props.created_at)}
-        </p>
-      </Grid>
-    </Grid>
-  </Paper>
-</Typography>
-); */
 }
