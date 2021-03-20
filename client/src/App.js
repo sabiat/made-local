@@ -106,10 +106,8 @@ function App() {
             <Route path="/shops/:shop_id">
               <ShopProfile shops={shops} user={user} />
             </Route>
-            <Route path="/chat">
-              <Store>
-                <Chat />
-              </Store>
+            <Route path="/chat" exact>
+              <Chat shops={shops} user={user}/>
             </Route>
           </Switch>
         </div>

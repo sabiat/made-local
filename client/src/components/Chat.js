@@ -8,9 +8,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import theme from "../styles/theme";
 import { useState } from "react";
-import { CTX } from "./Store";
+import useChat from "../hooks/useChat"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,42 +38,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Chat() {
+export default function Chat(props) {
   const classes = useStyles();
 
-  const { allChats, sendChatAction, user, socket } = React.useContext(CTX);
+  const { currentConversation, conversationList, sendChatMessage, receiveChatMessage, selectActiveConversation, activeConversation, setActiveConversation, transformShopData } = useChat();
 
-  const topics = Object.keys(allChats);
-
-  const [activeTopic, changeActiveTopic] = useState(topics[0]);
   const [textValue, changeTextValue] = useState("");
 
-  console.log("in chat:", allChats);
+  const convoData = transformShopData(conversationList);
+  console.log("CONVODATA", convoData);
+  
   return (
     <div>
       <Paper className={classes.root}>
         <Typography variant="h4" component="h3">
-          Chat app
+          Chats
         </Typography>
         <Typography variant="h5" component="h3">
-          {activeTopic}
+          {/* {activeTopic} */}
         </Typography>
         <div className={classes.flex}>
           <div className={classes.topicsWindow}>
             <List>
-              {topics.map((topic) => (
+              {convoData.map((convo) => (
                 <ListItem
-                  onClick={(e) => changeActiveTopic(e.target.innerText)}
-                  key={topic}
+                onClick={() => {selectActiveConversation(convo[0])}}
+                  // console.log("TARGET", e.target.innerText);
+                  key={convo[0]}
                   button
                 >
-                  <ListItemText primary={topic} />
+                  <ListItemText primary={convo[1]} />
                 </ListItem>
               ))}
             </List>
           </div>
           <div className={classes.chatWindow}>
-            {allChats[activeTopic].map((chat, i) => (
+            {conversationList &&
+            conversationList[activeConversation] &&
+            conversationList[activeConversation].messages.map((chat, i) => (
               <div className={classes.flex} key={i}>
                 <Chip
                   label={chat.from}
@@ -99,14 +100,7 @@ export default function Chat() {
             variant="outlined"
             className={classes.button}
             onClick={() => {
-              sendChatAction(
-                {
-                  from: user,
-                  msg: textValue,
-                  topic: activeTopic,
-                },
-                socket
-              );
+              sendChatMessage(props.user, textValue);
               changeTextValue("");
             }}
           >

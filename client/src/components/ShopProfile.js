@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 
 export default function ShopProfile(props) {
-  console.log("THESE P", props);
   const [isLoading, setLoading] = useState(true);
   const [state, setState] = useState({
     shop: [],
@@ -26,7 +25,6 @@ export default function ShopProfile(props) {
     fetchshopDetails();
   }, []);
 
-  console.log("state:", state.shop[0]);
   return (
     <div>
       {isLoading ? (
