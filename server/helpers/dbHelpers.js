@@ -105,6 +105,60 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getShopUserId = (user_id) => {
+    const query = {
+      text: `SELECT shops.id from shops
+      WHERE shops.user_id = $1
+      `,
+      values: [`${user_id}`],
+    };
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
+  const getConversationsByShopId = (shop_id) => {
+    return db
+      .query(
+        `SELECT conversations.id AS id, 
+        conversations.user_id, 
+        conversations.shop_id,
+        chat_messages.message_text AS message,
+        chat_messages.user_id AS from,
+        shops.name AS shopname
+        FROM conversations
+        INNER JOIN chat_messages ON conversations.id = chat_messages.conversation_id
+        INNER JOIN users ON users.id = conversations.user_id
+        INNER JOIN shops ON shops.id = conversations.shop_id
+        WHERE shop_id = $1`,
+        [shop_id]
+      )
+      .then((result) => {
+        console.log("QUERY", result.rows);
+        return result.rows;
+      })
+      .catch((err) => err);
+  };
+
+  // const getConversationsByShopId = (shop_id) => {
+  //   return db
+  //     .query(
+  //       `SELECT conversations.*, chat_messages.user_name as from, shops.name as shopname, message_text as message
+  //       FROM conversations
+  //       JOIN chat_messages ON conversations.id = chat_messages.conversation_id
+  //       JOIN users ON users.id = conversations.user_id
+  //       JOIN shops ON shops.id = conversations.shop_id
+  //       WHERE shop_id = $1`,
+  //       [shop_id]
+  //     )
+  //     .then((result) => {
+  //       console.log("QUERY", result.rows);
+  //       return result.rows;
+  //     })
+  //     .catch((err) => err);
+  // };
+
   const getMessagesByShopId = (id) => {
     const query = {
       text: `SELECT shop_messages.*, users.user_name AS user_name, users.photo AS photo
@@ -133,7 +187,7 @@ module.exports = (db) => {
       JOIN shops ON shops.id = conversations.shop_id
       WHERE conversations.user_id = $1
       `,
-      values: [`${user_id}`]
+      values: [`${user_id}`],
     };
     return db
       .query(query)
@@ -265,7 +319,9 @@ module.exports = (db) => {
     addFavouriteShop,
     addShopMessages,
     removeFavouriteShop,
-    getConversationsByUserId
+    getConversationsByUserId,
+    getShopUserId,
+    getConversationsByShopId,
     //addUser,
     //getUsersPosts
   };

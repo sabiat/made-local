@@ -8,5 +8,6 @@ VALUES
 (7, 'Like... cheez?', 2),
 (2, 'Yes.. if so I need 2 litres for my superbowl party', 2),
 (7, 'I can deliver - are you still in NDG?', 2),
-(2, 'Yes.. text me at 514-444-2362', 2);
-
+(2, 'Yes.. text me at 514-444-2362', 2),
+(8, 'test chat from user 8', 3),
+(3, 'test chat from business owner user 2', 3);

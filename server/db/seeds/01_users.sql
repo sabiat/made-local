@@ -17,4 +17,7 @@ INSERT INTO users (user_name, first_name, last_name, email, photo, password, pas
   VALUES ('celinedion', 'Celine', 'Dion', 'celine@gouv.qc.ca', 'https://www.bridgestonearena.com/assets/img/CelineDion2019_Slide-c143b05a83.jpg', 'password', 'password'); 
 
 INSERT INTO users (user_name, first_name, last_name, email, photo, password, password_confirmation)
-  VALUES ('quebecqueen2', 'Dion', 'Celine', 'celine2@gouv.qc.ca', 'https://www.bridgestonearena.com/assets/img/CelineDion2019_Slide-c143b05a83.jpg', 'password', 'password');    
+  VALUES ('quebecqueen2', 'Dion', 'Celine', 'celine2@gouv.qc.ca', 'https://www.bridgestonearena.com/assets/img/CelineDion2019_Slide-c143b05a83.jpg', 'password', 'password');  
+
+INSERT INTO users (user_name, first_name, last_name, email, photo, password, password_confirmation)
+  VALUES ('abc', 'd', 'abcd', 'a@b.c', 'https://www.bridgestonearena.com/assets/img/CelineDion2019_Slide-c143b05a83.jpg', 'password', 'password');      

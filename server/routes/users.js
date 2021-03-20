@@ -14,6 +14,8 @@ module.exports = ({
   addFavouriteShop,
   removeFavouriteShop,
   getConversationsByUserId,
+  getShopUserId,
+  getConversationsByShopId,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -33,22 +35,40 @@ module.exports = ({
         res.json({
           error: err.message,
         })
-        );
-      });
-      
-  router.get("/chats", (req, res) => {
-    getConversationsByUserId(req.cookies.id)
-      .then((resp) => {
-        res.json(resp)
-      })
-      .catch((err) =>
-      res.json({
-        error: err.message,
-      })
       );
-  })
+  });
 
-      router.get("/:id", (req, res) => {
+  router.get("/chats", (req, res) => {
+    getShopUserId(req.cookies.id).then((resp) => {
+      console.log("THIS IS THE GEN RES ", resp);
+      if (resp.length > 0) {
+        console.log("THIS IS THE RESP", resp[0].id);
+        getConversationsByShopId(resp[0].id)
+          .then((response) => {
+            console.log("WE HAVE THIS", response);
+            return res.json(response);
+          })
+          .catch((err) =>
+            res.json({
+              error: err.message,
+            })
+          );
+      } else {
+        getConversationsByUserId(req.cookies.id)
+          .then((resp) => {
+            console.log("THIS IS WHAT WE WAANT", resp);
+            return res.json(resp);
+          })
+          .catch((err) =>
+            res.json({
+              error: err.message,
+            })
+          );
+      }
+    });
+  });
+
+  router.get("/:id", (req, res) => {
     getUserById(req.params.id)
       .then((users) => res.json(users))
       .catch((err) =>
@@ -96,7 +116,6 @@ module.exports = ({
         })
       );
   });
-
 
   router.post("/register", (req, res) => {
     const {
