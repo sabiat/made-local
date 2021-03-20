@@ -15,7 +15,6 @@ import theme from "./styles/theme";
 import Chat from "./components/Chat";
 
 import { ThemeProvider } from "@material-ui/core/styles";
-import Store from "./components/Store";
 
 import useApplicationData from "./hooks/useApplicationData";
 
@@ -58,7 +57,10 @@ function App() {
         const loggedInUser = {
           id: res.data.id,
           user_name: res.data.user_name,
+          first_name: res.data.first_name,
+          last_name: res.data.last_name,
           email: res.data.email,
+          photo: res.data.photo
         };
         setUser(loggedInUser);
       } else {
@@ -72,8 +74,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <div className="App">
           <Nav user={user} handleLogout={handleLogout} />
-          {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/" exact>
               <Root />

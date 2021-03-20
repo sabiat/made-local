@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import Avatar from "@material-ui/core/Avatar";
 import Card from "./Card";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -12,7 +13,6 @@ export default function UserProfile(props) {
   const [isLoading, setLoading] = useState(true);
   const [state, setState] = useState([]);
   const history = useHistory();
-  // const [favList, setFavList] = useState([]);
 
   const fetchUserFavourites = () => {
     const endpoint = window.location.pathname.split("/");
@@ -53,6 +53,8 @@ export default function UserProfile(props) {
     );
   });
 
+  // console.log("PROP", props.user)
+
   return (
     <div>
       <br />
@@ -66,7 +68,10 @@ export default function UserProfile(props) {
       )}
       <Grid container alignItems="center">
         <Grid item xs={2}></Grid>
-        <Grid item xs={8}>
+        <Grid item xs={2}>
+          <Avatar src={props.photo} />
+        </Grid>
+        <Grid item xs={6}>
           <Typography variant="body1">
             <FavoriteIcon />
           </Typography>
