@@ -115,10 +115,8 @@ function App() {
                 <CircularProgress />
               )}
             </Route>
-            <Route path="/chat">
-              <Store>
-                <Chat />
-              </Store>
+            <Route path="/chat" exact>
+              <Chat shops={shops} user={user}/>
             </Route>
           </Switch>
         </div>

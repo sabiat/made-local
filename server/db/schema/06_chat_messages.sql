@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS messages CASCADE;
-CREATE TABLE "messages" (
+DROP TABLE IF EXISTS chat_messages CASCADE;
+CREATE TABLE "chat_messages" (
   "id" SERIAL PRIMARY KEY,
   "user_id" INTEGER REFERENCES users(id),
   "message_text" VARCHAR(255),
   "created_at"  TIMESTAMP NOT NULL DEFAULT NOW(),
-  "chat_id" INTEGER REFERENCES chats(id)
+  "conversation_id" INTEGER REFERENCES conversations(id)
 );
