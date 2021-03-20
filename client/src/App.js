@@ -106,7 +106,7 @@ function App() {
               <ShopRegister />
             </Route>
             <Route path="/shops/:shop_id/addphoto">
-              <AddPhoto />
+              {user ? <AddPhoto user={user} /> : <CircularProgress />}
             </Route>
             <Route path="/shops/:shop_id">
               {user ? (
