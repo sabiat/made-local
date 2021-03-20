@@ -32,20 +32,22 @@ export default function Nav(props) {
                 Logout
               </Link>
             </MenuItem>
+            <MailOutlineIcon></MailOutlineIcon>
           </>
         ) : (
-          <MenuItem>
-            <Link to="/login" style={{ textDecoration: "none" }}>
-              Login
-            </Link>
-          </MenuItem>
+          <>
+            <MenuItem>
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                Login
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/register" style={{ textDecoration: "none" }}>
+                Register
+              </Link>
+            </MenuItem>
+          </>
         )}
-        <MenuItem>
-          <Link to="/register" style={{ textDecoration: "none" }}>
-            Register
-          </Link>
-        </MenuItem>
-        <MailOutlineIcon></MailOutlineIcon>
       </ToolBar>
     </AppBar>
   );

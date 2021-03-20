@@ -1,5 +1,11 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
 import Root from "./components/Root";
@@ -34,6 +40,7 @@ function App() {
   } = useApplicationData();
   const [user, setUser] = useState(null);
 
+  const history = useHistory();
   const handleLogin = (userInfo) => {
     axios.post("/api/users/login", { ...userInfo }).then((res) => {
       if (res.data.err) {
@@ -81,17 +88,21 @@ function App() {
               <Root />
             </Route>
             <Route path="/home">
-              <Home
-                user={user}
-                loading={loading}
-                setLoading={setLoading}
-                shop={shop}
-                setShop={setShop}
-                shops={shops}
-                setShops={setShops}
-                userLocation={userLocation}
-                setUserLocation={setUserLocation}
-              />
+              {user ? (
+                <Home
+                  user={user}
+                  loading={loading}
+                  setLoading={setLoading}
+                  shop={shop}
+                  setShop={setShop}
+                  shops={shops}
+                  setShops={setShops}
+                  userLocation={userLocation}
+                  setUserLocation={setUserLocation}
+                />
+              ) : (
+                <Redirect to="/" />
+              )}
             </Route>
             <Route path="/login">
               <Login handleLogin={handleLogin} />
@@ -100,10 +111,14 @@ function App() {
               <Register setAppUser={setUser} />
             </Route>
             <Route path="/users/:user_id">
-              <UserProfile shops={shops} setShops={setShops} user={user} />
+              {user ? (
+                <UserProfile shops={shops} setShops={setShops} user={user} />
+              ) : (
+                <Redirect to="/" />
+              )}
             </Route>
             <Route path="/shops/new">
-              <ShopRegister />
+              {user ? <ShopRegister /> : <Redirect to="/" />}
             </Route>
             <Route path="/shops/:shop_id/addphoto">
               {user ? <AddPhoto user={user} /> : <CircularProgress />}
@@ -116,7 +131,7 @@ function App() {
               )}
             </Route>
             <Route path="/chat" exact>
-              <Chat shops={shops} user={user}/>
+              {user ? <Chat shops={shops} user={user} /> : <Redirect to="/" />}
             </Route>
           </Switch>
         </div>
