@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const conversationListData = {
   1: {
-    shopName: "The Original Cupcakes",
+    shopname: "The Original Cupcakes",
     shopId: 1, // userId of shop owner
     messages: [
       { from: "User", msg: "Hi, do you offer gluten free options?" },
@@ -16,7 +17,7 @@ const conversationListData = {
     ],
   },
   2: {
-    shopName: "Shop the Constant Closet",
+    shopname: "Shop the Constant Closet",
     shopId: 2, // userId of shop owner
     messages: [
       { from: "User", msg: "Hi, do you offer gluten free sweaters?" },
@@ -28,7 +29,6 @@ const conversationListData = {
     ],
   },
 };
-
 const currentConversationData = {
   shopName: "The Original Cupcakes",
   shopId: 1, // userId of shop owner
@@ -47,6 +47,7 @@ export default function useChat() {
   const [socket, setSocket] = useState(null);
   const [conversationList, setConversationList] = useState();
   const [shopData, setShopData] = useState();
+  const { state } = useLocation();
 
   function transformResData(resData) {
     let result = {};
@@ -85,9 +86,33 @@ export default function useChat() {
   // db - used inside a useEffect
   const fetchAllConversations = () => {
     // use axios get to fetch from backend
+    let shopIdForNewConvo = state[0];
+
     return axios.get("/api/users/chats").then((res) => {
       setConversationList(transformResData(res.data));
-      console.log("FRONT END", res.data);
+      const objectKeys = Object.keys(transformResData(res.data));
+
+      if (!objectKeys.includes(state[0])) {
+        let newConvo = {
+          id: state[0],
+          shopname: state[1],
+          shopId: state[0],
+          messages: [],
+        };
+        const newConversationList = {
+          ...conversationList,
+          [shopIdForNewConvo]: newConvo,
+        };
+
+        setConversationList((prev) => ({ ...prev, ...newConversationList }));
+        setActiveConversation(state[0]);
+        // setShopData(transformShopData(conversationList));
+      } else {
+        setConversationList(transformResData(res.data));
+        // setShopData(transformShopData(conversationList));
+      }
+
+      // console.log("FRONT END", res.data);
     });
   };
 
@@ -154,5 +179,6 @@ export default function useChat() {
     selectActiveConversation,
     setActiveConversation,
     transformShopData,
+    shopData,
   };
 }
