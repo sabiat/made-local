@@ -1,7 +1,9 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import { React, useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   },
 }));
@@ -17,52 +19,38 @@ const useStyles = makeStyles((theme) => ({
 export default function ShopPhotos() {
   const classes = useStyles();
 
+  const [photosLoading, setPhotosLoading] = useState(true);
+  const [photos, setPhotos] = useState();
+
+  const endpoint = window.location.pathname.split("/");
+  const id = endpoint[endpoint.length - 1];
+
+  const fetchShopPhotos = () => {
+    axios.get(`/api/shops/${id}/photos`).then((res) => {
+      setPhotos(res.data);
+      setPhotosLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    fetchShopPhotos();
+  }, []);
+
   return (
     <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}><img
-        width="100px"
-        src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
-        alt=""
-      /></Paper>
+      {photosLoading ? (
+        <CircularProgress color="secondary" />
+      ) : (
+        <Grid container spacing={3}>
+          {photos.map((photo) => (
+            <Grid item xs={4} key={photo.id}>
+              <Paper className={classes.paper}>
+                <img width="80%" src={photo.photo_urls} alt="" />
+              </Paper>
+            </Grid>
+          ))}
         </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}><img
-        width="100px"
-        src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
-        alt=""
-      /></Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}><img
-        width="100px"
-        src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
-        alt=""
-      /></Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}><img
-        width="100px"
-        src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
-        alt=""
-      /></Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}><img
-        width="100px"
-        src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
-        alt=""
-      /></Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}><img
-        width="100px"
-        src="https://images.pexels.com/photos/4916562/pexels-photo-4916562.jpeg?cs=srgb&dl=pexels-maria-orlova-4916562.jpg&fm=jpg"
-        alt=""
-      /></Paper>
-        </Grid>
-      </Grid>
+      )}
     </div>
   );
 }

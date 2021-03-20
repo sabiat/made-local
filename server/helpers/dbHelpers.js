@@ -279,6 +279,31 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getPhotosByShopId = (id) => {
+    const query = {
+      text: `SELECT * FROM shop_photos  WHERE shop_id = $1;`,
+      values: [id],
+    };
+    return db
+      .query(query)
+      .then((result) => {
+        return result.rows;
+      })
+      .catch((err) => err);
+  };
+
+  const addPhotosToShop = (url, shopId) => {
+    return db
+      .query(
+        `INSERT INTO shop_photos (shop_id, photo_urls) VALUES ($1, $2) RETURNING *`,
+        [shopId, url]
+      )
+      .then((result) => {
+        result.rows;
+      })
+      .catch((err) => err);
+  };
+
   // const addUser = (firstName, lastName, email, password) => {
   //     const query = {
   //         text: `INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *` ,
@@ -319,6 +344,8 @@ module.exports = (db) => {
     addFavouriteShop,
     addShopMessages,
     removeFavouriteShop,
+    getPhotosByShopId,
+    addPhotosToShop,
     getConversationsByUserId,
     getShopUserId,
     getConversationsByShopId,

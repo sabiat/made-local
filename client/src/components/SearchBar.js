@@ -6,8 +6,6 @@ import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 //import theme from './styles/theme';
 
-import { useState } from "react";
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -21,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchBar(props) {
   const classes = useStyles();
 
-  console.log(props);
   return (
     <div>
       <FormControl className={classes.formControl}>

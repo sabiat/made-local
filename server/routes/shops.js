@@ -8,6 +8,8 @@ module.exports = ({
   getMessagesByShopId,
   registerShop,
   addShopMessages,
+  getPhotosByShopId,
+  addPhotosToShop,
 }) => {
   router.get("/", (req, res) => {
     getShops()
@@ -37,6 +39,26 @@ module.exports = ({
           error: err.message,
         })
       );
+  });
+
+  router.get("/:id/photos", (req, res) => {
+    getPhotosByShopId(req.params.id)
+      .then((photos) => res.json(photos))
+      .catch((err) =>
+        res.json({
+          error: err.message,
+        })
+      );
+  });
+  router.post("/addphoto", (req, res) => {
+    console.log(req.body);
+    addPhotosToShop(req.body.photoUrl, req.body.shopId)
+      .then((result) => res.json(result))
+      .catch((err) => {
+        res.json({
+          error: err.message,
+        });
+      });
   });
 
   router.post("/:id/messages", (req, res) => {

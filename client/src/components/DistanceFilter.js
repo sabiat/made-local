@@ -24,7 +24,7 @@ export default function DistanceFilter(props) {
         <InputLabel htmlFor="age-native-helper">Distance</InputLabel>
         <NativeSelect value={props.distance} onChange={props.setDistance}>
           <option aria-label="None" value="" />
-          <option value={5}>50 km</option>
+          <option value={50}>50 km</option>
           <option value={30}>30 km</option>
           <option value={20}>20 km</option>
           <option value={10}>10 km</option>
