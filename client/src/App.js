@@ -10,6 +10,7 @@ import ShopProfile from "./components/ShopProfile";
 import ShopRegister from "./components/ShopRegister";
 import Nav from "./components/Nav";
 import { useState, useEffect } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import theme from "./styles/theme";
 import Chat from "./components/Chat";
@@ -98,7 +99,11 @@ function App() {
               <Register setAppUser={setUser} />
             </Route>
             <Route path="/users/:user_id">
-              <UserProfile shops={shops} setShops={setShops} user={user} />
+              {user ? (
+                <UserProfile shops={shops} setShops={setShops} user={user} />
+              ) : (
+              <CircularProgress />
+              )}
             </Route>
             <Route path="/shops/new">
               <ShopRegister />

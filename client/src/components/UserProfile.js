@@ -53,8 +53,6 @@ export default function UserProfile(props) {
     );
   });
 
-  // console.log("PROP", props.user)
-
   return (
     <div>
       <br />
@@ -64,34 +62,38 @@ export default function UserProfile(props) {
           <CircularProgress />
         </div>
       ) : (
-        <Grid item xs={4}></Grid>
-      )}
-      <Grid container alignItems="center">
-        <Grid item xs={2}></Grid>
-        <Grid item xs={2}>
-          <Avatar src={props.photo} />
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="body1">
-            <FavoriteIcon />
-          </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              history.push("/shops/new");
-            }}
-          >
-            + Shop
+        <div>
+          <Grid container alignItems="center">
+            <Grid item xs={2}></Grid>
+            <Grid item xs={2}>
+              <Avatar
+                width="100px"
+                src={props.user.photo}
+                alt=""
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body1">
+                <FavoriteIcon />
+              </Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  history.push("/shops/new");
+                }}
+              >
+                + Shop
           </Button>
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={1}>
-        {favouriteList}
-      </Grid>
+            </Grid>
+          </Grid>
+          <Grid container spacing={1}>
+            {favouriteList}
+          </Grid>
+        </div>
+      )}
     </div>
   );
 }
