@@ -43,7 +43,7 @@ export default function ShopPhotos() {
       ) : (
         <Grid container spacing={3}>
           {photos.map((photo) => (
-            <Grid item xs={4}>
+            <Grid item xs={4} key={photo.id}>
               <Paper className={classes.paper}>
                 <img width="80%" src={photo.photo_urls} alt="" />
               </Paper>

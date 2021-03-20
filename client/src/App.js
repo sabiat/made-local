@@ -15,9 +15,11 @@ import theme from "./styles/theme";
 import Chat from "./components/Chat";
 
 import { ThemeProvider } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Store from "./components/Store";
 
 import useApplicationData from "./hooks/useApplicationData";
+import AddPhoto from "./components/Shop Components/AddPhoto";
 
 function App() {
   const {
@@ -103,8 +105,15 @@ function App() {
             <Route path="/shops/new">
               <ShopRegister />
             </Route>
+            <Route path="/shops/:shop_id/addphoto">
+              <AddPhoto />
+            </Route>
             <Route path="/shops/:shop_id">
-              <ShopProfile shops={shops} user={user} />
+              {user ? (
+                <ShopProfile shops={shops} user={user} />
+              ) : (
+                <CircularProgress />
+              )}
             </Route>
             <Route path="/chat">
               <Store>

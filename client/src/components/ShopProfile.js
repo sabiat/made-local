@@ -2,10 +2,11 @@ import ShopContact from "./Shop Components/ShopContact";
 import ShopMap from "./Shop Components/ShopMap";
 import ShopPhotos from "./Shop Components/ShopPhotos";
 import ShopMessageBoard from "./Shop Components/ShopMessageBoard";
-import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import Grid from "@material-ui/core/Grid";
 
@@ -14,6 +15,8 @@ export default function ShopProfile(props) {
   const [state, setState] = useState({
     shop: [],
   });
+
+  const history = useHistory();
 
   const fetchshopDetails = () => {
     const endpoint = window.location.pathname.split("/");
@@ -27,14 +30,9 @@ export default function ShopProfile(props) {
     fetchshopDetails();
   }, []);
 
-  // if shop[0].user_id === props.user.id
-  // they can edit the shop
-
   if (isLoading) {
     return <CircularProgress color="secondary" />;
   }
-
-  console.log(props.user);
 
   return (
     <div>
@@ -54,9 +52,13 @@ export default function ShopProfile(props) {
       {/* )} */}
       <Grid container alignItems="center">
         <Grid item xs={8}>
-          {/* {state.shop[0].user_id === props.user.id && (
-            <AddToPhotosIcon onClick={() => alert("clicked")} />
-          )} */}
+          {state.shop[0].user_id === props.user.id && (
+            <AddAPhotoIcon
+              onClick={() =>
+                history.push(`/shops/${state.shop[0].id}/addphoto`)
+              }
+            />
+          )}
           <ShopPhotos />
         </Grid>
 
