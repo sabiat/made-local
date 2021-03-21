@@ -41,6 +41,7 @@ export default function ShopProfile(props) {
       ) : ( */}
       <ShopContact
         name={state.shop[0].name}
+        id={state.shop[0].id}
         description={state.shop[0].description}
         photo={state.shop[0].photo}
         phoneNumber={state.shop[0].phone_number}
