@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import Img from "react-cool-img";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
@@ -41,12 +42,25 @@ export default function ShopPhotos() {
       {photosLoading ? (
         <CircularProgress color="secondary" />
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={1}>
           {photos.map((photo) => (
             <Grid item xs={4} key={photo.id}>
-              <Paper className={classes.paper}>
-                <img width="80%" src={photo.photo_urls} alt="" />
-              </Paper>
+              <div
+              // style={{
+              //   margin: "10px",
+              // }}
+              >
+                <img
+                  src={photo.photo_urls}
+                  style={{
+                    width: "21.75em",
+                    height: "21.75em",
+                    objectFit: "cover",
+                    maxWidth: "100%",
+                  }}
+                  alt=""
+                />
+              </div>
             </Grid>
           ))}
         </Grid>

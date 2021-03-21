@@ -15,6 +15,7 @@
     "leaflet-geosearch": "^3.2.2",
     "material-ui-search-bar": "^1.0.0",
     "react": "^17.0.1",
+    "react-cool-img": "^1.2.9",
     "react-dom": "^17.0.1",
     "react-leaflet": "^3.1.0",
     "react-router-dom": "^5.2.0",

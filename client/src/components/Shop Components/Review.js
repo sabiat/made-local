@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: "1 0 auto",
-    width: "500px",
+    width: "1000px",
     height: "240px",
   },
 }));
@@ -33,27 +33,27 @@ export default function Review(props) {
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography variant="body2">
-            <Paper style={{ padding: "5px 5px" }}>
-              <Grid container wrap="nowrap" spacing={2}>
-                <Grid item>
-                  <Avatar alt={props.user_name} src={props.photo} />
-                </Grid>
-                <Grid justifyContent="left" item xs zeroMinWidth>
-                  <h4 style={{ margin: 0, textAlign: "left" }}>
-                    {props.user_name}
-                  </h4>
-                  <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-                  <p style={{ textAlign: "left" }}>{props.message_text}</p>
-                  <p style={{ textAlign: "left", color: "gray" }}>
-                    <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-                    <p style={{ textAlign: "right", marginRight: "30px" }}>
-                      {trimDate(props.created_at)}
-                    </p>
-                  </p>
-                </Grid>
+          <Typography variant="h5">
+            {/* <Paper style={{ padding: "5px 5px" }}> */}
+            <Grid container wrap="nowrap" spacing={2}>
+              <Grid item>
+                <Avatar alt={props.user_name} src={props.photo} />
               </Grid>
-            </Paper>
+              <Grid justifyContent="left" item xs zeroMinWidth>
+                <h4 style={{ margin: 0, textAlign: "left" }}>
+                  {props.user_name}
+                </h4>
+                <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+                <p style={{ textAlign: "left" }}>{props.message_text}</p>
+                <p style={{ textAlign: "left", color: "gray" }}>
+                  <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+                  <p style={{ textAlign: "right", marginRight: "30px" }}>
+                    {trimDate(props.created_at)}
+                  </p>
+                </p>
+              </Grid>
+            </Grid>
+            {/* </Paper> */}
           </Typography>
         </CardContent>
       </div>

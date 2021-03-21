@@ -60,24 +60,26 @@ export default function ShopMessageBoard(props) {
   };
 
   return (
-    <Grid container className={classes.content}>
-      <Grid>
-        <Typography variant="h6">Community Message Board</Typography>
-        {messages.map((message) => (
-          <Review key={message.id} {...message}></Review>
-        ))}
+    // <Grid container className={classes.content}>
+    <div>
+      {/* <Grid item> */}
+      <Typography variant="h3">Community Message Board</Typography>
+      {messages.map((message) => (
+        <Review key={message.id} {...message}></Review>
+      ))}
 
-        <form onSubmit={updateMessageBoard}>
-          <TextField
-            // onKeyDown={(event) => updateMessageBoard(event)}
-            id="outlined-basic"
-            label="Add Review"
-            variant="outlined"
-            name="messageForm"
-          ></TextField>
-          <Button type="submit">send me</Button>
-        </form>
-      </Grid>
-    </Grid>
+      <form onSubmit={updateMessageBoard}>
+        <TextField
+          // onKeyDown={(event) => updateMessageBoard(event)}
+          id="outlined-basic"
+          label="Add Review"
+          variant="outlined"
+          name="messageForm"
+        ></TextField>
+        <Button type="submit">send me</Button>
+      </form>
+      {/* </Grid> */}
+    </div>
+    // </Grid>
   );
 }
