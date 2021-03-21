@@ -16,6 +16,7 @@ module.exports = ({
   getConversationsByUserId,
   getShopUserId,
   getConversationsByShopId,
+  getUserShops,
 }) => {
   /* GET users listing. */
   router.get("/", (req, res) => {
@@ -86,6 +87,12 @@ module.exports = ({
           error: err.message,
         })
       );
+  });
+
+  router.get("/:id/shops", (req, res) => {
+    getUserShops(req.params.id)
+      .then((shops) => res.json(shops))
+      .catch((err) => res.json({ error: err.message }));
   });
 
   router.post("/:id/favourites", (req, res) => {

@@ -70,6 +70,20 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
+  const getUserShops = (id) => {
+    const query = {
+      text: `SELECT shops.*, users.user_name AS user_name 
+      FROM shops
+      JOIN users ON shops.user_id = users.id 
+      WHERE shops.user_id = $1;`,
+      values: [`${id}`],
+    };
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => err);
+  };
+
   const addFavouriteShop = (user_id, shop_id) => {
     const query = {
       text: `INSERT INTO favourites (user_id, shop_id) 
@@ -349,6 +363,7 @@ module.exports = (db) => {
     getConversationsByUserId,
     getShopUserId,
     getConversationsByShopId,
+    getUserShops,
     //addUser,
     //getUsersPosts
   };

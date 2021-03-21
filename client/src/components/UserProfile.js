@@ -7,25 +7,33 @@ import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Card from "./Card";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Divider from "@material-ui/core/Divider";
 
 export default function UserProfile(props) {
   const [isLoading, setLoading] = useState(true);
   const [state, setState] = useState([]);
+  const [userShops, setUserShops] = useState([]);
   const history = useHistory();
-  // const [favList, setFavList] = useState([]);
 
+  const endpoint = window.location.pathname.split("/");
+  const id = endpoint[endpoint.length - 1];
   const fetchUserFavourites = () => {
-    const endpoint = window.location.pathname.split("/");
-    const id = endpoint[endpoint.length - 1];
-    // hardcoded for now ~ was ${id}
     axios.get(`/api/users/${id}/favourites`).then((res) => {
       setState((prev) => res.data);
       setLoading(false);
     });
   };
 
+  const fetchUserShops = () => {
+    return axios.get(`/api/users/${id}/shops`).then((res) => {
+      setUserShops((prev) => res.data);
+      setLoading(false);
+    });
+  };
+
   useEffect(() => {
     fetchUserFavourites();
+    fetchUserShops();
   }, []);
 
   let favShops = [];
@@ -46,6 +54,29 @@ export default function UserProfile(props) {
   const favouriteList = favShops.map((shop) => {
     shop.isFavourited = true;
     // <Card />
+    return (
+      <Grid item style={{ padding: 30 }} xs={4}>
+        <Card key={shop.id} {...shop} user={props.user} />
+      </Grid>
+    );
+  });
+
+  let userOwnShops = [];
+  const filterUserOwnShops = () => {
+    // console.log(state);
+    // console.log(userShops);
+    const userShopIds = userShops.map((shop) => {
+      return shop.id;
+    });
+    userOwnShops = props.shops.filter((shop) => {
+      if (userShopIds.includes(shop.id)) {
+        return shop;
+      }
+    });
+  };
+  console.log(filterUserOwnShops());
+
+  const userShopList = userOwnShops.map((shop) => {
     return (
       <Grid item style={{ padding: 30 }} xs={4}>
         <Card key={shop.id} {...shop} user={props.user} />
@@ -83,9 +114,40 @@ export default function UserProfile(props) {
           </Button>
         </Grid>
       </Grid>
-
-      <Grid container spacing={1}>
-        {favouriteList}
+      <Grid
+        container
+        spacing={1}
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Typography variant="h4">My favourites</Typography>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+        >
+          {favouriteList}
+        </Grid>
+      </Grid>
+      <Divider light />
+      <Grid
+        container
+        spacing={1}
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Typography variant="h4">My shops</Typography>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+        >
+          {userShopList}
+        </Grid>
       </Grid>
     </div>
   );
