@@ -12,6 +12,7 @@ import useChat from "../hooks/useChat";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
+import whitelogo2 from "../styles/whitelogo2.png";
 
 import Fab from "@material-ui/core/Fab";
 import SendIcon from "@material-ui/icons/Send";
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   borderRight500: {
     borderRight: "0.15rem solid #6C9998",
+    backgroundColor: "#6C9998",
   },
   messageArea: {
     height: "70vh",
@@ -64,7 +66,14 @@ export default function Chat(props) {
   console.log("conversation LISST", conversationList);
 
   return (
-    <div style={{ height: "25px", width: "990px", margin: "95px" }}>
+    <div
+      style={{
+        height: "25px",
+        width: "990px",
+        margin: "95px",
+        paddingLeft: "100px",
+      }}
+    >
       <Box
         border={1}
         borderColor="primary.main"
@@ -77,34 +86,42 @@ export default function Chat(props) {
           <Grid item xs={3} className={classes.borderRight500}>
             <List>
               <Grid container xs={5}>
-                <Grid item xs={12} style={{ padding: "10px" }}>
+                <Grid item xs={12}>
                   <div className={classes.flex}>
-                    <Chip
-                      variant="outlined"
-                      variant="h2"
-                      size="x-large"
-                      label="My Chats"
-                      color="secondary"
+                    <img
+                      src={whitelogo2}
+                      alt="logo"
                       style={{
-                        height: "50px",
-                        width: "100px",
-                        border: "0.15rem solid #6C9998",
-                        fontSize: "90%",
+                        height: "4.5em",
+                        padding: "5px",
+                        paddingLeft: "88px",
                       }}
                     />
                   </div>
                 </Grid>
               </Grid>
               <Divider className={classes.divider} />
+
               {shopData.map((convo) => (
-                <ListItem
-                  onClick={() => {
-                    selectActiveConversation(convo[0]);
-                  }}
-                  key={convo[0]}
-                  button
-                >
-                  <ListItemText primary={convo[1]} />
+                <ListItem>
+                  <Chip
+                    variant="outlined"
+                    size="x-large"
+                    label={convo[1]}
+                    onClick={() => {
+                      selectActiveConversation(convo[0]);
+                    }}
+                    key={convo[0]}
+                    button
+                    style={{
+                      height: "50px",
+                      width: "300px",
+                      border: "0.15rem solid #FFFFFF",
+                      fontSize: "90%",
+                      color: "#FFFFFF",
+                      fontWeight: "bold",
+                    }}
+                  />
                 </ListItem>
               ))}
             </List>
@@ -121,15 +138,26 @@ export default function Chat(props) {
                         conversationList[activeConversation] &&
                         conversationList[activeConversation].messages.map(
                           (chat, i) => (
-                            <div className={classes.flex} key={i}>
+                            <div
+                              className={classes.flex}
+                              key={i}
+                              style={{ padding: "5px" }}
+                            >
                               <Chip
                                 label={chat.from}
                                 className={classes.chip}
                                 variant="outlined"
                                 color="primary"
-                                style={{ padding: "5px" }}
+                                color="secondary"
+                                style={{
+                                  border: "0.15rem solid #6C9998",
+                                  padding: "5px",
+                                }}
                               />
-                              <Typography variant="body2">
+                              <Typography
+                                variant="body1"
+                                style={{ paddingLeft: "10px" }}
+                              >
                                 {chat.msg}
                               </Typography>
                             </div>
@@ -143,11 +171,10 @@ export default function Chat(props) {
             <Divider className={classes.divider} />
 
             <Grid container>
-              <Grid item xs={11}>
+              <Grid item xs={11} style={{ paddingLeft: "10px" }}>
                 <TextField
                   id="outlined-basic-email"
                   fullWidth
-                  // id="standard-basic"
                   label="Send chat"
                   value={textValue}
                   onChange={(e) => changeTextValue(e.target.value)}
@@ -173,179 +200,3 @@ export default function Chat(props) {
     </div>
   );
 }
-
-{
-  /* <div>
-{!shopData ? (
-  <CircularProgress color="secondary" />
-) : (
-  <>
-    <Paper className={classes.root}>
-      <Typography variant="h4" component="h3">
-        Chats
-      </Typography>
-      <Typography variant="h5" component="h3">
-        {/* {activeTopic} */
-}
-//       </Typography>
-//       <div className={classes.flex}>
-//         <div className={classes.topicsWindow}>
-//           <List>
-//             {shopData.map((convo) => (
-//               <ListItem
-//                 onClick={() => {
-//                   selectActiveConversation(convo[0]);
-//                 }}
-//                 // console.log("TARGET", e.target.innerText);
-//                 key={convo[0]}
-//                 button
-//               >
-//                 <ListItemText primary={convo[1]} />
-//               </ListItem>
-//             ))}
-//           </List>
-//         </div>
-//         <div className={classes.chatWindow}>
-//           {conversationList &&
-//             conversationList[activeConversation] &&
-//             conversationList[activeConversation].messages.map(
-//               (chat, i) => (
-//                 <div className={classes.flex} key={i}>
-//                   <Chip
-//                     label={chat.from}
-//                     className={classes.chip}
-//                     variant="outlined"
-//                   />
-//                   <Typography variant="body1">{chat.msg}</Typography>
-//                 </div>
-//               )
-//             )}
-//         </div>
-//       </div>
-
-//       <div className={classes.flex}>
-//         <TextField
-//           id="standard-basic"
-//           label="Send chat"
-//           className={classes.chatBox}
-//           value={textValue}
-//           onChange={(e) => changeTextValue(e.target.value)}
-//         />
-//         <Button
-//           variant="outlined"
-//           className={classes.button}
-//           onClick={() => {
-//             sendChatMessage(props.user, textValue);
-//             changeTextValue("");
-//           }}
-//         >
-//           Send
-//         </Button>
-//       </div>
-//     </Paper>
-//   </>
-// )}
-// </div>
-// );
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     margin: "50px",
-//     padding: theme.spacing(3, 2),
-//   },
-//   flex: {
-//     display: "flex",
-//     alignItems: "center",
-//   },
-//   topicsWindow: {
-//     width: "30%",
-//     height: "300px",
-//     borderRight: "1px solid grey",
-//   },
-//   chatWindow: {
-//     width: "70%",
-//     height: "300px",
-//     padding: "20 px",
-//   },
-//   chatBox: {
-//     width: "85%",
-//   },
-//   button: {
-//     width: "15%",
-//   },
-// })); */}
-// const Chat = () => {
-//   const classes = useStyles();
-
-//   return (
-//     <div>
-//       <Grid container>
-//         <Grid item xs={12}>
-//           <Typography variant="h5" className="header-message">
-//             Chat
-//           </Typography>
-//         </Grid>
-//       </Grid>
-
-//       <Grid container component={Paper} className={classes.chatSection}>
-//         <Grid item xs={3} className={classes.borderRight500}>
-//           <Divider />
-//           <Divider />
-//           <List>
-//             <ListItem button key="RemySharp">
-//               <ListItemIcon>
-//                 <Avatar
-//                   alt="Remy Sharp"
-//                   src="https://material-ui.com/static/images/avatar/1.jpg"
-//                 />
-//               </ListItemIcon>
-//               <ListItemText primary="Remy Sharp">Remy Sharp</ListItemText>
-//               <ListItemText secondary="online" align="right"></ListItemText>
-//             </ListItem>
-//             <ListItem button key="Alice">
-//               <ListItemIcon>
-//                 <Avatar
-//                   alt="Alice"
-//                   src="https://material-ui.com/static/images/avatar/3.jpg"
-//                 />
-//               </ListItemIcon>
-//               <ListItemText primary="Alice">Alice</ListItemText>
-//             </ListItem>
-//           </List>
-//         </Grid>
-//         <Grid item xs={9}>
-//           <List className={classes.messageArea}>
-//             <ListItem key="3">
-//               <Grid container>
-//                 <Grid item xs={12}>
-//                   <ListItemText
-//                     align="right"
-//                     primary="Cool. i am good, let's catch up!"
-//                   ></ListItemText>
-//                 </Grid>
-//                 <Grid item xs={12}>
-//                   <ListItemText align="right" secondary="10:30"></ListItemText>
-//                 </Grid>
-//               </Grid>
-//             </ListItem>
-//           </List>
-//           <Divider />
-//           <Grid container style={{ padding: "20px" }}>
-//             <Grid item xs={11}>
-//               <TextField
-//                 id="outlined-basic-email"
-//                 label="Type Something"
-//                 fullWidth
-//               />
-//             </Grid>
-//             <Grid xs={1} align="right">
-//               <Fab color="primary" aria-label="add">
-//                 <SendIcon />
-//               </Fab>
-//             </Grid>
-//           </Grid>
-//         </Grid>
-//       </Grid>
-//     </div>
-//   );
-// };
