@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   margin-top: 70px;
+  background-color: #ffffff;
 }
 
 .App-logo {
@@ -23,6 +24,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Card-style {
+  border: 0.2 rem;
+  border-radius: 12px;
 }
 
 .App-link {

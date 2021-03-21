@@ -3,6 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
 import { MenuItem } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import madelocallogo6 from "../styles/madelocallogo6.png"
 
 export default function Nav(props) {
   return (
@@ -10,7 +11,7 @@ export default function Nav(props) {
       <ToolBar>
         <MenuItem>
           <Link to="/home" style={{ textDecoration: "none" }}>
-            made | local
+            <img src={madelocallogo6} alt="logo" style={{height: "2.5em", paddingTop: "10px"}}/>
           </Link>
         </MenuItem>
         {props.user ? (

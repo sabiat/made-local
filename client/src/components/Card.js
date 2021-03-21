@@ -17,7 +17,7 @@ import { CardActionArea } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 250,
   },
   media: {
     height: 0,
@@ -34,11 +34,17 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   header: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.light,
+    maxHeight: 35,
   },
   icon: {
     color: theme.palette.warning.main,
   },
+  card: {
+    borderRadius: 12,
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.primary.contrastText,
+   }
 }));
 
 export default function ShopCard(props) {
@@ -77,8 +83,9 @@ export default function ShopCard(props) {
   };
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
+    <Card className={classes.card}>
+        <CardHeader
+        variant="h1"
         className={classes.header}
         title={props.name}
         subheader={`${props.distance} km away`}

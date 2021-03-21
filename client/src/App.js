@@ -78,8 +78,8 @@ function App() {
 
   return (
     <Router>
-      <ThemeProvider theme={theme}>
         <div className="App">
+      <ThemeProvider theme={theme}>
           <Nav user={user} handleLogout={handleLogout} />
           {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
@@ -134,8 +134,8 @@ function App() {
               {user ? <Chat shops={shops} user={user} /> : <Redirect to="/" />}
             </Route>
           </Switch>
-        </div>
       </ThemeProvider>
+        </div>
     </Router>
   );
 }
