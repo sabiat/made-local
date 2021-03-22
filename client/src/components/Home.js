@@ -3,6 +3,7 @@ import SearchBar from "./SearchBar";
 import DistanceFilter from "./DistanceFilter";
 import Card from "./Card";
 import axios from "axios";
+import Chip from "@material-ui/core/Chip";
 
 import { useEffect, useState } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -33,7 +34,7 @@ export default function Home(props) {
   }, []);
 
   return (
-    <div>
+    <div style={{ padding: "3rem 8rem 2rem 8rem" }}>
       {props.loading ? (
         <div
           style={{
@@ -62,14 +63,28 @@ export default function Home(props) {
         </div>
       ) : (
         <>
-          <Grid
-            container
-            direction="row"
-            justify="space-evenly"
-            alignItems="center"
-          >
-            <SearchBar category={category} setCategory={handleChange} />
-            <DistanceFilter distance={distance} setDistance={setDistance} />
+          <Grid container justify="space-between" alignItems="center">
+            <Grid item xs={6} justify="left">
+              <Typography
+                variant="h1"
+                style={{
+                  color: "#84a59D",
+                  fontWeight: "bold",
+                  fontSize: "30px",
+                  float: "left",
+                  paddingLeft: "32px",
+                }}
+              >
+                Discover shops in your area:
+              </Typography>
+            </Grid>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={4}>
+              <Grid container direction="column">
+                <DistanceFilter distance={distance} setDistance={setDistance} />
+                <SearchBar category={category} setCategory={handleChange} />
+              </Grid>
+            </Grid>
           </Grid>
           <Grid container spacing={1}>
             {props.shop

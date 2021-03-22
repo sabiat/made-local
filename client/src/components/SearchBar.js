@@ -8,8 +8,9 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
+    // margin: theme.spacing(1),
     minWidth: 120,
+    width: "15rem",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -33,7 +34,7 @@ export default function SearchBar(props) {
           <option value={6}>Home & Living</option>
           <option value={7}>Health & Wellness</option>
         </NativeSelect>
-        <FormHelperText>Filter by Category</FormHelperText>
+        {/* <FormHelperText>Filter by Category</FormHelperText> */}
       </FormControl>
     </div>
   );

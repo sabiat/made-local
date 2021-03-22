@@ -36,25 +36,21 @@ function valuetext(value) {
 }
 
 export default function DistanceFilter(props) {
-  const classes = useStyles();
-
   return (
     <div>
-      <div className={classes.root} style={{ paddingTop: "4em" }}>
-        <Slider
-          defaultValue={10}
-          getAriaValueText={valuetext}
-          aria-labelledby="discrete-slider-always"
-          step={1}
-          marks={marks}
-          valueLabelDisplay="auto"
-          max={30}
-          onChange={(event, value) => {
-            props.setDistance(value);
-          }}
-        />
-        <Typography variant="body2">Filter by distance</Typography>
-      </div>
+      <Slider
+        defaultValue={10}
+        getAriaValueText={valuetext}
+        aria-labelledby="discrete-slider-always"
+        step={1}
+        marks={marks}
+        valueLabelDisplay="auto"
+        max={30}
+        style={{ width: "15rem" }}
+        onChange={(event, value) => {
+          props.setDistance(value);
+        }}
+      />
     </div>
   );
 }

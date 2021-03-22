@@ -10,6 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
+import Grid from "@material-ui/core/Grid";
 
 import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
 import axios from "axios";
@@ -34,20 +35,32 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   header: {
-    // options: #faf0ca #fcf6bd #f9dbbd
-    backgroundColor: "#f3eec3",
-    maxHeight: 25,
+    backgroundColor: "#f9dbbd",
+    maxHeight: "50%",
     fontWeight: "700",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   icon: {
     color: theme.palette.warning.main,
   },
+
   card: {
     borderRadius: 12,
     height: "100%",
     width: "100%",
     backgroundColor: theme.palette.background.paper,
     color: "#000000",
+  },
+  symbols: {
+    display: "flex",
+    justifyContent: "center",
+    padding: "0.5px",
+  },
+  symbol: {
+    fontWeight: "600",
+    color: "#6C9998",
   },
 }));
 
@@ -88,26 +101,14 @@ export default function ShopCard(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader
-        className={classes.header}
-        title={props.name}
-        subheader={`${props.distance} km away`}
-      />
-      <CardActionArea>
-        <CardMedia
-          onClick={() => history.push(`/shops/${props.id}`)}
-          className={classes.media}
-          image={props.photo}
-          title={props.name}
-        />
-      </CardActionArea>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <div>
+      <Grid container className={classes.header}>
+        <Grid item>
+          <CardHeader
+            title={props.name}
+            subheader={`${props.distance} km away`}
+          />
+        </Grid>
+        <Grid item style={{ position: "absolute", paddingLeft: "15em" }}>
           <IconButton aria-label="add to favorites">
             {favourite ? (
               <FavoriteIcon
@@ -123,10 +124,33 @@ export default function ShopCard(props) {
               />
             )}
           </IconButton>
+        </Grid>
+      </Grid>
+      <CardActionArea>
+        <CardMedia
+          onClick={() => history.push(`/shops/${props.id}`)}
+          className={classes.media}
+          image={props.photo}
+          title={props.name}
+        />
+      </CardActionArea>
+      <CardContent>
+        <Typography variant="body1" color="textSecondary" component="p">
+          Delicious gluten free baked goods prepared daily. We also have a ton
+          of vegan options to choose from! Contact us today to order!
+          {/* {props.description} */}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing className={classes.symbols}>
+        <div>
           {props.pickup && (
             <IconButton>
               <CheckCircleOutlineRoundedIcon color="primary" />
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography
+                variant="body2"
+                component="p"
+                className={classes.symbol}
+              >
                 pick-up
               </Typography>
             </IconButton>
@@ -134,7 +158,11 @@ export default function ShopCard(props) {
           {props.delivery && (
             <IconButton>
               <CheckCircleOutlineRoundedIcon color="primary" />
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography
+                variant="body2"
+                component="p"
+                className={classes.symbol}
+              >
                 delivery
               </Typography>
             </IconButton>
@@ -142,7 +170,11 @@ export default function ShopCard(props) {
           {props.shipping && (
             <IconButton>
               <CheckCircleOutlineRoundedIcon color="primary" />
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography
+                variant="body2"
+                component="p"
+                className={classes.symbol}
+              >
                 shipping
               </Typography>
             </IconButton>
