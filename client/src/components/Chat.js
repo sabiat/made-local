@@ -1,4 +1,6 @@
 import React from "react";
+import { useState } from "react";
+
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,15 +9,15 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Chip from "@material-ui/core/Chip";
 import TextField from "@material-ui/core/TextField";
-import { useState } from "react";
 import useChat from "../hooks/useChat";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
-import whitelogo2 from "../styles/whitelogo2.png";
-
 import Fab from "@material-ui/core/Fab";
 import SendIcon from "@material-ui/icons/Send";
+
+import whitelogo2 from "../styles/whitelogo2.png";
+
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -43,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   divider: {
     background: theme.palette.primary.main,
-  },
+  }
 }));
 
 export default function Chat(props) {
@@ -63,7 +65,6 @@ export default function Chat(props) {
   const [textValue, changeTextValue] = useState("");
 
   const shopData = transformShopData(conversationList);
-  console.log("conversation LISST", conversationList);
 
   return (
     <div
@@ -111,6 +112,7 @@ export default function Chat(props) {
                     onClick={() => {
                       selectActiveConversation(convo[0]);
                     }}
+                    className={classes.isSelected}
                     key={convo[0]}
                     button
                     style={{
@@ -120,6 +122,7 @@ export default function Chat(props) {
                       fontSize: "90%",
                       color: "#FFFFFF",
                       fontWeight: "bold",
+                      backgroundColor: (activeConversation === convo[0]) ? "#f6bd60" : "#84a59D"
                     }}
                   />
                 </ListItem>
@@ -147,7 +150,6 @@ export default function Chat(props) {
                                 label={chat.from}
                                 className={classes.chip}
                                 variant="outlined"
-                                color="primary"
                                 color="secondary"
                                 style={{
                                   border: "0.15rem solid #6C9998",

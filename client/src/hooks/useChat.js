@@ -43,7 +43,7 @@ const currentConversationData = {
 };
 
 export default function useChat() {
-  const [activeConversation, setActiveConversation] = useState(5);
+  const [activeConversation, setActiveConversation] = useState(3);
   const [socket, setSocket] = useState(null);
   const [conversationList, setConversationList] = useState();
   const [shopData, setShopData] = useState();
@@ -75,7 +75,6 @@ export default function useChat() {
   }
 
   const transformShopData = function (data) {
-    //console.log("DATA", data)
     const arr = [];
     for (let convoNum in data) {
       arr.push([data[convoNum].shopId, data[convoNum].shopname]);
@@ -106,41 +105,27 @@ export default function useChat() {
 
         setConversationList((prev) => ({ ...prev, ...newConversationList }));
         setActiveConversation(state[0]);
-        // setShopData(transformShopData(conversationList));
       } else {
         setConversationList(transformResData(res.data));
-        // setShopData(transformShopData(conversationList));
       }
-
-      // console.log("FRONT END", res.data);
     });
   };
-
-  //console.log("convolist", conversationList);
-  //console.log(transformShopData(conversationList));
-  //  console.log("shopData", shopData);
 
   const selectActiveConversation = (shopId) => {
     setActiveConversation(shopId);
   };
 
   const sendChatMessage = (user, value) => {
-    console.log("ACTIVECONVO", activeConversation);
     //sends message to back-end
-    // const newMessages = [...activeConversation.messages];
     socket.emit("chat message", { user, value, shopId: activeConversation });
-    // newMessages.push({from: user.user_name, msg: value});
-    // setActiveConversation({...activeConversation, messages: newMessages});
   };
 
   const receiveChatMessage = (value) => {
-    console.log("VALUE", value);
     const newMessage = {
       from: value.user.user_name,
       msg: value.value,
     };
     // append to array of messages of the current conversation
-    //const updatedMessages = [...activeConversation.messages, newMessage]
     const shopIdOfCurrentConvo = {};
 
     shopIdOfCurrentConvo[value.shopId] = conversationList[value.shopId];
@@ -150,11 +135,6 @@ export default function useChat() {
       ...shopIdOfCurrentConvo,
     };
     setConversationList((prev) => ({ ...prev, ...newConversationList }));
-    // setActiveConversation(prev => ({...prev, messages: [...prev.messages, newMessage]}));
-    // console.log("ACTIVECONVO", activeConversation);
-    // console.log("CONVOLIST", conversationList);
-    console.log("shopidconvo", shopIdOfCurrentConvo);
-    console.log("convolist", conversationList);
   };
 
   useEffect(() => {

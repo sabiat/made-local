@@ -15,10 +15,6 @@ export default function Home(props) {
     setCategory(event.target.value);
   };
   const [distance, setDistance] = useState(10);
-  // console.log("distance", distance)
-  // const handleDistanceChange = (value) => {
-  //   setDistance(value);
-  // };
 
   const [favouritedShops, setFavouritedShops] = useState(null);
 

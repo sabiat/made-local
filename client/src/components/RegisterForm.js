@@ -132,7 +132,6 @@ export default function RegistrationForm(props) {
                 autoFocus
                 //
                 type="name"
-                id="username"
                 placeholder="Username"
                 value={state.username}
                 onChange={handleChange}
@@ -148,9 +147,7 @@ export default function RegistrationForm(props) {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                //
                 type="name"
-                id="firstName"
                 placeholder="First Name"
                 value={state.firstName}
                 onChange={handleChange}
@@ -165,9 +162,7 @@ export default function RegistrationForm(props) {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                //
                 type="name"
-                id="lastName"
                 placeholder="Last Name"
                 value={state.lastName}
                 onChange={handleChange}
@@ -182,9 +177,7 @@ export default function RegistrationForm(props) {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                //
                 type="email"
-                id="email"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
                 value={state.email}
@@ -200,9 +193,7 @@ export default function RegistrationForm(props) {
                 label="Picture"
                 id="photo"
                 autoComplete="photo"
-                //
                 type="photo"
-                id="photo"
                 placeholder="Picture"
                 value={state.photo}
                 onChange={handleChange}
@@ -218,9 +209,6 @@ export default function RegistrationForm(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                //
-                type="password"
-                id="password"
                 placeholder="Password"
                 value={state.password}
                 onChange={handleChange}
@@ -235,8 +223,6 @@ export default function RegistrationForm(props) {
                 name="password"
                 label="Confirm Password"
                 autoComplete="current-password"
-                //
-
                 type="password"
                 id="confirmPassword"
                 placeholder="Confirm Password"
