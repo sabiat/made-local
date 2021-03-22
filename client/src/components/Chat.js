@@ -70,8 +70,8 @@ export default function Chat(props) {
       style={{
         height: "25px",
         width: "990px",
-        margin: "95px",
-        paddingLeft: "100px",
+        marginTop: "95px",
+        marginLeft: "10px"
       }}
     >
       <Box
