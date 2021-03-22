@@ -1,4 +1,4 @@
-import { Divider, Avatar, Grid, Paper } from "@material-ui/core";
+import { Divider, Avatar, Grid } from "@material-ui/core";
 
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -34,7 +34,6 @@ export default function Review(props) {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography variant="h5">
-            {/* <Paper style={{ padding: "5px 5px" }}> */}
             <Grid container wrap="nowrap" spacing={2}>
               <Grid item>
                 <Avatar alt={props.user_name} src={props.photo} />
@@ -53,7 +52,6 @@ export default function Review(props) {
                 </p>
               </Grid>
             </Grid>
-            {/* </Paper> */}
           </Typography>
         </CardContent>
       </div>

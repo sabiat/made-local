@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   Redirect,
-  useHistory,
 } from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
@@ -22,7 +21,6 @@ import Chat from "./components/Chat";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Store from "./components/Store";
 
 import useApplicationData from "./hooks/useApplicationData";
 import AddPhoto from "./components/Shop Components/AddPhoto";
@@ -40,7 +38,6 @@ function App() {
   } = useApplicationData();
   const [user, setUser] = useState(null);
 
-  const history = useHistory();
   const handleLogin = (userInfo) => {
     axios.post("/api/users/login", { ...userInfo }).then((res) => {
       if (res.data.err) {
@@ -78,8 +75,8 @@ function App() {
 
   return (
     <Router>
-        <div className="App">
-      <ThemeProvider theme={theme}>
+      <div className="App">
+        <ThemeProvider theme={theme}>
           <Nav user={user} handleLogout={handleLogout} />
           {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
@@ -134,8 +131,8 @@ function App() {
               {user ? <Chat shops={shops} user={user} /> : <Redirect to="/" />}
             </Route>
           </Switch>
-      </ThemeProvider>
-        </div>
+        </ThemeProvider>
+      </div>
     </Router>
   );
 }

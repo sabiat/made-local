@@ -1,11 +1,10 @@
-import ShopContact from "./Shop Components/ShopContact";
 import ShopMap from "./Shop Components/ShopMap";
 import ShopPhotos from "./Shop Components/ShopPhotos";
 import ShopMessageBoard from "./Shop Components/ShopMessageBoard";
 import Typography from "@material-ui/core/Typography";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import InstagramIcon from "@material-ui/icons/Instagram";
+
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import axios from "axios";
