@@ -39,8 +39,6 @@ export default function ShopProfile(props) {
     return <CircularProgress color="secondary" />;
   }
 
-  console.log(props);
-
   return (
     <div>
       {/* main container top is all info, bottom is msg board */}

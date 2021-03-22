@@ -1,11 +1,7 @@
 import Review from "./Review";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {
-  Typography,
-  TextField,
-  Button
-} from "@material-ui/core";
+import { Typography, TextField, Button } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +39,8 @@ export default function ShopMessageBoard(props) {
 
     const message_text = event.target.messageForm.value;
     const user_id = props.user.id;
+
+    event.target.messageForm.value = "";
 
     axios
       .post(`/api/shops/${shop_id}/messages`, {
