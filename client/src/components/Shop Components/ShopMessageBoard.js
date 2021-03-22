@@ -63,13 +63,13 @@ export default function ShopMessageBoard(props) {
         <Box
           border={2}
           style={{
-            backgroundColor: "#84A59D",
-            borderColor: "#84A59D",
+            backgroundColor: "#6C9998",
+            borderColor: "#6C9998",
             paddingTop: "25px",
             borderRadius: "10px",
           }}
         >
-          <Grid item style={{ backgroundColor: "#84A59D" }}>
+          <Grid item style={{ backgroundColor: "#6C9998" }}>
             <Typography variant="h1" style={{ color: "white" }}>
               Community Hub
             </Typography>
