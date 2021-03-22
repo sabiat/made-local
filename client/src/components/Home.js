@@ -6,17 +6,19 @@ import axios from "axios";
 
 import { useEffect, useState } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Typography } from "@material-ui/core";
+import madelocallogo7 from "../styles/madelocallogo7.png"
 
 export default function Home(props) {
   const [category, setCategory] = useState("");
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
-
-  const [distance, setDistance] = useState("");
-  const handleDistanceChange = (event) => {
-    setDistance(event.target.value);
-  };
+  const [distance, setDistance] = useState();
+  // console.log("distance", distance)
+  // const handleDistanceChange = (value) => {
+  //   setDistance(value);
+  // };
 
   const [favouritedShops, setFavouritedShops] = useState(null);
 
@@ -37,7 +39,19 @@ export default function Home(props) {
   return (
     <div>
       {props.loading ? (
-        <CircularProgress color="secondary" />
+        <div style={{ padding: "20em", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+          <div>
+            <CircularProgress color="secondary" size='5em' />
+          </div>
+          <div>
+            <img src={madelocallogo7} alt="logo" style={{ height: "2.5em", paddingTop: "10px" }} />
+          </div>
+          <div style={{ padding: "1em" }}>
+            <Typography variant="body1">
+              Finding shops in your area...
+            </Typography>
+          </div>
+        </div>
       ) : (
         <>
           <Grid
@@ -46,10 +60,12 @@ export default function Home(props) {
             justify="space-evenly"
             alignItems="center"
           >
+        
+
             <SearchBar category={category} setCategory={handleChange} />
             <DistanceFilter
               distance={distance}
-              setDistance={handleDistanceChange}
+              setDistance={setDistance}
             />
           </Grid>
           <Grid container spacing={1}>
