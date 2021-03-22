@@ -41,7 +41,8 @@ const theme = createMuiTheme({
     },
     body1: {
       fontFamily: "Montserrat",
-      fontSize: "1rem",
+      fontSize: "0.9rem",
+      fontWeight: 600,
     },
     body2: {
       fontFamily: "Lora",
@@ -60,7 +61,8 @@ const theme = createMuiTheme({
     },
     h5: {
       fontFamily: "Montserrat",
-      fontSize: "0.9rem",
+      fontSize: "0.98rem",
+      fontWeight: "bold",
     },
   },
   shape: {

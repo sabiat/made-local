@@ -34,17 +34,21 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   header: {
-    backgroundColor: theme.palette.primary.light,
-    maxHeight: 35,
+    // options: #faf0ca #fcf6bd #f9dbbd
+    backgroundColor: "#f3eec3",
+    maxHeight: 25,
+    fontWeight: "700",
   },
   icon: {
     color: theme.palette.warning.main,
   },
   card: {
     borderRadius: 12,
+    height: "100%",
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
-    color: theme.palette.primary.contrastText,
-   }
+    color: "#000000",
+  },
 }));
 
 export default function ShopCard(props) {
@@ -84,8 +88,7 @@ export default function ShopCard(props) {
 
   return (
     <Card className={classes.card}>
-        <CardHeader
-        variant="h1"
+      <CardHeader
         className={classes.header}
         title={props.name}
         subheader={`${props.distance} km away`}

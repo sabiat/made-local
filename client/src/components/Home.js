@@ -96,7 +96,7 @@ export default function Home(props) {
                   item
                   style={{ padding: 30 }}
                   xs={4}
-                  spacing={3}
+                  spacing={1}
                 >
                   <Card key={shop.id} {...shop} user={props.user} />
                 </Grid>
