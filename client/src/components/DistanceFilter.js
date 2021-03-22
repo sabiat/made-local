@@ -42,7 +42,7 @@ export default function DistanceFilter(props) {
     <div>
       <div className={classes.root} style={{ paddingTop: "4em" }}>
         <Slider
-          defaultValue={30}
+          defaultValue={10}
           getAriaValueText={valuetext}
           aria-labelledby="discrete-slider-always"
           step={1}

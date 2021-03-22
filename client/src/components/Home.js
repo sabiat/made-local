@@ -14,7 +14,7 @@ export default function Home(props) {
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
-  const [distance, setDistance] = useState(30);
+  const [distance, setDistance] = useState(10);
   // console.log("distance", distance)
   // const handleDistanceChange = (value) => {
   //   setDistance(value);
