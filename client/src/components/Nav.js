@@ -3,7 +3,8 @@ import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
 import { MenuItem } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-import madelocallogo6 from "../styles/madelocallogo6.png"
+import madelocallogo6 from "../styles/madelocallogo6.png";
+import Typography from "@material-ui/core/Typography";
 
 export default function Nav(props) {
   return (
@@ -11,7 +12,11 @@ export default function Nav(props) {
       <ToolBar>
         <MenuItem>
           <Link to="/home" style={{ textDecoration: "none" }}>
-            <img src={madelocallogo6} alt="logo" style={{height: "2.5em", paddingTop: "10px"}}/>
+            <img
+              src={madelocallogo6}
+              alt="logo"
+              style={{ height: "2.5em", paddingTop: "10px" }}
+            />
           </Link>
         </MenuItem>
         {props.user ? (
@@ -19,7 +24,11 @@ export default function Nav(props) {
             <MenuItem>
               <Link
                 to={`/users/${props.user.id}`}
-                style={{ textDecoration: "none" }}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontSize: "1.25em",
+                }}
               >
                 {props.user["user_name"]}
               </Link>
@@ -28,23 +37,46 @@ export default function Nav(props) {
               <Link
                 to="/"
                 onClick={props.handleLogout}
-                style={{ textDecoration: "none" }}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontSize: "1.25em",
+                }}
               >
-                Logout
+                logout
               </Link>
             </MenuItem>
-            <MailOutlineIcon></MailOutlineIcon>
+            <MailOutlineIcon
+              style={{
+                textDecoration: "none",
+                color: "white",
+              }}
+            ></MailOutlineIcon>
           </>
         ) : (
           <>
             <MenuItem>
-              <Link to="/login" style={{ textDecoration: "none" }}>
-                Login
+              <Link
+                to="/login"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontSize: "1.25em",
+                }}
+              >
+                login
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link to="/register" style={{ textDecoration: "none" }}>
-                Register
+              <Link
+                to="/register"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontSize: "1.25em",
+                }}
+              >
+                register
               </Link>
             </MenuItem>
           </>

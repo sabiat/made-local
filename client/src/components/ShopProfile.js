@@ -5,6 +5,7 @@ import ShopMessageBoard from "./Shop Components/ShopMessageBoard";
 import Typography from "@material-ui/core/Typography";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import InstagramIcon from "@material-ui/icons/Instagram";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import axios from "axios";
@@ -44,7 +45,7 @@ export default function ShopProfile(props) {
   return (
     <div>
       {/* main container top is all info, bottom is msg board */}
-      <Box mx="auto" bgcolor="background.paper" p={10}>
+      <Box mx="auto" bgcolor="background.paper" p={5}>
         {/* MAIN CONTAINER */}
         <Grid
           container
@@ -58,20 +59,19 @@ export default function ShopProfile(props) {
             <Grid container>
               <Grid item xs={8}>
                 {/* NAME AND PHOTOS */}
-                <Grid container direction="column">
+                <Grid
+                  container
+                  direction="column"
+                  justify="flex-start"
+                  alignItems="flex-start"
+                  spacing={1}
+                >
                   <Grid item>
-                    <Typography variant="h4">
+                    <Typography variant="h1" style={{ marginTop: "-25px" }}>
                       <h1>{state.shop[0].name}</h1>
                     </Typography>
                   </Grid>
                   <Grid item>
-                    {state.shop[0].user_id === props.user.id && (
-                      <AddAPhotoIcon
-                        onClick={() =>
-                          history.push(`/shops/${state.shop[0].id}/addphoto`)
-                        }
-                      />
-                    )}
                     <ShopPhotos />
                   </Grid>
                 </Grid>
@@ -84,20 +84,54 @@ export default function ShopProfile(props) {
                     direction="column"
                     alignItems="center"
                     justify="center"
+                    style={{ marginTop: "2rem" }}
                   >
-                    <Grid item xs={4}>
-                      <Avatar width="100px" src={state.shop[0].photo} alt="" />
+                    <Grid
+                      container
+                      direction="row"
+                      justify="center"
+                      spacing={4}
+                    >
+                      <Grid item>
+                        <Avatar
+                          width="200px"
+                          style={{ height: "70px", width: "70px" }}
+                          sizes="large"
+                          src={state.shop[0].photo}
+                          alt=""
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Grid item>
+                          <Typography variant="h4" color="textSecondary">
+                            Contact
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant="h5">
+                            {state.shop[0].social}
+                          </Typography>
+                        </Grid>
+                        <Typography variant="h5">
+                          {state.shop[0].phone_number}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        {state.shop[0].user_id === props.user.id && (
+                          <Box>
+                            <AddAPhotoIcon
+                              onClick={() =>
+                                history.push(
+                                  `/shops/${state.shop[0].id}/addphoto`
+                                )
+                              }
+                            />
+                          </Box>
+                        )}
+                      </Grid>
                     </Grid>
-                    <Grid item xs={4}>
-                      <Typography variant="h3" color="textSecondary">
-                        Contact
-                      </Typography>
-                    </Grid>
-                    <Typography variant="h4">{state.shop[0].social}</Typography>
-                    <Typography variant="h5">
-                      {state.shop[0].phone_number}
-                    </Typography>
                   </Grid>
+
                   <Grid item>
                     <ShopMap
                       name={state.shop[0].name}
