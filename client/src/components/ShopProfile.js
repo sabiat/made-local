@@ -171,7 +171,7 @@ export default function ShopProfile(props) {
               </Grid>
             </Grid>
           </Grid>
-          {/* ,ESSAGE BOARD */}
+          {/* MESSAGE BOARD */}
           <Grid item xs={10}>
             <ShopMessageBoard user={props.user} />
           </Grid>

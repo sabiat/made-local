@@ -5,7 +5,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
+import Box from "@material-ui/core/Box";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -16,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: "1 0 auto",
-    width: "1000px",
-    height: "240px",
+    width: "700px",
+    height: "6em",
+    borderRadius: "10px",
   },
 }));
 
@@ -30,8 +31,17 @@ export default function Review(props) {
   };
 
   return (
-    <Card className={classes.root}>
-      <div className={classes.details}>
+    // <Card className={classes.root}>
+    <div className={classes.details}>
+      <Box
+        border={2}
+        style={{
+          borderRadius: "10px",
+          margin: "0.5em",
+          borderColor: "#84A59D",
+          backgroundColor: "#FAF9F9",
+        }}
+      >
         <CardContent className={classes.content}>
           <Typography variant="h5">
             <Grid container wrap="nowrap" spacing={2}>
@@ -42,19 +52,24 @@ export default function Review(props) {
                 <h4 style={{ margin: 0, textAlign: "left" }}>
                   {props.user_name}
                 </h4>
-                <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+                {/* <Divider variant="fullWidth" style={{ margin: "15px 0" }} /> */}
                 <p style={{ textAlign: "left" }}>{props.message_text}</p>
-                <p style={{ textAlign: "left", color: "gray" }}>
-                  <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
-                  <p style={{ textAlign: "right", marginRight: "30px" }}>
-                    {trimDate(props.created_at)}
-                  </p>
+                {/* <Divider variant="fullWidth" style={{ margin: "15px 0" }} /> */}
+                <p
+                  style={{
+                    textAlign: "right",
+                    marginRight: "30px",
+                    color: "grey",
+                  }}
+                >
+                  {trimDate(props.created_at)}
                 </p>
               </Grid>
             </Grid>
           </Typography>
         </CardContent>
-      </div>
-    </Card>
+      </Box>
+    </div>
+    // </Card>
   );
 }

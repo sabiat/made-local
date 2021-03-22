@@ -43,11 +43,7 @@ export default function ShopPhotos() {
         <Grid container spacing={1}>
           {photos.map((photo) => (
             <Grid item xs={4} key={photo.id} spacing={1}>
-              <div
-              // style={{
-              //   margin: "10px",
-              // }}
-              >
+              <div>
                 <img
                   src={photo.photo_urls}
                   style={{
@@ -55,6 +51,7 @@ export default function ShopPhotos() {
                     height: "18em",
                     objectFit: "cover",
                     maxWidth: "100%",
+                    borderRadius: "10px",
                   }}
                   alt=""
                 />
