@@ -140,11 +140,7 @@ export default function ShopProfile(props) {
                   </Grid>
                   <Grid item>
                     <Typography variant="body1" color="textSecondary">
-                      Lorem ipsum is placeholder text commonly used in the
-                      graphic, print, and publishing industries for previewing
-                      layouts and visual mockups. Lorem ipsum is placeholder
-                      text commonly used in the graphic, print, and publishing
-                      industries for previewing layouts and visual mockups.
+                      {state.shop[0].description}
                     </Typography>
                   </Grid>
                   <Grid item>
