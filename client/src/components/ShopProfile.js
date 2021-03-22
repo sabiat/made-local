@@ -55,7 +55,7 @@ export default function ShopProfile(props) {
         >
           <Grid item>
             {/* NAME AND PHOTOS ONE SIDE AND CONTACT OTHER SIDE */}
-            <Grid container>
+            <Grid container spacing={2}>
               <Grid item xs={8}>
                 {/* NAME AND PHOTOS */}
                 <Grid
@@ -77,7 +77,12 @@ export default function ShopProfile(props) {
               </Grid>
               <Grid item xs={4}>
                 {/* CONTACT, DESC, MAP */}
-                <Grid container direction="column" spacing={4}>
+                <Grid
+                  container
+                  direction="column"
+                  spacing={5}
+                  style={{ marginTop: "-37px" }}
+                >
                   <Grid
                     container
                     direction="column"
@@ -85,86 +90,84 @@ export default function ShopProfile(props) {
                     justify="center"
                     style={{ marginTop: "2rem" }}
                   >
-                    <Grid
-                      container
-                      direction="row"
-                      justify="center"
-                      spacing={4}
-                    >
-                      <Grid item>
-                        <Avatar
-                          width="200px"
-                          style={{ height: "70px", width: "70px" }}
-                          sizes="large"
-                          src={state.shop[0].photo}
-                          alt=""
-                        />
-                      </Grid>
-                      <Grid item>
-                        <Grid item>
-                          <Typography variant="h4" color="textSecondary">
-                            Contact
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography variant="h5">
-                            {state.shop[0].social}
-                          </Typography>
-                        </Grid>
-                        <Typography variant="h5">
-                          {state.shop[0].phone_number}
-                        </Typography>
-                      </Grid>
-                      <Grid item>
-                        {state.shop[0].user_id === props.user.id && (
-                          <Box>
-                            <AddAPhotoIcon
-                              onClick={() =>
-                                history.push(
-                                  `/shops/${state.shop[0].id}/addphoto`
-                                )
-                              }
-                            />
-                          </Box>
-                        )}
-                      </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        size="large"
+                        color="secondary"
+                        style={{
+                          maxWidth: "500px",
+                          maxHeight: "100px",
+                          minWidth: "70px",
+                          minHeight: "70px",
+                        }}
+                      >
+                        <Link
+                          style={{
+                            textDecoration: "none",
+                            color: "white",
+                          }}
+                          to={{
+                            pathname: "/chat",
+                            state: [state.shop[0].id, state.shop[0].name],
+                          }}
+                        >
+                          Chat with this shop
+                        </Link>
+                      </Button>
                     </Grid>
                   </Grid>
 
-                  <Grid item>
+                  <Grid item style={{ paddingTop: "37px" }}>
                     <ShopMap
                       name={state.shop[0].name}
                       lat={state.shop[0].latitude}
                       lon={state.shop[0].longitude}
                     />
                   </Grid>
+                  <Grid container direction="row" justify="center" spacing={4}>
+                    <Grid item>
+                      <Avatar
+                        width="200px"
+                        style={{ height: "70px", width: "70px" }}
+                        sizes="large"
+                        src={state.shop[0].photo}
+                        alt=""
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Grid item>
+                        <Typography variant="h4" color="textSecondary">
+                          Contact
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="h5">
+                          {state.shop[0].social}
+                        </Typography>
+                      </Grid>
+                      <Typography variant="h5">
+                        {state.shop[0].phone_number}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      {state.shop[0].user_id === props.user.id && (
+                        <Box>
+                          <AddAPhotoIcon
+                            onClick={() =>
+                              history.push(
+                                `/shops/${state.shop[0].id}/addphoto`
+                              )
+                            }
+                          />
+                        </Box>
+                      )}
+                    </Grid>
+                  </Grid>
                   <Grid item>
                     <Typography variant="body1" color="textSecondary">
                       {state.shop[0].description}
                     </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      color="secondary"
-                      style={{
-                        maxWidth: "500px",
-                        maxHeight: "100px",
-                        minWidth: "70px",
-                        minHeight: "70px",
-                      }}
-                    >
-                      <Link
-                        style={{ textDecoration: "none" }}
-                        to={{
-                          pathname: "/chat",
-                          state: [state.shop[0].id, state.shop[0].name],
-                        }}
-                      >
-                        Chat with this shop
-                      </Link>
-                    </Button>
                   </Grid>
                 </Grid>
               </Grid>
