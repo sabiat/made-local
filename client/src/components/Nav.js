@@ -4,7 +4,6 @@ import ToolBar from "@material-ui/core/ToolBar";
 import { MenuItem } from "@material-ui/core";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import madelocallogo6 from "../styles/madelocallogo6.png";
-import Typography from "@material-ui/core/Typography";
 
 export default function Nav(props) {
   return (

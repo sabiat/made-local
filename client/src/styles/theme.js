@@ -32,6 +32,8 @@ const theme = createMuiTheme({
       fontSize: "1.5rem",
       fontWeight: 600,
       // letterSpacing: "-0.03em",
+      letterSpacing: "-0.03em",
+      color: "#f28482",
     },
     h2: {
       fontFamily: "Montserrat",

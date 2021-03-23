@@ -1,12 +1,11 @@
 import Review from "./Review";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {
-  Typography,
-  TextField,
-  Button
-} from "@material-ui/core";
+import { Typography, TextField, Button } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import whitelogo2 from "../../styles/whitelogo2.png";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -44,6 +43,8 @@ export default function ShopMessageBoard(props) {
     const message_text = event.target.messageForm.value;
     const user_id = props.user.id;
 
+    event.target.messageForm.value = "";
+
     axios
       .post(`/api/shops/${shop_id}/messages`, {
         shop_id,
@@ -57,26 +58,53 @@ export default function ShopMessageBoard(props) {
   };
 
   return (
-    // <Grid container className={classes.content}>
     <div>
-      {/* <Grid item> */}
-      <Typography variant="h3">Community Message Board</Typography>
-      {messages.map((message) => (
-        <Review key={message.id} {...message}></Review>
-      ))}
+      <Grid container direction="column" spacing={3}>
+        <Box
+          border={2}
+          style={{
+            backgroundColor: "#6C9998",
+            borderColor: "#6C9998",
+            paddingTop: "25px",
+            borderRadius: "10px",
+          }}
+        >
+          <Grid item style={{ backgroundColor: "#6C9998" }}>
+            <Typography variant="h1" style={{ color: "white" }}>
+              Community Hub
+            </Typography>
+          </Grid>
+          <Grid item>
+            <img src={whitelogo2} style={{ width: "2.5em" }} />
+          </Grid>
+          <Grid item>
+            {messages.map((message) => (
+              <Review key={message.id} {...message}></Review>
+            ))}
+          </Grid>
+        </Box>
 
-      <form onSubmit={updateMessageBoard}>
-        <TextField
-          // onKeyDown={(event) => updateMessageBoard(event)}
-          id="outlined-basic"
-          label="Add Review"
-          variant="outlined"
-          name="messageForm"
-        ></TextField>
-        <Button type="submit">send me</Button>
-      </form>
-      {/* </Grid> */}
+        <Grid item>
+          <form onSubmit={updateMessageBoard}>
+            <TextField
+              // onKeyDown={(event) => updateMessageBoard(event)}
+              style={{ width: "100%" }}
+              id="outlined-basic"
+              label="Add Comment"
+              variant="outlined"
+              name="messageForm"
+            ></TextField>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "1em" }}
+            >
+              Share
+            </Button>
+          </form>
+        </Grid>
+      </Grid>
     </div>
-    // </Grid>
   );
 }
