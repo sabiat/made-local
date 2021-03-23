@@ -34,7 +34,7 @@ export default function Home(props) {
   }, []);
 
   return (
-    <div style={{ padding: "40px 30px 40px 30px" }}>
+    <div style={{ padding: "50px 30px 40px 30px" }}>
       {props.loading ? (
         <div
           style={{
