@@ -21,7 +21,7 @@ export default function Nav(props) {
         </MenuItem>
         {props.user && (
           <>
-            <Grid container xs={12} justify="flex-end" alignItems="center">
+            <Grid container xs={10} justify="flex-end" alignItems="center">
               <Grid item>
                 <MenuItem>
                   <Grid

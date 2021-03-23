@@ -136,9 +136,7 @@ export default function ShopCard(props) {
       </CardActionArea>
       <CardContent>
         <Typography variant="body1" color="textSecondary" component="p">
-          Delicious gluten free baked goods prepared daily. We also have a ton
-          of vegan options to choose from! Contact us today to order!
-          {/* {props.description} */}
+          {props.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.symbols}>

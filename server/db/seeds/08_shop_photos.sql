@@ -6,7 +6,7 @@ INSERT INTO shop_photos(shop_id, photo_urls)
   (1, 'https://images.pexels.com/photos/5633980/pexels-photo-5633980.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (2, 'https://images.pexels.com/photos/4792074/pexels-photo-4792074.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260'),
   (2, 'https://images.pexels.com/photos/1030946/pexels-photo-1030946.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
-  (2, 'https://images.pexels.com/photos/5464589/pexels-photo-5464589.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
+  (2, 'https://images.pexels.com/photos/63448/pexels-photo-63448.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (2, 'https://images.pexels.com/photos/5704188/pexels-photo-5704188.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (2, 'https://images.pexels.com/photos/5603200/pexels-photo-5603200.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
   (2, 'https://images.pexels.com/photos/5710106/pexels-photo-5710106.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
@@ -27,6 +27,7 @@ INSERT INTO shop_photos(shop_id, photo_urls)
   (7, 'https://images.pexels.com/photos/4147872/pexels-photo-4147872.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (7, 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (7, 'https://images.pexels.com/photos/4099235/pexels-photo-4099235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  (7, 'https://images.pexels.com/photos/5107162/pexels-photo-5107162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (8, 'https://images.pexels.com/photos/4443405/pexels-photo-4443405.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
   (8, 'https://images.pexels.com/photos/4109998/pexels-photo-4109998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (8, 'https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
@@ -50,7 +51,15 @@ INSERT INTO shop_photos(shop_id, photo_urls)
   (11, 'https://images.pexels.com/photos/994515/pexels-photo-994515.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (11, 'https://images.pexels.com/photos/3634366/pexels-photo-3634366.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
   (11, 'https://images.pexels.com/photos/4960230/pexels-photo-4960230.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
-  (11, 'https://images.pexels.com/photos/1413420/pexels-photo-1413420.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
+  (11, 'https://images.pexels.com/photos/1413420/pexels-photo-1413420.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  (12, 'https://images.pexels.com/photos/6045284/pexels-photo-6045284.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  (12, 'https://images.pexels.com/photos/6461528/pexels-photo-6461528.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  (12, 'https://images.pexels.com/photos/2089949/pexels-photo-2089949.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'),
+  (13, 'https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  (13, 'https://images.pexels.com/photos/4428507/pexels-photo-4428507.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  (14, 'https://images.pexels.com/photos/1012506/pexels-photo-1012506.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  (14, 'https://images.pexels.com/photos/4503269/pexels-photo-4503269.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  (14, 'https://images.pexels.com/photos/4505144/pexels-photo-4505144.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 
 
 
