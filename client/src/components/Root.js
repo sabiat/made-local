@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid"
+import Grid from "@material-ui/core/Grid";
 import whitelogo2 from "../styles/whitelogo2.png";
 import communityphoto4 from "../styles/communityphoto4.png";
 
@@ -12,17 +12,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f9dbbd",
   },
   main: {
-    minHeight: "100vh",
-    position: "relative"
+    minHeight: "55vw",
+    position: "relative",
   },
   font: {
     color: "#000000",
-    fontSize: "1.5em"
+    fontSize: "24px",
   },
   textBox: {
-    maxWidth: "28em",
+    maxWidth: "30vw",
     float: "right",
-    textAlign: "right"
+    textAlign: "center",
   },
   buttons: {
     float: "left",
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     bottom: "0",
     width: "100%",
-  }
+  },
 }));
 
 export default function Root() {
@@ -40,7 +40,6 @@ export default function Root() {
 
   return (
     <div className={classes.superMain}>
-
       <div className={classes.main}>
         <div>
           <Grid
@@ -48,27 +47,27 @@ export default function Root() {
             direction="row"
             justify="center"
             alignItems="center"
-            style={{ minHeight: '60vh' }}
+            style={{ minHeight: "30vw" }}
           >
-            <Grid item xs={5}>
+            <Grid item xs={6}>
               <Box>
-                <Typography variant="h2" justify="flex-end" className={classes.textBox}>
-                  <Box className={classes.font}>Welcome to madelocal, your friendly community hub for supporting local home-based businesses.</Box>
+                <Typography
+                  variant="h2"
+                  justify="flex-end"
+                  className={classes.textBox}
+                >
+                  <Box className={classes.font}>
+                    Welcome to madelocal, your friendly community hub for
+                    supporting local home-based businesses.
+                  </Box>
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={2}>
-              <img
-                src={whitelogo2}
-                alt="logo"
-                style={{ height: "8em" }}
-              />
+              <img src={whitelogo2} alt="logo" style={{ height: "9vw" }} />
             </Grid>
-            <Grid item xs={5} className={classes.buttons}>
-              <Grid
-                container
-                direction="column"
-                spacing={2}>
+            <Grid item xs={4} className={classes.buttons}>
+              <Grid container direction="column" spacing={2}>
                 <Grid item xs={1}>
                   <Button
                     variant="contained"
@@ -78,7 +77,7 @@ export default function Root() {
                     }}
                   >
                     LOGIN
-          </Button>
+                  </Button>
                 </Grid>
                 <Grid item xs={2}>
                   <Button
@@ -89,7 +88,7 @@ export default function Root() {
                     }}
                   >
                     Register
-          </Button>
+                  </Button>
                 </Grid>
               </Grid>
             </Grid>
@@ -99,7 +98,11 @@ export default function Root() {
           <img
             src={communityphoto4}
             alt="community"
-            style={{ maxWidth: "100%", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+            style={{
+              maxWidth: "100%",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
           />
         </footer>
       </div>

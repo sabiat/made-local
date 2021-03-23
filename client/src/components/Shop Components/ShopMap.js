@@ -7,13 +7,13 @@ export default function ShopMap(props) {
 
   return (
     <MapContainer className="map-container" center={coords} zoom={15}>
-      <Circle
+      {/* <Circle
         center={{ lat: props.lat, lng: props.lon }}
         fillColor="#588b8b"
         color="#588b8b"
         radius={400}
-      />
-      {/* <Marker position={coords}></Marker> */}
+      /> */}
+      <Marker position={coords}></Marker>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

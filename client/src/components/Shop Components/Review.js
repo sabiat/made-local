@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flex: "1 0 auto",
     width: "700px",
-    height: "6em",
+    height: "10vw",
     borderRadius: "10px",
   },
 }));
@@ -30,6 +30,8 @@ export default function Review(props) {
     return date.split("").slice(0, 10).join("");
   };
 
+  console.log(props);
+
   return (
     // <Card className={classes.root}>
     <div className={classes.details}>
@@ -37,7 +39,7 @@ export default function Review(props) {
         border={2}
         style={{
           borderRadius: "10px",
-          margin: "0.5em",
+          margin: "0.5vw",
           borderColor: "#84A59D",
           backgroundColor: "#FAF9F9",
         }}
@@ -52,9 +54,8 @@ export default function Review(props) {
                 <h4 style={{ margin: 0, textAlign: "left" }}>
                   {props.user_name}
                 </h4>
-                {/* <Divider variant="fullWidth" style={{ margin: "15px 0" }} /> */}
+
                 <p style={{ textAlign: "left" }}>{props.message_text}</p>
-                {/* <Divider variant="fullWidth" style={{ margin: "15px 0" }} /> */}
                 <p
                   style={{
                     textAlign: "right",

@@ -47,6 +47,7 @@ function App() {
         id: res.data.id,
         user_name: res.data.user_name,
         email: res.data.email,
+        photo: res.data.photo,
       };
       setUser(loggedInUser);
     });
@@ -65,6 +66,7 @@ function App() {
           id: res.data.id,
           user_name: res.data.user_name,
           email: res.data.email,
+          photo: res.data.photo,
         };
         setUser(loggedInUser);
       } else {

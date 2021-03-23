@@ -108,7 +108,7 @@ export default function ShopCard(props) {
             subheader={`${props.distance} km away`}
           />
         </Grid>
-        <Grid item style={{ position: "absolute", paddingLeft: "15em" }}>
+        <Grid item style={{ position: "absolute", paddingLeft: "19vw" }}>
           <IconButton aria-label="add to favorites">
             {favourite ? (
               <FavoriteIcon

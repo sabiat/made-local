@@ -42,14 +42,14 @@ export default function ShopProfile(props) {
   return (
     <div>
       {/* main container top is all info, bottom is msg board */}
-      <Box mx="auto" bgcolor="background.paper" p={5}>
+      <Box mx="auto" bgcolor="#fcf8f2" p={7}>
         {/* MAIN CONTAINER */}
         <Grid
           container
           direction="column"
           alignItems="center"
           justify="center"
-          spacing={4}
+          spacing={6}
         >
           <Grid item>
             {/* NAME AND PHOTOS ONE SIDE AND CONTACT OTHER SIDE */}
