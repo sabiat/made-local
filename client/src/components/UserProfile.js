@@ -1,15 +1,23 @@
-import Button from "@material-ui/core/Button";
 import axios from "axios";
+import Card from "./Card";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import { Grid, Typography, Button, CircularProgress } from "@material-ui/core/";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import Card from "./Card";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Divider from "@material-ui/core/Divider";
+import StorefrontIcon from "@material-ui/icons/Storefront";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  font: {
+    color: "#84a59D",
+    fontWeight: "bold",
+    fontSize: "27px",
+  },
+}));
 
 export default function UserProfile(props) {
+  const classes = useStyles();
+
   const [isLoading, setLoading] = useState(true);
   const [state, setState] = useState([]);
   const [userShops, setUserShops] = useState([]);
@@ -53,7 +61,6 @@ export default function UserProfile(props) {
 
   const favouriteList = favShops.map((shop) => {
     shop.isFavourited = true;
-    // <Card />
     return (
       <Grid item style={{ padding: 30 }} xs={4}>
         <Card key={shop.id} {...shop} user={props.user} />
@@ -63,8 +70,6 @@ export default function UserProfile(props) {
 
   let userOwnShops = [];
   const filterUserOwnShops = () => {
-    // console.log(state);
-    // console.log(userShops);
     const userShopIds = userShops.map((shop) => {
       return shop.id;
     });
@@ -85,7 +90,7 @@ export default function UserProfile(props) {
   });
 
   return (
-    <div>
+    <div style={{ padding: "10px 70px 30px 67px" }}>
       <br />
       <br />
       {isLoading ? (
@@ -99,19 +104,8 @@ export default function UserProfile(props) {
         <Grid item xs={2}></Grid>
         <Grid item xs={8}>
           <Typography variant="body1">
-            <FavoriteIcon />
+            <FavoriteIcon color="secondary" />
           </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => {
-              history.push("/shops/new");
-            }}
-          >
-            + Shop
-          </Button>
         </Grid>
       </Grid>
       <Grid
@@ -121,7 +115,7 @@ export default function UserProfile(props) {
         justify="center"
         alignItems="center"
       >
-        <Typography variant="h4">My favourites</Typography>
+        <Typography className={classes.font}>My favourites</Typography>
         <Grid
           container
           direction="row"
@@ -131,22 +125,46 @@ export default function UserProfile(props) {
           {favouriteList}
         </Grid>
       </Grid>
-      <Divider light />
-      <Grid
-        container
-        spacing={1}
-        direction="column"
-        justify="center"
-        alignItems="center"
-      >
-        <Typography variant="h4">My shops</Typography>
+      <Grid container alignItems="center">
+        <Grid item xs={2}></Grid>
+        <Grid item xs={8}>
+          <Typography variant="body1">
+            <StorefrontIcon color="secondary" />
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{
+              width: "150px",
+              height: "50px",
+            }}
+            onClick={() => {
+              history.push("/shops/new");
+            }}
+          >
+            + Shop
+          </Button>
+        </Grid>
         <Grid
           container
-          direction="row"
-          justify="flex-start"
+          spacing={1}
+          direction="column"
+          justify="center"
           alignItems="center"
         >
-          {userShopList}
+          <Typography variant="h4" className={classes.font}>
+            My shops
+          </Typography>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+          >
+            {userShopList}
+          </Grid>
         </Grid>
       </Grid>
     </div>
