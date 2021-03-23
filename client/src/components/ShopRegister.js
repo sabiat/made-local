@@ -4,20 +4,16 @@ import { useHistory } from "react-router-dom";
 
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RegistrationForm(props) {
+export default function ShopRegister(props) {
   const classes = useStyles();
 
   let history = useHistory();
@@ -135,12 +131,13 @@ export default function RegistrationForm(props) {
   const handleSubmitClick = (e) => {
     e.preventDefault();
     sendDetailsToServer();
+    history.push("/home");
   };
 
   return (
     <Container component="main" maxWidth="xs">
       {/* <div className={classes.paper}> */}
-      <Avatar className={classes.avatar} style={{justify: "center"}}>
+      <Avatar className={classes.avatar} style={{ justify: "center" }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
@@ -165,21 +162,23 @@ export default function RegistrationForm(props) {
           </Grid>
 
           <Grid item xs={5}>
-            <FormControl style={{minWidth: 120}}>
-            <NativeSelect
-            id="category"
-            name="category"
-              value={state.category}
-              onChange={handleChange}
+            <FormControl style={{ minWidth: 120 }}>
+              <NativeSelect
+                id="category"
+                name="category"
+                value={state.category}
+                onChange={handleChange}
               >
-            <option aria-label="Select Category" value="" />
-            <option value="Food & Catering">Food & Catering</option>
-            <option value="Jewellery & Accessories">Jewellery & Accessories</option>
-            <option value="Tattoo Artists">Tattoo Artists</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Events & Planning">Events & Planning</option>
-            <option value="Home & Living">Home & Living</option>
-            <option value="Health & Wellness">Health & Wellness</option>
+                <option aria-label="Select Category" value="" />
+                <option value="Food & Catering">Food & Catering</option>
+                <option value="Jewellery & Accessories">
+                  Jewellery & Accessories
+                </option>
+                <option value="Tattoo Artists">Tattoo Artists</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Events & Planning">Events & Planning</option>
+                <option value="Home & Living">Home & Living</option>
+                <option value="Health & Wellness">Health & Wellness</option>
               </NativeSelect>
             </FormControl>
           </Grid>
@@ -280,6 +279,45 @@ export default function RegistrationForm(props) {
               placeholder="Paste a link to your photo!"
               value={state.photo}
               onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.delivery}
+                  onChange={handleCheck}
+                  name="Delivery"
+                  id="delivery"
+                />
+              }
+              label="Delivery"
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.pickup}
+                  onChange={handleCheck}
+                  name="Pickup"
+                  id="pickup"
+                />
+              }
+              label="Pickup"
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={state.shipping}
+                  onChange={handleCheck}
+                  name="Shipping"
+                  id="shipping"
+                />
+              }
+              label="Shipping"
             />
           </Grid>
         </Grid>
