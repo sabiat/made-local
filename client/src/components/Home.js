@@ -64,7 +64,7 @@ export default function Home(props) {
       ) : (
         <>
           <Grid container justify="space-between" alignItems="center">
-            <Grid item xs={6} justify="left">
+            <Grid item xs={6}>
               <Typography
                 variant="h1"
                 style={{
