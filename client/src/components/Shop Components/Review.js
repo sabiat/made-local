@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: "1 0 auto",
-    width: "700px",
-    height: "10vw",
+    width: "600px",
+    height: "8.5vw",
     borderRadius: "10px",
   },
 }));
