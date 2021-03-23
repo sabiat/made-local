@@ -47,8 +47,8 @@ export default function ShopPhotos() {
                 <img
                   src={photo.photo_urls}
                   style={{
-                    width: "18em",
-                    height: "18em",
+                    width: "19vw",
+                    height: "19vw",
                     objectFit: "cover",
                     maxWidth: "100%",
                     borderRadius: "10px",

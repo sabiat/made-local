@@ -42,14 +42,14 @@ export default function ShopProfile(props) {
   return (
     <div>
       {/* main container top is all info, bottom is msg board */}
-      <Box mx="auto" bgcolor="background.paper" p={5}>
+      <Box mx="auto" bgcolor="#fcf8f2" p={7}>
         {/* MAIN CONTAINER */}
         <Grid
           container
           direction="column"
           alignItems="center"
           justify="center"
-          spacing={4}
+          spacing={6}
         >
           <Grid item>
             {/* NAME AND PHOTOS ONE SIDE AND CONTACT OTHER SIDE */}
@@ -123,7 +123,13 @@ export default function ShopProfile(props) {
                       lon={state.shop[0].longitude}
                     />
                   </Grid>
-                  <Grid container direction="row" justify="center" spacing={4}>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    spacing={4}
+                    style={{ marginTop: "5px" }}
+                  >
                     <Grid item>
                       <Avatar
                         width="200px"
@@ -135,16 +141,19 @@ export default function ShopProfile(props) {
                     </Grid>
                     <Grid item>
                       <Grid item>
-                        <Typography variant="h4" color="textSecondary">
-                          Contact
+                        <Typography
+                          variant="h4"
+                          style={{ color: "#f28482", fontWeight: "bold" }}
+                        >
+                          CONTACT US
                         </Typography>
                       </Grid>
                       <Grid item>
-                        <Typography variant="h5">
+                        <Typography variant="h5" color="textSecondary">
                           {state.shop[0].social}
                         </Typography>
                       </Grid>
-                      <Typography variant="h5">
+                      <Typography variant="h5" color="textSecondary">
                         {state.shop[0].phone_number}
                       </Typography>
                     </Grid>
@@ -162,8 +171,8 @@ export default function ShopProfile(props) {
                       )}
                     </Grid>
                   </Grid>
-                  <Grid item>
-                    <Typography variant="body1" color="textSecondary">
+                  <Grid item style={{ marginTop: "10px" }}>
+                    <Typography variant="h4">
                       {state.shop[0].description}
                     </Typography>
                   </Grid>
