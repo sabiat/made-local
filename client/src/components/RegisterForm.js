@@ -92,14 +92,13 @@ export default function RegistrationForm(props) {
             history.push("/home");
           } else {
             console.log("error");
-            //props.showError("Some error ocurred");
           }
         })
         .catch(function (error) {
           console.log(error);
         });
     } else {
-      alert("Please fill-in all fields");
+      alert('Oops! Certain fields are empty! Please fully fill the form.');
     }
   };
 
@@ -130,7 +129,6 @@ export default function RegistrationForm(props) {
                 id="username"
                 label="User name"
                 autoFocus
-                //
                 type="name"
                 placeholder="Username"
                 value={state.username}
