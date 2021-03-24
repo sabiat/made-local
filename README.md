@@ -14,23 +14,19 @@ People are becoming increasingly conscious of their spending patterns, wanting t
 
 ### Root
 
-!["Home"]()
+!["Home"](https://github.com/sabiat/made-local/blob/main/docs/Root.png?raw=true)
 
 ### List of home-based businesses
 
-!["List of home-based businesses"]()
+!["List of home-based businesses"](https://github.com/sabiat/made-local/blob/main/docs/Home.png?raw=true)
 
 ### Shop profile
 
-!["Shop profile"]()
+!["Shop profile"](https://github.com/sabiat/made-local/blob/main/docs/Shop.png?raw=true)
 
 ### Chat
 
-!["Chat"]()
-
-### Message board
-
-!["Message board"]()
+!["Chat"](https://github.com/sabiat/made-local/blob/main/docs/Chat.png?raw=true)
 
 ## Getting Started
 
