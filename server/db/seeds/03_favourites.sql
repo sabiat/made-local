@@ -4,4 +4,4 @@ INSERT INTO favourites (user_id, shop_id) VALUES
 (1,1),
 (1,2),
 (8,2),
-(8, 8)
+(8, 4)

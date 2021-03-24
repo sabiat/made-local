@@ -75,7 +75,7 @@ export default function ShopMessageBoard(props) {
             </Typography>
           </Grid>
           <Grid item>
-            <img src={whitelogo2} style={{ width: "2.5em" }} />
+            <img src={whitelogo2} style={{ width: "35px" }} />
           </Grid>
           <Grid item>
             {messages.map((message) => (
@@ -98,7 +98,7 @@ export default function ShopMessageBoard(props) {
               type="submit"
               variant="contained"
               color="primary"
-              style={{ marginTop: "1em" }}
+              style={{ marginTop: "10px" }}
             >
               Share
             </Button>

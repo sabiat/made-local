@@ -20,4 +20,4 @@ INSERT INTO users (user_name, first_name, last_name, email, photo, password, pas
   VALUES ('quebecqueen2', 'Dion', 'Celine', 'celine2@gouv.qc.ca', 'https://www.bridgestonearena.com/assets/img/CelineDion2019_Slide-c143b05a83.jpg', 'password', 'password');  
 
 INSERT INTO users (user_name, first_name, last_name, email, photo, password, password_confirmation)
-  VALUES ('abc', 'd', 'abcd', 'a@b.c', 'https://www.bridgestonearena.com/assets/img/CelineDion2019_Slide-c143b05a83.jpg', 'password', 'password');      
+  VALUES ('sabiat', 'd', 'abcd', 'a@b.c', 'https://images.pexels.com/photos/1408221/pexels-photo-1408221.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260', 'password', 'password');      
