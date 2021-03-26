@@ -15,7 +15,6 @@ module.exports = ({ getCategories, getShopsByCategories }) => {
 
   router.get("/:id", (req, res) => {
     const category = req.params.id;
-    console.log(category);
     getShopsByCategories(category)
       .then((shops) => res.json(shops))
       .catch((err) =>

@@ -44,17 +44,6 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  // const getUserById = (id) => {
-  //   const query = {
-  //     text: `SELECT user_name FROM users WHERE id = $1`,
-  //     values: [`${id}`],
-  //   };
-  //   return db
-  //     .query(query)
-  //     .then((result) => result.rows[0])
-  //     .catch((err) => err);
-  // };
-
   const getUserFavourites = (id) => {
     const query = {
       text: `SELECT shops.*, favourites.*, users.user_name AS user_name 
@@ -149,29 +138,10 @@ module.exports = (db) => {
         [shop_id]
       )
       .then((result) => {
-        console.log("QUERY", result.rows);
         return result.rows;
       })
       .catch((err) => err);
   };
-
-  // const getConversationsByShopId = (shop_id) => {
-  //   return db
-  //     .query(
-  //       `SELECT conversations.*, chat_messages.user_name as from, shops.name as shopname, message_text as message
-  //       FROM conversations
-  //       JOIN chat_messages ON conversations.id = chat_messages.conversation_id
-  //       JOIN users ON users.id = conversations.user_id
-  //       JOIN shops ON shops.id = conversations.shop_id
-  //       WHERE shop_id = $1`,
-  //       [shop_id]
-  //     )
-  //     .then((result) => {
-  //       console.log("QUERY", result.rows);
-  //       return result.rows;
-  //     })
-  //     .catch((err) => err);
-  // };
 
   const getMessagesByShopId = (id) => {
     const query = {
@@ -251,19 +221,6 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  const postMessage = (id) => {
-    // const query = {
-    //   text: `SELECT shops.*
-    // FROM shops
-    // WHERE id = $1;`,
-    //   values: [`${id}`],
-    // };
-    // return db
-    //   .query(query)
-    //   .then((result) => result.rows)
-    //   .catch((err) => err);
-  };
-
   const getUserByEmail = (email) => {
     const query = {
       text: `SELECT * FROM users WHERE email = $1`,
@@ -318,31 +275,6 @@ module.exports = (db) => {
       .catch((err) => err);
   };
 
-  // const addUser = (firstName, lastName, email, password) => {
-  //     const query = {
-  //         text: `INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *` ,
-  //         values: [firstName, lastName, email, password]
-  //     }
-
-  //     return db.query(query)
-  //         .then(result => result.rows[0])
-  //         .catch(err => err);
-  // }
-
-  // const getUsersPosts = () => {
-  //     const query = {
-  //         text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
-  //     FROM users
-  //     INNER JOIN posts
-  //     ON users.id = posts.user_id`
-  //     }
-
-  //     return db.query(query)
-  //         .then(result => result.rows)
-  //         .catch(err => err);
-
-  // }
-
   return {
     getUsers,
     getShops,
@@ -364,7 +296,5 @@ module.exports = (db) => {
     getShopUserId,
     getConversationsByShopId,
     getUserShops,
-    //addUser,
-    //getUsersPosts
   };
 };

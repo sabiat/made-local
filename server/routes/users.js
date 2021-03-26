@@ -41,12 +41,9 @@ module.exports = ({
 
   router.get("/chats", (req, res) => {
     getShopUserId(req.cookies.id).then((resp) => {
-      console.log("THIS IS THE GEN RES ", resp);
       if (resp.length > 0) {
-        console.log("THIS IS THE RESP", resp[0].id);
         getConversationsByShopId(resp[0].id)
           .then((response) => {
-            console.log("WE HAVE THIS", response);
             return res.json(response);
           })
           .catch((err) =>
@@ -57,7 +54,6 @@ module.exports = ({
       } else {
         getConversationsByUserId(req.cookies.id)
           .then((resp) => {
-            console.log("THIS IS WHAT WE WAANT", resp);
             return res.json(resp);
           })
           .catch((err) =>
@@ -161,7 +157,6 @@ module.exports = ({
           res.cookie("id", response.id);
           res.json(response);
         } else {
-          console.log("here");
           res.json({ err: "Incorrect login" });
         }
       })
