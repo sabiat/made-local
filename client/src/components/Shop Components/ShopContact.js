@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 
 export default function ShopContact(props) {
   const classes = useStyles();
-  console.log(props);
 
   return (
     <Grid container direction="row" spacing={1}>
