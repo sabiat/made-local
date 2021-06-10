@@ -16,17 +16,17 @@ People are becoming increasingly conscious of their spending patterns, wanting t
 
 !["Home"](https://github.com/sabiat/made-local/blob/main/docs/Root.png?raw=true)
 
-### List of home-based businesses
+### Main Page
 
-!["List of home-based businesses"](https://github.com/sabiat/made-local/blob/main/docs/Home.png?raw=true)
+!["Main Page"](https://github.com/sabiat/made-local/blob/main/client/public/gifs/homepage.gif?raw=true)
 
-### Shop profile
+### Shop Profile
 
-!["Shop profile"](https://github.com/sabiat/made-local/blob/main/docs/Shop.png?raw=true)
+!["Shop Profile"](https://github.com/sabiat/made-local/blob/main/client/public/gifs/profile.gif?raw=true)
 
-### Chat
+### Chat Functionality
 
-!["Chat"](https://github.com/sabiat/made-local/blob/main/docs/Chat.png?raw=true)
+!["Chat Functionality"](https://github.com/sabiat/made-local/blob/main/client/public/gifs/chat.gif?raw=true)
 
 ## Getting Started
 
