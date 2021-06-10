@@ -22,11 +22,11 @@ People are becoming increasingly conscious of their spending patterns, wanting t
 
 ### Shop Profile
 
-!["Shop Profile"](https://github.com/sabiat/made-local/blob/main/client/public/gifs/profile.gif?raw=true)
+!["Shop Profile"](https://github.com/sabiat/made-local/blob/main/client/public/gifs/chat.gif?raw=true)
 
 ### Chat Functionality
 
-!["Chat Functionality"](https://github.com/sabiat/made-local/blob/main/client/public/gifs/chat.gif?raw=true)
+!["Chat Functionality"](https://github.com/sabiat/made-local/blob/main/client/public/gifs/profile.gif?raw=true)
 
 ## Getting Started
 
