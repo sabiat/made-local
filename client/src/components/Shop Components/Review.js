@@ -30,8 +30,6 @@ export default function Review(props) {
     return date.split("").slice(0, 10).join("");
   };
 
-  console.log(props);
-
   return (
     // <Card className={classes.root}>
     <div className={classes.details}>

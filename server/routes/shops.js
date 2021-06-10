@@ -51,7 +51,6 @@ module.exports = ({
       );
   });
   router.post("/addphoto", (req, res) => {
-    console.log(req.body);
     addPhotosToShop(req.body.photoUrl, req.body.shopId)
       .then((result) => res.json(result))
       .catch((err) => {
